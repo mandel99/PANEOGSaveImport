@@ -1,0 +1,12 @@
+/.vs/
+/bin/
+/obj/
+/__pycache__/
+*.user
+*.suo
+*.cache
+*.pdb
+*.pyc
+_*.json
+akhenaten_mission_metadata.json
+pharaoh_extract.py
