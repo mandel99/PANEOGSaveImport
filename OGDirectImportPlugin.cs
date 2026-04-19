@@ -26,7 +26,7 @@ namespace OGDirectImport
     {
         private const string ModGuid = "PANE.ogdirectimport";
         private const string ModName = "OG Direct Import";
-        private const string VersionString = "0.1.1";
+        private const string VersionString = "0.1.2";
         private const string ImportButtonObjectName = "OGDirectImportButton";
         private const string ImportButtonLabel = "Import OG MAP/SAV";
         private const string CreateButtonScenePath = "Canvas/Panel_LevelEditor/Generic_Container/PanelContent/Image/CreateButton";
@@ -81,6 +81,7 @@ namespace OGDirectImport
         internal static JObject PendingRoot;
         internal static string PendingArray = "grid";
         internal static int PendingMapSide;
+        internal static MapHumidity PendingClimate = MapHumidity.Normal;
         internal static bool ApplyPending;
         internal static bool ImportArmed;
 
@@ -633,6 +634,7 @@ namespace OGDirectImport
                 PendingRoot = root;
                 PendingMapSide = side;
                 PendingArray = gridArrayName;
+                PendingClimate = ResolvePendingClimate(root);
                 ImportArmed = true;
                 ApplyPending = true;
 
@@ -959,8 +961,8 @@ namespace OGDirectImport
                 return;
             }
 
-            ApplyTerrainTiles(mapEditorInstance, arr);
             TryApplyScenarioInfo(mapEditorInstance, root);
+            ApplyTerrainTiles(mapEditorInstance, arr);
             TryApplyAvailability(mapEditorInstance, root);
             TryApplyDeitiesViaMapEditor(mapEditorInstance, root);
             TryApplyMapFlags(mapEditorInstance, root);
@@ -1739,6 +1741,7 @@ namespace OGDirectImport
                     if (TryMapOgClimateToNewEra(ogClimate, out int mappedClimate))
                     {
                         TrySetEnumMember(levelObj, levelType, "Climate", mappedClimate);
+                        TrySyncEditorClimateUi(mapEditorInstance, mappedClimate);
                     }
                 }
 
@@ -1777,6 +1780,39 @@ namespace OGDirectImport
 
             // New Era expects a localization key here, but plain text may still be useful in editor/runtime tests.
             SetMember(levelObj, levelType, "BriefingKey", briefDescription);
+        }
+
+        private static MapHumidity ResolvePendingClimate(JObject root)
+        {
+            int ogClimate = ReadInt((root?["scenario_info"] as JObject)?["env"] as JObject, "climate");
+            return TryMapOgClimateToNewEra(ogClimate, out int mappedClimate)
+                ? (MapHumidity)mappedClimate
+                : MapHumidity.Normal;
+        }
+
+        private static void TrySyncEditorClimateUi(object mapEditorInstance, int mappedClimate)
+        {
+            if (mapEditorInstance == null)
+            {
+                return;
+            }
+
+            try
+            {
+                FieldInfo climateDropdownField = AccessTools.Field(mapEditorInstance.GetType(), "_climateDropdown");
+                object dropdown = climateDropdownField?.GetValue(mapEditorInstance);
+                if (dropdown == null)
+                {
+                    return;
+                }
+
+                AccessTools.Method(dropdown.GetType(), "SetValueWithoutNotify", new[] { typeof(int) })?.Invoke(dropdown, new object[] { mappedClimate });
+                AccessTools.Method(mapEditorInstance.GetType(), "OnDropdownClimateValueChanged", new[] { typeof(int) })?.Invoke(mapEditorInstance, new object[] { mappedClimate });
+            }
+            catch (Exception ex)
+            {
+                Log?.LogDebug($"Climate UI sync skipped: {ex.Message}");
+            }
         }
 
         private static void TryApplyAvailability(object mapEditorInstance, JObject root)
@@ -4020,6 +4056,7 @@ namespace OGDirectImport
             int eventState = ReadInt(ev, "event_state");
             bool isLate = ev["is_overdue"]?.Value<bool>() ?? false;
             bool isActive = ev["is_active"]?.Value<bool>() ?? false;
+            EventFrequency frequency = MapOgEventFrequency(triggerType);
 
             if (month <= 0) month = 1;
             if (month > 12) month = 12;
@@ -4034,7 +4071,7 @@ namespace OGDirectImport
                 TriggerYearMax = Math.Max(0, yearMax),
                 AmountMin = Math.Max(0, amountMin),
                 AmountMax = Math.Max(0, amountMax),
-                Frequency = MapOgEventFrequency(triggerType),
+                Frequency = frequency,
                 Origin = MapOgEventOrigin(mappedType, senderFaction, cityId),
                 RelatedCityId = cityId >= 0 ? cityId : ScriptedEvent.s_InvalidId,
                 IsLate = isLate
@@ -4110,12 +4147,37 @@ namespace OGDirectImport
             else if (mappedType == ScriptedEventType.TroopRequest)
             {
                 int mappedReason = MapOgTroopRequestSubtypeToReason(subtype);
+                if (mappedReason < 0)
+                {
+                    if (ogType == 29 || (ogType == 20 && subtype == 4))
+                    {
+                        mappedReason = (int)EventReason.EgyptianCity;
+                    }
+                    else if (ogType == 31)
+                    {
+                        mappedReason = (int)EventReason.DistantBattle;
+                    }
+                }
                 if (mappedReason < 0 && firstReason >= 0)
                 {
                     if (firstReason == 5) mappedReason = (int)EventReason.EgyptianCity;
                     else if (firstReason == 6) mappedReason = (int)EventReason.DistantBattle;
                 }
                 TryAssignEnumIfDefined<EventReason>(mappedReason, value => scripted.Reason = value);
+            }
+            else if (mappedType == ScriptedEventType.KingdomInvasion)
+            {
+                if (ogType == 30)
+                {
+                    scripted.Reason = EventReason.Threat;
+                }
+            }
+            else if (mappedType == ScriptedEventType.Victory)
+            {
+                if (ogType == 32)
+                {
+                    scripted.Reason = EventReason.GodFestival;
+                }
             }
 
             if ((mappedType == ScriptedEventType.Invasion || mappedType == ScriptedEventType.KingdomInvasion) && ReadInt(itemData, "value") == 4)
@@ -4170,7 +4232,23 @@ namespace OGDirectImport
             int totalMonths = monthsInitial > 0 ? monthsInitial : monthsLeft;
             if (scripted.Frequency == EventFrequency.Triggered)
             {
-                scripted.Delay = Math.Max(0, monthsInitial);
+                if (monthsInitial > 0)
+                {
+                    scripted.Delay = Math.Max(0, monthsInitial);
+                }
+                else if (scripted.TriggerYearMin > 0 && scripted.TriggerYearMin == scripted.TriggerYearMax)
+                {
+                    scripted.Delay = scripted.TriggerYearMin;
+                }
+                else if (scripted.TriggerYearMax > scripted.TriggerYearMin && scripted.TriggerYearMin > 0)
+                {
+                    // Matches the older OG CSV importer behavior for randomized trigger windows.
+                    scripted.Delay = -1;
+                }
+                else
+                {
+                    scripted.Delay = 0;
+                }
             }
             else
             {
@@ -4690,6 +4768,16 @@ namespace OGDirectImport
                 case 17: mappedType = ScriptedEventType.KingdomRatingIncrease; return true;
                 case 18: mappedType = ScriptedEventType.KingdomRatingDecrease; return true;
                 case 19: mappedType = ScriptedEventType.CityStatusChange; return true;
+                case 20:
+                    return TryMapOgMessageEventSubtype(subtype, out mappedType);
+                // Pragmatic compatibility mapping for PANE:
+                // OG/Akhenaten uses type 29 for trade-city-under-siege, but the legacy
+                // OGEventImport workflow treated it as TroopRequest and that aligns better
+                // with current New Era editor capabilities for now.
+                case 29: mappedType = ScriptedEventType.TroopRequest; return true;
+                case 30: mappedType = ScriptedEventType.KingdomInvasion; return true;
+                case 31: mappedType = ScriptedEventType.TroopRequest; return true;
+                case 32: mappedType = ScriptedEventType.Victory; return true;
                 case 21: mappedType = ScriptedEventType.FailedFlood; return true;
                 case 22: mappedType = ScriptedEventType.PerfectFlood; return true;
                 case 23: mappedType = ScriptedEventType.Gift; return true;
@@ -4701,6 +4789,29 @@ namespace OGDirectImport
                 default:
                     mappedType = ScriptedEventType.None;
                     return false;
+            }
+        }
+
+        private static bool TryMapOgMessageEventSubtype(int subtype, out ScriptedEventType mappedType)
+        {
+            switch (subtype)
+            {
+                case 0:
+                case 1:
+                    mappedType = ScriptedEventType.Victory;
+                    return true;
+                case 2:
+                    mappedType = ScriptedEventType.Defeat;
+                    return true;
+                case 3:
+                    mappedType = ScriptedEventType.ThreatAcknowledge;
+                    return true;
+                case 4:
+                    mappedType = ScriptedEventType.TroopRequest;
+                    return true;
+                default:
+                    mappedType = ScriptedEventType.Victory;
+                    return true;
             }
         }
 
@@ -4899,7 +5010,7 @@ namespace OGDirectImport
             GlobalAccessor.LevelToCreateContext = new GlobalAccessor.LevelCreateContext
             {
                 Size = (MapSize)mapSide,
-                Climate = MapHumidity.Normal
+                Climate = PendingClimate
             };
 
             string sceneName = SceneManager.GetActiveScene().name;
@@ -4968,8 +5079,8 @@ namespace OGDirectImport
             Type humidityType = AccessTools.TypeByName("MapHumidity");
             if (humidityType != null && humidityType.IsEnum)
             {
-                object normal = Enum.Parse(humidityType, "Normal");
-                SetMember(ctx, ctxType, "Climate", normal);
+                object pendingClimate = Enum.ToObject(humidityType, (int)PendingClimate);
+                SetMember(ctx, ctxType, "Climate", pendingClimate);
             }
 
             levelCtxField.SetValue(null, ctx);
