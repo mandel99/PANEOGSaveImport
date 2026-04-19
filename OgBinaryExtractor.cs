@@ -134,6 +134,48 @@ namespace OGDirectImport
             { 105, "temple_complex_ra" }, { 106, "temple_complex_ptah" }, { 107, "temple_complex_seth" }, { 108, "temple_complex_bast" },
         };
 
+        private static readonly Dictionary<int, string> MonumentNames = new Dictionary<int, string>
+        {
+            { 0, "none" },
+            { 1, "small_bent_pyramid" },
+            { 2, "medium_bent_pyramid" },
+            { 3, "small_mudbrick_pyramid" },
+            { 4, "medium_mudbrick_pyramid" },
+            { 5, "large_mudbrick_pyramid" },
+            { 6, "mudbrick_pyramid_complex" },
+            { 7, "grand_mudbrick_pyramid_complex" },
+            { 8, "small_stepped_pyramid" },
+            { 9, "medium_stepped_pyramid" },
+            { 10, "large_stepped_pyramid" },
+            { 11, "stepped_pyramid_complex" },
+            { 12, "grand_stepped_pyramid_complex" },
+            { 13, "small_pyramid" },
+            { 14, "medium_pyramid" },
+            { 15, "large_pyramid" },
+            { 16, "pyramid_complex" },
+            { 17, "grand_pyramid_complex" },
+            { 18, "small_mastaba" },
+            { 19, "medium_mastaba" },
+            { 20, "large_mastaba" },
+            { 21, "sphinx" },
+            { 22, "small_obelisk" },
+            { 23, "large_obelisk" },
+            { 24, "sun_temple" },
+            { 25, "mausoleum_a" },
+            { 26, "mausoleum_b" },
+            { 27, "mausoleum_c" },
+            { 28, "pharos_lighthouse" },
+            { 29, "alexandrias_library" },
+            { 30, "caesareum" },
+            { 31, "colossi" },
+            { 32, "temple_of_luxor" },
+            { 33, "small_royal_burial_tomb" },
+            { 34, "medium_royal_burial_tomb" },
+            { 35, "large_royal_burial_tomb" },
+            { 36, "grand_royal_burial_tomb" },
+            { 37, "abu_simbel" },
+        };
+
         public static bool TryExtract(string sourcePath, bool dumpJson, out JObject root, out int mapSide, out string gridKey, out string dumpedJsonPath, out string error)
         {
             root = null;
@@ -524,7 +566,42 @@ namespace OGDirectImport
 
             result["disembark_points"] = BuildPointArray(ReadInt32Array(r, MaxDisembarkPoints), ReadInt32Array(r, MaxDisembarkPoints));
             result["debt_interest_rate"] = r.ReadUInt32();
-            result["monuments"] = new JObject { ["first"] = r.ReadUInt16(), ["second"] = r.ReadUInt16(), ["third"] = r.ReadUInt16() };
+            ushort monumentFirst = r.ReadUInt16();
+            ushort monumentSecond = r.ReadUInt16();
+            ushort monumentThird = r.ReadUInt16();
+            JArray monumentEnabledIds = new JArray();
+            JArray monumentEnabledNames = new JArray();
+            JArray monumentSlots = new JArray();
+            ushort[] monumentValues = { monumentFirst, monumentSecond, monumentThird };
+            string[] monumentSlotNames = { "first", "second", "third" };
+            for (int i = 0; i < monumentValues.Length; i++)
+            {
+                int monumentId = monumentValues[i];
+                string monumentName = GetMonumentName(monumentId);
+                bool enabled = monumentId != 0;
+                monumentSlots.Add(new JObject
+                {
+                    ["slot"] = monumentSlotNames[i],
+                    ["id"] = monumentId,
+                    ["name"] = monumentName,
+                    ["enabled"] = enabled
+                });
+                if (enabled)
+                {
+                    monumentEnabledIds.Add(monumentId);
+                    monumentEnabledNames.Add(monumentName);
+                }
+            }
+
+            result["monuments"] = new JObject
+            {
+                ["first"] = monumentFirst,
+                ["second"] = monumentSecond,
+                ["third"] = monumentThird,
+                ["enabled_ids"] = monumentEnabledIds,
+                ["enabled_names"] = monumentEnabledNames,
+                ["slots"] = monumentSlots
+            };
             r.Skip(2);
 
             uint[] required = ReadUInt32Array(r, ResourcesMax);
@@ -1580,6 +1657,12 @@ namespace OGDirectImport
         {
             string name;
             return ResourceNames.TryGetValue(resourceId, out name) ? name : "resource_" + resourceId.ToString(CultureInfo.InvariantCulture);
+        }
+
+        private static string GetMonumentName(int monumentId)
+        {
+            string name;
+            return MonumentNames.TryGetValue(monumentId, out name) ? name : "monument_" + monumentId.ToString(CultureInfo.InvariantCulture);
         }
 
         private static string GetOrFallback(Dictionary<int, string> dict, int key, string fallback)

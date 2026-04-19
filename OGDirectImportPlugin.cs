@@ -217,6 +217,85 @@ namespace OGDirectImport
             { 107, new[] { BuildingType.TempleComplexSeth } },
             { 108, new[] { BuildingType.TempleComplexBast } },
         };
+        private static readonly Dictionary<int, string> OgMonumentIdNames = new Dictionary<int, string>
+        {
+            { 0, "None" },
+            { 1, "Small Bent Pyramid" },
+            { 2, "Medium Bent Pyramid" },
+            { 3, "Small Mudbrick Pyramid" },
+            { 4, "Medium Mudbrick Pyramid" },
+            { 5, "Large Mudbrick Pyramid" },
+            { 6, "Mudbrick Pyramid Complex" },
+            { 7, "Grand Mudbrick Pyramid Complex" },
+            { 8, "Small Stepped Pyramid" },
+            { 9, "Medium Stepped Pyramid" },
+            { 10, "Large Stepped Pyramid" },
+            { 11, "Stepped Pyramid Complex" },
+            { 12, "Grand Stepped Pyramid Complex" },
+            { 13, "Small Pyramid" },
+            { 14, "Medium Pyramid" },
+            { 15, "Large Pyramid" },
+            { 16, "Pyramid Complex" },
+            { 17, "Grand Pyramid Complex" },
+            { 18, "Small Mastaba" },
+            { 19, "Medium Mastaba" },
+            { 20, "Large Mastaba" },
+            { 21, "Sphinx" },
+            { 22, "Small Obelisk" },
+            { 23, "Large Obelisk" },
+            { 24, "Sun Temple" },
+            { 25, "Mausoleum A" },
+            { 26, "Mausoleum B" },
+            { 27, "Mausoleum C" },
+            { 28, "Pharos Lighthouse" },
+            { 29, "Alexandria's Library" },
+            { 30, "Caesareum" },
+            { 31, "Colossi" },
+            { 32, "Temple of Luxor" },
+            { 33, "Small Royal Burial Tomb" },
+            { 34, "Medium Royal Burial Tomb" },
+            { 35, "Large Royal Burial Tomb" },
+            { 36, "Grand Royal Burial Tomb" },
+            { 37, "Abu Simbel" },
+        };
+        private static readonly Dictionary<int, BuildingType[]> OgAllowedMonumentIdToNewEraBuildings = new Dictionary<int, BuildingType[]>
+        {
+            { 1, new[] { BuildingType.PyramidBentSmall } },
+            { 2, new[] { BuildingType.PyramidBentMedium } },
+            { 3, new[] { BuildingType.PyramidBrickCoreSmall } },
+            { 4, new[] { BuildingType.PyramidBrickCoreMedium } },
+            { 5, new[] { BuildingType.PyramidBrickCoreLarge } },
+            { 6, new[] { BuildingType.PyramidBrickCoreComplex } },
+            { 7, new[] { BuildingType.PyramidBrickCoreGrandComplex } },
+            { 8, new[] { BuildingType.PyramidSteppedSmall } },
+            { 9, new[] { BuildingType.PyramidSteppedMedium } },
+            { 10, new[] { BuildingType.PyramidSteppedLarge } },
+            { 11, new[] { BuildingType.PyramidSteppedComplex } },
+            { 12, new[] { BuildingType.PyramidSteppedGrandComplex } },
+            { 13, new[] { BuildingType.PyramidTrueSmall } },
+            { 14, new[] { BuildingType.PyramidTrueMedium } },
+            { 15, new[] { BuildingType.PyramidTrueLarge } },
+            { 16, new[] { BuildingType.PyramidTrueComplex } },
+            { 17, new[] { BuildingType.PyramidTrueGrandComplex } },
+            { 18, new[] { BuildingType.MastabaSmall } },
+            { 19, new[] { BuildingType.MastabaMedium } },
+            { 20, new[] { BuildingType.MastabaLarge } },
+            { 21, new[] { BuildingType.Sphinx } },
+            { 22, new[] { BuildingType.ObeliskSmall } },
+            { 23, new[] { BuildingType.ObeliskLarge } },
+            { 24, new[] { BuildingType.SunTemple } },
+            { 25, new[] { BuildingType.MausoleumA } },
+            { 26, new[] { BuildingType.MausoleumB } },
+            { 27, new[] { BuildingType.MausoleumC } },
+            { 28, new[] { BuildingType.PharaohsLighthouse } },
+            { 29, new[] { BuildingType.AlexandriasLibrary } },
+            { 30, new[] { BuildingType.Caesareum } },
+            { 33, new[] { BuildingType.RoyalTombSmall } },
+            { 34, new[] { BuildingType.RoyalTombMedium } },
+            { 35, new[] { BuildingType.RoyalTombLarge } },
+            { 36, new[] { BuildingType.RoyalTombGrand } },
+            { 37, new[] { BuildingType.AbuSimbel } },
+        };
 
         private void Awake()
         {
@@ -1946,6 +2025,11 @@ namespace OGDirectImport
                 buildings.Add(buildingType);
             }
 
+            foreach (BuildingType buildingType in EnumerateAllowedMonumentsFromScenario(root["scenario_info"] as JObject))
+            {
+                buildings.Add(buildingType);
+            }
+
             foreach (Good good in goods ?? Enumerable.Empty<Good>())
             {
                 foreach (BuildingType buildingType in MapGoodToBuildings(good))
@@ -2004,6 +2088,40 @@ namespace OGDirectImport
                 if (!OgAllowedBuildingIndexToNewEraBuildings.TryGetValue(ogIndex, out BuildingType[] mappedBuildings) || mappedBuildings == null || mappedBuildings.Length == 0)
                 {
                     Log?.LogInfo($"No New Era mapping yet for OG allowed-building id {ogIndex}.");
+                    continue;
+                }
+
+                foreach (BuildingType buildingType in mappedBuildings)
+                {
+                    if (yielded.Add(buildingType))
+                    {
+                        yield return buildingType;
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<BuildingType> EnumerateAllowedMonumentsFromScenario(JObject scenarioInfo)
+        {
+            JObject monuments = scenarioInfo?["monuments"] as JObject;
+            if (monuments == null)
+            {
+                yield break;
+            }
+
+            HashSet<int> emittedMonumentIds = new HashSet<int>();
+            HashSet<BuildingType> yielded = new HashSet<BuildingType>();
+            foreach (JToken token in (monuments["enabled_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
+            {
+                int ogMonumentId = token?.Value<int>() ?? 0;
+                if (ogMonumentId == 0 || !emittedMonumentIds.Add(ogMonumentId))
+                {
+                    continue;
+                }
+
+                if (!OgAllowedMonumentIdToNewEraBuildings.TryGetValue(ogMonumentId, out BuildingType[] mappedBuildings) || mappedBuildings == null || mappedBuildings.Length == 0)
+                {
+                    Log?.LogInfo($"No New Era mapping yet for OG monument id {ogMonumentId} ({GetOgMonumentName(ogMonumentId)}).");
                     continue;
                 }
 
@@ -2107,6 +2225,11 @@ namespace OGDirectImport
                     yield return buildingType;
                 }
             }
+        }
+
+        private static string GetOgMonumentName(int ogMonumentId)
+        {
+            return OgMonumentIdNames.TryGetValue(ogMonumentId, out string name) ? name : $"Monument {ogMonumentId}";
         }
 
         private static IEnumerable<BuildingType> MapGodToBuildings(string rawGod)
@@ -2618,13 +2741,158 @@ namespace OGDirectImport
                 SetMember(winConditionObj, winConditionType, "SandboxMode", !(winCriteria.Properties().Any(p => p.Value?["enabled"]?.Value<bool>() ?? false)));
             }
 
+            ApplyRequiredMonuments(levelObj, levelType, winConditionObj, winConditionType, info);
+
             JArray burial = info["burial_provisions"] as JArray;
             if (burial != null)
             {
-                object burialGoodsObj = GetMember(winConditionObj, winConditionType, "BurialGoods");
-                if (burialGoodsObj is System.Collections.IList burialGoods)
+                ApplyBurialGoods(winConditionObj, winConditionType, burial);
+            }
+        }
+
+        private static void ApplyRequiredMonuments(object levelObj, Type levelType, object winConditionObj, Type winConditionType, JObject info)
+        {
+            object requiredMonumentsObj = GetMember(winConditionObj, winConditionType, "RequiredMonuments");
+            if (!(requiredMonumentsObj is System.Collections.IList requiredMonuments))
+            {
+                return;
+            }
+
+            List<BuildingType> importedMonuments = EnumerateRequiredMonuments(info).Distinct().ToList();
+            requiredMonuments.Clear();
+            foreach (BuildingType monumentType in importedMonuments)
+            {
+                requiredMonuments.Add(monumentType);
+            }
+
+            if (importedMonuments.Count > 0)
+            {
+                SetMember(levelObj, levelType, "MonumentPreset", ChooseMonumentPreset(importedMonuments));
+            }
+
+            RecomputeMonumentWinConditionScores(winConditionObj, winConditionType, importedMonuments);
+        }
+
+        private static IEnumerable<BuildingType> EnumerateRequiredMonuments(JObject info)
+        {
+            JObject monuments = info?["monuments"] as JObject;
+            if (monuments == null)
+            {
+                yield break;
+            }
+
+            HashSet<int> seenOgIds = new HashSet<int>();
+            HashSet<BuildingType> yielded = new HashSet<BuildingType>();
+            foreach (JToken token in (monuments["enabled_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
+            {
+                int ogMonumentId = token?.Value<int>() ?? 0;
+                if (ogMonumentId == 0 || !seenOgIds.Add(ogMonumentId))
                 {
-                    burialGoods.Clear();
+                    continue;
+                }
+
+                if (!OgAllowedMonumentIdToNewEraBuildings.TryGetValue(ogMonumentId, out BuildingType[] mappedBuildings) || mappedBuildings == null || mappedBuildings.Length == 0)
+                {
+                    Log?.LogInfo($"Skipping OG monument win condition id {ogMonumentId} ({GetOgMonumentName(ogMonumentId)}), no New Era counterpart found.");
+                    continue;
+                }
+
+                foreach (BuildingType buildingType in mappedBuildings)
+                {
+                    if (yielded.Add(buildingType))
+                    {
+                        yield return buildingType;
+                    }
+                }
+            }
+        }
+
+        private static MonumentPresetType ChooseMonumentPreset(IEnumerable<BuildingType> monuments)
+        {
+            HashSet<BuildingType> set = new HashSet<BuildingType>(monuments ?? Enumerable.Empty<BuildingType>());
+            if (set.Contains(BuildingType.PharaohsLighthouse) || set.Contains(BuildingType.AlexandriasLibrary) || set.Contains(BuildingType.Caesareum))
+            {
+                return MonumentPresetType.Alexandria;
+            }
+
+            if (set.Contains(BuildingType.AbuSimbel))
+            {
+                return MonumentPresetType.AbuSimbel;
+            }
+
+            if (set.Contains(BuildingType.RoyalTombSmall) || set.Contains(BuildingType.RoyalTombMedium) || set.Contains(BuildingType.RoyalTombLarge) || set.Contains(BuildingType.RoyalTombGrand))
+            {
+                return MonumentPresetType.ValleyOfTheKings;
+            }
+
+            return MonumentPresetType.Pyramids;
+        }
+
+        private static void RecomputeMonumentWinConditionScores(object winConditionObj, Type winConditionType, IEnumerable<BuildingType> monuments)
+        {
+            int totalRating = 0;
+            Type monumentComponentType = AccessTools.TypeByName("Monument");
+            Dictionary<BuildingType, GameObject> buildingPrefabs = GlobalAccessor.GlobalSettings?.GameplaySettings?.BuildingPrefabs;
+            if (buildingPrefabs != null && monumentComponentType != null)
+            {
+                foreach (BuildingType monumentType in monuments ?? Enumerable.Empty<BuildingType>())
+                {
+                    if (!buildingPrefabs.TryGetValue(monumentType, out GameObject prefab) || prefab == null)
+                    {
+                        continue;
+                    }
+
+                    Component monumentComponent = prefab.GetComponent(monumentComponentType);
+                    object ratingScoreObj = monumentComponent != null ? GetMember(monumentComponent, monumentComponentType, "RatingScore") : null;
+                    if (ratingScoreObj is int ratingScore)
+                    {
+                        totalRating += ratingScore;
+                    }
+                }
+            }
+
+            SetMember(winConditionObj, winConditionType, "MonumentsRating", Mathf.Clamp(totalRating, 0, 100));
+            SetMember(winConditionObj, winConditionType, "MonumentScoreRatio", totalRating <= 0 ? 1f : Mathf.Min(100f / (float)totalRating, 1f));
+        }
+
+        private static void ApplyBurialGoods(object winConditionObj, Type winConditionType, JArray burial)
+        {
+            object burialGoodsObj = GetMember(winConditionObj, winConditionType, "BurialGoods");
+            if (!(burialGoodsObj is System.Collections.IList burialGoods))
+            {
+                return;
+            }
+
+            burialGoods.Clear();
+
+            int importedCount = 0;
+            foreach (JObject provision in burial?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                Good? mappedGood = MapOgGoodToken(provision["resource_name"]) ?? MapOgGoodToken(provision["resource_id"]);
+                if (!mappedGood.HasValue || mappedGood.Value == Good.Gold)
+                {
+                    continue;
+                }
+
+                int required = ReadInt(provision, "required");
+                if (required <= 0)
+                {
+                    continue;
+                }
+
+                int dispatched = Math.Max(0, ReadInt(provision, "dispatched"));
+                burialGoods.Add(new BurialGood
+                {
+                    Good = mappedGood.Value,
+                    Quantity = required,
+                    WasSentToTomb = dispatched >= required
+                });
+
+                importedCount++;
+                if (importedCount >= MonumentPresets.MaxBurialGoods)
+                {
+                    Log?.LogWarning($"Burial goods truncated to {MonumentPresets.MaxBurialGoods} entries because the New Era editor UI does not support more slots.");
+                    break;
                 }
             }
         }
