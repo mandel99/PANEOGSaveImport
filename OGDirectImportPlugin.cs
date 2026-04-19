@@ -167,6 +167,7 @@ namespace OGDirectImport
         private static readonly Dictionary<BuildingType, Good[]> NewEraLinkedBuildingsToGoods = BuildReverseGoodBuildingLinks();
         private static readonly Dictionary<int, BuildingType[]> OgAllowedBuildingIndexToNewEraBuildings = new Dictionary<int, BuildingType[]>
         {
+            { 0, new[] { BuildingType.ArchitectPost, BuildingType.Firehouse, BuildingType.PoliceStation } },
             { 2, new[] { BuildingType.MineGold } },
             { 3, new[] { BuildingType.WaterLift } },
             { 4, new[] { BuildingType.IrrigationDitch } },
@@ -183,7 +184,7 @@ namespace OGDirectImport
             { 15, new[] { BuildingType.FestivalSquare } },
             { 16, new[] { BuildingType.ScribalSchool } },
             { 17, new[] { BuildingType.Library } },
-            { 18, new[] { BuildingType.WaterSupply } },
+            { 18, new[] { BuildingType.Well, BuildingType.WaterSupply } },
             { 19, new[] { BuildingType.Dentist } },
             { 20, new[] { BuildingType.Apothecary } },
             { 21, new[] { BuildingType.Physician } },
@@ -191,7 +192,7 @@ namespace OGDirectImport
             { 23, new[] { BuildingType.TaxCollector } },
             { 24, new[] { BuildingType.Courthouse } },
             { 25, new[] { BuildingType.PalaceVillage, BuildingType.PalaceTown, BuildingType.PalaceCity } },
-            { 26, new[] { BuildingType.MansionFamily, BuildingType.MansionDynasty } },
+            { 26, new[] { BuildingType.MansionPersonal, BuildingType.MansionFamily, BuildingType.MansionDynasty } },
             { 27, new[] { BuildingType.Roadblock } },
             { 28, new[] { BuildingType.Bridge } },
             { 29, new[] { BuildingType.FerryLanding } },
@@ -2081,10 +2082,33 @@ namespace OGDirectImport
                 yield break;
             }
 
+            int playerRank = Math.Max(0, ReadInt(scenarioInfo, "player_rank"));
             HashSet<BuildingType> yielded = new HashSet<BuildingType>();
             foreach (JToken token in (allowedBuildings["enabled_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
             {
                 int ogIndex = token?.Value<int>() ?? -1;
+                if (ogIndex == 25)
+                {
+                    BuildingType palaceTier = ResolveOgPalaceTier(playerRank);
+                    if (yielded.Add(palaceTier))
+                    {
+                        yield return palaceTier;
+                    }
+
+                    continue;
+                }
+
+                if (ogIndex == 26)
+                {
+                    BuildingType mansionTier = ResolveOgMansionTier(playerRank);
+                    if (yielded.Add(mansionTier))
+                    {
+                        yield return mansionTier;
+                    }
+
+                    continue;
+                }
+
                 if (!OgAllowedBuildingIndexToNewEraBuildings.TryGetValue(ogIndex, out BuildingType[] mappedBuildings) || mappedBuildings == null || mappedBuildings.Length == 0)
                 {
                     Log?.LogInfo($"No New Era mapping yet for OG allowed-building id {ogIndex}.");
@@ -2099,6 +2123,40 @@ namespace OGDirectImport
                     }
                 }
             }
+        }
+
+        private static BuildingType ResolveOgPalaceTier(int playerRank)
+        {
+            // Akhenaten uses scenario_property_player_rank() to enable palace tiers:
+            // rank < 6 => village, rank < 8 => town, otherwise city.
+            if (playerRank < 6)
+            {
+                return BuildingType.PalaceVillage;
+            }
+
+            if (playerRank < 8)
+            {
+                return BuildingType.PalaceTown;
+            }
+
+            return BuildingType.PalaceCity;
+        }
+
+        private static BuildingType ResolveOgMansionTier(int playerRank)
+        {
+            // Akhenaten mirrors the same thresholds for mansion tiers:
+            // rank < 6 => personal, rank < 8 => family, otherwise dynasty.
+            if (playerRank < 6)
+            {
+                return BuildingType.MansionPersonal;
+            }
+
+            if (playerRank < 8)
+            {
+                return BuildingType.MansionFamily;
+            }
+
+            return BuildingType.MansionDynasty;
         }
 
         private static IEnumerable<BuildingType> EnumerateAllowedMonumentsFromScenario(JObject scenarioInfo)
