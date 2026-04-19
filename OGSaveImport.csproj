@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OgBinaryExtractor.cs" />
+    <Compile Include="OgNewEraMappings.cs" />
     <Compile Include="OGDirectImportPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +83,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PluginDeployDir>C:\Program Files (x86)\Steam\steamapps\common\Pharaoh A New Era\BepInEx\plugins\$(TargetName)</PluginDeployDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "C:\Program Files (x86)\Steam\steamapps\common\Pharaoh A New Era\BepInEx\plugins\$(TargetName)"
+xcopy /q/y/i "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Pharaoh A New Era\BepInEx\plugins\$(TargetName)" /E /H /C</PostBuildEvent>
   </PropertyGroup>
   <Target Name="DeployPlugin" AfterTargets="Build">
     <ItemGroup>

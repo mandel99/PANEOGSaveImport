@@ -26,7 +26,7 @@ namespace OGDirectImport
     {
         private const string ModGuid = "PANE.ogdirectimport";
         private const string ModName = "OG Direct Import";
-        private const string VersionString = "0.1.0";
+        private const string VersionString = "0.1.1";
         private const string ImportButtonObjectName = "OGDirectImportButton";
         private const string ImportButtonLabel = "Import OG MAP/SAV";
         private const string CreateButtonScenePath = "Canvas/Panel_LevelEditor/Generic_Container/PanelContent/Image/CreateButton";
@@ -35,6 +35,41 @@ namespace OGDirectImport
         private const float CreateButtonTargetY = -7.5f;
         private const float ImportButtonTargetY = -117.5f;
         private const float LoadButtonTargetY = -62.5f;
+        private const uint OgTerrainFlagTree = 0x00000001u;
+        private const uint OgTerrainFlagRock = 0x00000002u;
+        private const uint OgTerrainFlagWater = 0x00000004u;
+        private const uint OgTerrainFlagShrub = 0x00000010u;
+        private const uint OgTerrainFlagRoad = 0x00000040u;
+        private const uint OgTerrainFlagGroundwater = 0x00000080u;
+        private const uint OgTerrainFlagCanal = 0x00000100u;
+        private const uint OgTerrainFlagElevation = 0x00000200u;
+        private const uint OgTerrainFlagMeadow = 0x00000800u;
+        private const uint OgTerrainFlagWall = 0x00004000u;
+        private const uint OgTerrainFlagFloodplain = 0x00010000u;
+        private const uint OgTerrainFlagMarshland = 0x00040000u;
+        private const uint OgTerrainFlagOutOfBounds = 0x00080000u;
+        private const uint OgTerrainFlagOre = 0x00100000u;
+        private const uint OgTerrainFlagIrrigationRange = 0x01000000u;
+        private const uint OgTerrainFlagDune = 0x02000000u;
+        private const uint OgTerrainFlagDeepWater = 0x04000000u;
+        private const uint OgTerrainFlagSubmergedRoad = 0x08000000u;
+        private const uint OgTerrainFlagGrass = 0x10000000u;
+        private const uint OgTerrainFlagShore = 0x80000000u;
+        private static int TerrainConflictWaterMarshLogCount;
+        private static readonly TerrainType[] TerrainBrushPriority = new[]
+        {
+            TerrainType.FloodPlain,
+            TerrainType.Water,
+            TerrainType.Marsh,
+            TerrainType.Sand,
+            TerrainType.Cliff,
+            TerrainType.Ore,
+            TerrainType.Meadow,
+            TerrainType.Tree,
+            TerrainType.Rock,
+            TerrainType.Dune,
+            TerrainType.Road
+        };
 
         internal static ManualLogSource Log;
         internal static OGDirectImportPlugin Instance;
@@ -165,138 +200,32 @@ namespace OGDirectImport
         };
 
         private static readonly Dictionary<BuildingType, Good[]> NewEraLinkedBuildingsToGoods = BuildReverseGoodBuildingLinks();
-        private static readonly Dictionary<int, BuildingType[]> OgAllowedBuildingIndexToNewEraBuildings = new Dictionary<int, BuildingType[]>
+        private static readonly Dictionary<string, uint> OgTerrainFlagByName = new Dictionary<string, uint>(StringComparer.OrdinalIgnoreCase)
         {
-            { 0, new[] { BuildingType.ArchitectPost, BuildingType.Firehouse, BuildingType.PoliceStation } },
-            { 2, new[] { BuildingType.MineGold } },
-            { 3, new[] { BuildingType.WaterLift } },
-            { 4, new[] { BuildingType.IrrigationDitch } },
-            { 5, new[] { BuildingType.FishingWharf } },
-            { 6, new[] { BuildingType.FoodWorkCamp, BuildingType.MonumentsWorkCamp } },
-            { 7, new[] { BuildingType.Granary } },
-            { 8, new[] { BuildingType.Bazaar } },
-            { 9, new[] { BuildingType.StorageYard } },
-            { 10, new[] { BuildingType.Dock } },
-            { 11, new[] { BuildingType.Booth, BuildingType.JugglerSchool } },
-            { 12, new[] { BuildingType.Bandstand, BuildingType.Conservatory } },
-            { 13, new[] { BuildingType.Pavilion, BuildingType.DanceSchool } },
-            { 14, new[] { BuildingType.SenetHouse } },
-            { 15, new[] { BuildingType.FestivalSquare } },
-            { 16, new[] { BuildingType.ScribalSchool } },
-            { 17, new[] { BuildingType.Library } },
-            { 18, new[] { BuildingType.Well, BuildingType.WaterSupply } },
-            { 19, new[] { BuildingType.Dentist } },
-            { 20, new[] { BuildingType.Apothecary } },
-            { 21, new[] { BuildingType.Physician } },
-            { 22, new[] { BuildingType.Mortuary } },
-            { 23, new[] { BuildingType.TaxCollector } },
-            { 24, new[] { BuildingType.Courthouse } },
-            { 25, new[] { BuildingType.PalaceVillage, BuildingType.PalaceTown, BuildingType.PalaceCity } },
-            { 26, new[] { BuildingType.MansionPersonal, BuildingType.MansionFamily, BuildingType.MansionDynasty } },
-            { 27, new[] { BuildingType.Roadblock } },
-            { 28, new[] { BuildingType.Bridge } },
-            { 29, new[] { BuildingType.FerryLanding } },
-            { 30, new[] { BuildingType.Gardens } },
-            { 31, new[] { BuildingType.Plaza } },
-            { 32, new[] { BuildingType.StatueSmallV1, BuildingType.StatueSmallV2, BuildingType.StatueSmallV3, BuildingType.StatueSmallV4, BuildingType.StatueMediumV1, BuildingType.StatueMediumV2, BuildingType.StatueMediumV3, BuildingType.StatueMediumV4, BuildingType.StatueLargeV1, BuildingType.StatueLargeV2, BuildingType.StatueLargeV3, BuildingType.StatueLargeV4 } },
-            { 33, new[] { BuildingType.Wall } },
-            { 34, new[] { BuildingType.Tower } },
-            { 35, new[] { BuildingType.GateHouse } },
-            { 36, new[] { BuildingType.Recruiter } },
-            { 37, new[] { BuildingType.FortInfantry } },
-            { 38, new[] { BuildingType.FortArchers } },
-            { 39, new[] { BuildingType.FortCharioteers } },
-            { 40, new[] { BuildingType.Academy } },
-            { 41, new[] { BuildingType.Weaponsmith } },
-            { 42, new[] { BuildingType.ChariotMaker } },
-            { 43, new[] { BuildingType.WarshipWharf } },
-            { 44, new[] { BuildingType.TransportWharf } },
-            { 45, new[] { BuildingType.Zoo } },
-            { 104, new[] { BuildingType.TempleComplexOsiris } },
-            { 105, new[] { BuildingType.TempleComplexRa } },
-            { 106, new[] { BuildingType.TempleComplexPtah } },
-            { 107, new[] { BuildingType.TempleComplexSeth } },
-            { 108, new[] { BuildingType.TempleComplexBast } },
+            { "TREE", OgTerrainFlagTree },
+            { "ROCK", OgTerrainFlagRock },
+            { "WATER", OgTerrainFlagWater },
+            { "SHRUB", OgTerrainFlagShrub },
+            { "ROAD", OgTerrainFlagRoad },
+            { "GROUNDWATER", OgTerrainFlagGroundwater },
+            { "CANAL", OgTerrainFlagCanal },
+            { "ELEVATION", OgTerrainFlagElevation },
+            { "MEADOW", OgTerrainFlagMeadow },
+            { "WALL", OgTerrainFlagWall },
+            { "FLOODPLAIN", OgTerrainFlagFloodplain },
+            { "MARSHLAND", OgTerrainFlagMarshland },
+            { "OUT_OF_BOUNDS", OgTerrainFlagOutOfBounds },
+            { "ORE", OgTerrainFlagOre },
+            { "IRRIGATION_RANGE", OgTerrainFlagIrrigationRange },
+            { "DUNE", OgTerrainFlagDune },
+            { "DEEPWATER", OgTerrainFlagDeepWater },
+            { "SUBMERGED_ROAD", OgTerrainFlagSubmergedRoad },
+            { "GRASS", OgTerrainFlagGrass },
+            { "SHORE", OgTerrainFlagShore }
         };
-        private static readonly Dictionary<int, string> OgMonumentIdNames = new Dictionary<int, string>
-        {
-            { 0, "None" },
-            { 1, "Small Bent Pyramid" },
-            { 2, "Medium Bent Pyramid" },
-            { 3, "Small Mudbrick Pyramid" },
-            { 4, "Medium Mudbrick Pyramid" },
-            { 5, "Large Mudbrick Pyramid" },
-            { 6, "Mudbrick Pyramid Complex" },
-            { 7, "Grand Mudbrick Pyramid Complex" },
-            { 8, "Small Stepped Pyramid" },
-            { 9, "Medium Stepped Pyramid" },
-            { 10, "Large Stepped Pyramid" },
-            { 11, "Stepped Pyramid Complex" },
-            { 12, "Grand Stepped Pyramid Complex" },
-            { 13, "Small Pyramid" },
-            { 14, "Medium Pyramid" },
-            { 15, "Large Pyramid" },
-            { 16, "Pyramid Complex" },
-            { 17, "Grand Pyramid Complex" },
-            { 18, "Small Mastaba" },
-            { 19, "Medium Mastaba" },
-            { 20, "Large Mastaba" },
-            { 21, "Sphinx" },
-            { 22, "Small Obelisk" },
-            { 23, "Large Obelisk" },
-            { 24, "Sun Temple" },
-            { 25, "Mausoleum A" },
-            { 26, "Mausoleum B" },
-            { 27, "Mausoleum C" },
-            { 28, "Pharos Lighthouse" },
-            { 29, "Alexandria's Library" },
-            { 30, "Caesareum" },
-            { 31, "Colossi" },
-            { 32, "Temple of Luxor" },
-            { 33, "Small Royal Burial Tomb" },
-            { 34, "Medium Royal Burial Tomb" },
-            { 35, "Large Royal Burial Tomb" },
-            { 36, "Grand Royal Burial Tomb" },
-            { 37, "Abu Simbel" },
-        };
-        private static readonly Dictionary<int, BuildingType[]> OgAllowedMonumentIdToNewEraBuildings = new Dictionary<int, BuildingType[]>
-        {
-            { 1, new[] { BuildingType.PyramidBentSmall } },
-            { 2, new[] { BuildingType.PyramidBentMedium } },
-            { 3, new[] { BuildingType.PyramidBrickCoreSmall } },
-            { 4, new[] { BuildingType.PyramidBrickCoreMedium } },
-            { 5, new[] { BuildingType.PyramidBrickCoreLarge } },
-            { 6, new[] { BuildingType.PyramidBrickCoreComplex } },
-            { 7, new[] { BuildingType.PyramidBrickCoreGrandComplex } },
-            { 8, new[] { BuildingType.PyramidSteppedSmall } },
-            { 9, new[] { BuildingType.PyramidSteppedMedium } },
-            { 10, new[] { BuildingType.PyramidSteppedLarge } },
-            { 11, new[] { BuildingType.PyramidSteppedComplex } },
-            { 12, new[] { BuildingType.PyramidSteppedGrandComplex } },
-            { 13, new[] { BuildingType.PyramidTrueSmall } },
-            { 14, new[] { BuildingType.PyramidTrueMedium } },
-            { 15, new[] { BuildingType.PyramidTrueLarge } },
-            { 16, new[] { BuildingType.PyramidTrueComplex } },
-            { 17, new[] { BuildingType.PyramidTrueGrandComplex } },
-            { 18, new[] { BuildingType.MastabaSmall } },
-            { 19, new[] { BuildingType.MastabaMedium } },
-            { 20, new[] { BuildingType.MastabaLarge } },
-            { 21, new[] { BuildingType.Sphinx } },
-            { 22, new[] { BuildingType.ObeliskSmall } },
-            { 23, new[] { BuildingType.ObeliskLarge } },
-            { 24, new[] { BuildingType.SunTemple } },
-            { 25, new[] { BuildingType.MausoleumA } },
-            { 26, new[] { BuildingType.MausoleumB } },
-            { 27, new[] { BuildingType.MausoleumC } },
-            { 28, new[] { BuildingType.PharaohsLighthouse } },
-            { 29, new[] { BuildingType.AlexandriasLibrary } },
-            { 30, new[] { BuildingType.Caesareum } },
-            { 33, new[] { BuildingType.RoyalTombSmall } },
-            { 34, new[] { BuildingType.RoyalTombMedium } },
-            { 35, new[] { BuildingType.RoyalTombLarge } },
-            { 36, new[] { BuildingType.RoyalTombGrand } },
-            { 37, new[] { BuildingType.AbuSimbel } },
-        };
+        private static readonly Dictionary<int, BuildingType[]> OgAllowedBuildingIndexToNewEraBuildings = OgNewEraMappings.AllowedBuildingIndexToNewEraBuildings;
+        private static readonly Dictionary<int, string> OgMonumentIdNames = OgNewEraMappings.MonumentIdNames;
+        private static readonly Dictionary<int, BuildingType[]> OgAllowedMonumentIdToNewEraBuildings = OgNewEraMappings.AllowedMonumentIdToNewEraBuildings;
 
         private void Awake()
         {
@@ -1033,6 +962,7 @@ namespace OGDirectImport
             ApplyTerrainTiles(mapEditorInstance, arr);
             TryApplyScenarioInfo(mapEditorInstance, root);
             TryApplyAvailability(mapEditorInstance, root);
+            TryApplyDeitiesViaMapEditor(mapEditorInstance, root);
             TryApplyMapFlags(mapEditorInstance, root);
             TryApplyWorldMap(mapEditorInstance, root);
 
@@ -1094,16 +1024,12 @@ namespace OGDirectImport
             TerrainType oldBrush = TerrainType.None;
             try { oldBrush = (TerrainType)fBrush.GetValue(paintContext); } catch { }
 
-            Type cellType = mPaintCell.GetParameters()[0].ParameterType;
-            Type terrainEnumType = mPaintCell.GetParameters()[1].ParameterType;
-
             HashSet<Cell> refreshCells = new HashSet<Cell>();
             HashSet<int> refreshGrass = new HashSet<int>();
             HashSet<TerrainType> changedNativeTerrains = new HashSet<TerrainType>();
             HashSet<StaggeredCellCoord> changedCoords = new HashSet<StaggeredCellCoord>();
             HashSet<StaggeredCellCoord> forcedGrassCoords = new HashSet<StaggeredCellCoord>();
-            List<Cell> marshCells = new List<Cell>();
-
+            List<OgTerrainCellImportState> preparedTiles = new List<OgTerrainCellImportState>(arr.Count);
             int applied = 0;
             int skipped = 0;
 
@@ -1120,29 +1046,15 @@ namespace OGDirectImport
                         x += 1;
                     }
 
-                    OgTerrainImportSpec terrainSpec = DescribeOgTerrain(jt["terrain"]?.Value<string>());
-                    string s = terrainSpec.PaintTerrainName;
-                    if (string.IsNullOrWhiteSpace(s))
-                    {
-                        skipped++;
-                        continue;
-                    }
-
-                    object terrainValue;
-                    object brushValue;
-                    try
-                    {
-                        terrainValue = Enum.Parse(terrainEnumType, s, true);
-                        brushValue = Enum.Parse(fBrush.FieldType, s, true);
-                    }
-                    catch
-                    {
-                        skipped++;
-                        continue;
-                    }
-
                     Cell cell = level.GetCell(new StaggeredCellCoord(x, y));
                     if (cell == null)
+                    {
+                        skipped++;
+                        continue;
+                    }
+
+                    OgTerrainImportSpec terrainSpec = DescribeOgTerrainCell(jt);
+                    if (terrainSpec == null || terrainSpec.Brushes.Count == 0)
                     {
                         skipped++;
                         continue;
@@ -1153,36 +1065,64 @@ namespace OGDirectImport
                         forcedGrassCoords.Add(cell.Coordinates);
                     }
 
-                    TerrainType targetTerrain = (TerrainType)terrainValue;
-                    TerrainType prevTerrain = cell.Terrain;
-                    if (prevTerrain != targetTerrain)
+                    OgTerrainCellImportState tileState = new OgTerrainCellImportState
                     {
-                        if (LevelMap.NativeTerrainFilter.Contains(prevTerrain))
+                        Cell = cell,
+                        TerrainSpec = terrainSpec
+                    };
+                    preparedTiles.Add(tileState);
+                }
+
+                foreach (TerrainType brush in TerrainBrushPriority)
+                {
+                    foreach (OgTerrainCellImportState tileState in preparedTiles)
+                    {
+                        if (!tileState.TerrainSpec.Brushes.Contains(brush))
                         {
-                            changedNativeTerrains.Add(prevTerrain);
+                            continue;
                         }
-                        if (LevelMap.NativeTerrainFilter.Contains(targetTerrain))
+
+                        if (ApplyTerrainBrush(
+                            editorInstance,
+                            paintContext,
+                            fBrush,
+                            mPaintCell,
+                            mFloodConn,
+                            tileState.Cell,
+                            brush,
+                            refreshCells,
+                            refreshGrass,
+                            changedNativeTerrains,
+                            changedCoords))
                         {
-                            changedNativeTerrains.Add(targetTerrain);
+                            tileState.AppliedAnyBrush = true;
                         }
                     }
 
-                    fBrush.SetValue(paintContext, brushValue);
+                    FlushTerrainPaintPhase(
+                        mapEditorInstance,
+                        editorInstance,
+                        tEditor,
+                        level,
+                        mBrushNeighbourUpdate,
+                        mCliffInvalidPurge,
+                        mStartAndWaitForPostPaintJob,
+                        refreshCells,
+                        refreshGrass,
+                        changedNativeTerrains,
+                        changedCoords);
+                }
 
-                    mPaintCell.Invoke(editorInstance, new object[] { cell, terrainValue, refreshCells, refreshGrass });
-                    mFloodConn?.Invoke(editorInstance, new object[] { cell, prevTerrain });
-                    if (prevTerrain == TerrainType.FloodPlain)
+                foreach (OgTerrainCellImportState tileState in preparedTiles)
+                {
+                    if (tileState.AppliedAnyBrush)
                     {
-                        cell.RemoveAdditionalData<FloodplainDistanceData>();
+                        applied++;
                     }
-
-                    refreshCells.Add(cell);
-                    changedCoords.Add(cell.Coordinates);
-                    if (targetTerrain == TerrainType.Marsh)
+                    else
                     {
-                        marshCells.Add(cell);
+                        skipped++;
                     }
-                    applied++;
                 }
             }
             finally
@@ -1190,137 +1130,8 @@ namespace OGDirectImport
                 try { fBrush.SetValue(paintContext, oldBrush); } catch { }
             }
 
-            if (marshCells.Count > 0)
-            {
-                foreach (Cell marshCell in marshCells)
-                {
-                    foreach (StaggeredCellCoord neighbourCoord in Isometric.GetRingCoordsFromRange(marshCell.Coordinates, 1))
-                    {
-                        Cell neighbour = level.GetCell(neighbourCoord);
-                        if (neighbour == null || (neighbour.Terrain != TerrainType.Water && neighbour.Terrain != TerrainType.FloodPlain))
-                        {
-                            continue;
-                        }
-
-                        TerrainType previousTerrain = neighbour.Terrain;
-                        if (LevelMap.NativeTerrainFilter.Contains(previousTerrain))
-                        {
-                            changedNativeTerrains.Add(previousTerrain);
-                        }
-                        changedNativeTerrains.Add(TerrainType.Sand);
-
-                        fBrush.SetValue(paintContext, TerrainType.Marsh);
-                        mPaintCell.Invoke(editorInstance, new object[] { neighbour, TerrainType.Sand, refreshCells, refreshGrass });
-                        mFloodConn?.Invoke(editorInstance, new object[] { neighbour, previousTerrain });
-                        if (previousTerrain == TerrainType.FloodPlain)
-                        {
-                            neighbour.RemoveAdditionalData<FloodplainDistanceData>();
-                        }
-
-                        refreshCells.Add(neighbour);
-                        changedCoords.Add(neighbour.Coordinates);
-                    }
-                }
-            }
-
             try
             {
-                int neighbourRange = 1;
-                object editorSettings = AccessTools.Field(tEditor, "_editorSettings")?.GetValue(editorInstance);
-                if (editorSettings != null)
-                {
-                    neighbourRange = Math.Max(1, (int)(AccessTools.Field(editorSettings.GetType(), "NeighbourCellUpdateRange")?.GetValue(editorSettings) ?? 1));
-                }
-
-                if (mBrushNeighbourUpdate != null && changedCoords.Count > 0)
-                {
-                    HashSet<StaggeredCellCoord> neighbourCoords = new HashSet<StaggeredCellCoord>(changedCoords);
-                    foreach (StaggeredCellCoord coord in changedCoords)
-                    {
-                        for (int range = 1; range <= neighbourRange + 1; range++)
-                        {
-                            neighbourCoords.UnionWith(Isometric.GetRingCoordsFromRange(coord, range));
-                        }
-                    }
-
-                    mBrushNeighbourUpdate.Invoke(editorInstance, new object[] { neighbourCoords, refreshCells });
-                }
-
-                mCliffInvalidPurge?.Invoke(editorInstance, new object[] { refreshCells });
-
-                foreach (TerrainType terrainType in changedNativeTerrains)
-                {
-                    if (LevelMap.NativeTerrainFilter.Contains(terrainType))
-                    {
-                        GraphicTileInstancing.Instance.ReuploadComputeBufferGPU(level, terrainType);
-                    }
-                }
-
-                if (refreshGrass.Count > 0)
-                {
-                    GraphicTileInstancing.Instance.MapEditor_RecomputeGrassPatchBuffer(refreshGrass);
-                }
-
-                object mapRenderer = AccessTools.Field(tEditor, "_mapRenderer")?.GetValue(mapEditorInstance);
-                MethodInfo mRefreshCellTiles = mapRenderer != null ? AccessTools.Method(mapRenderer.GetType(), "RefreshCellTiles") : null;
-                FieldInfo fPostJobWaterCells = AccessTools.Field(tEditor, "_postJobWaterCellsToRefresh");
-                if (fPostJobWaterCells?.GetValue(editorInstance) is HashSet<Cell> postJobWaterCells)
-                {
-                    foreach (Cell cell in refreshCells)
-                    {
-                        if (cell.Terrain == TerrainType.FloodPlain)
-                        {
-                            bool surroundedByFloodplain = true;
-                            foreach (StaggeredCellCoord squareCoord in Isometric.GetSquareCoordsFromRange(cell.Coordinates, 1))
-                            {
-                                Cell squareCell = level.GetCell(squareCoord);
-                                if (squareCell == null || squareCell.Terrain != TerrainType.FloodPlain)
-                                {
-                                    surroundedByFloodplain = false;
-                                    break;
-                                }
-                            }
-
-                            if (surroundedByFloodplain)
-                            {
-                                cell.RemoveAdditionalData<GrassCellData>();
-                            }
-                        }
-
-                        if (cell.Terrain == TerrainType.Water || cell.Terrain == TerrainType.FloodPlain)
-                        {
-                            postJobWaterCells.Add(cell);
-                        }
-                    }
-                }
-
-                mRefreshCellTiles?.Invoke(mapRenderer, new object[] { refreshCells });
-                AccessTools.Method(tEditor, "ForceRefreshGrass")?.Invoke(mapEditorInstance, Array.Empty<object>());
-
-                if (mStartAndWaitForPostPaintJob != null)
-                {
-                    Stopwatch wait = Stopwatch.StartNew();
-                    while (wait.ElapsedMilliseconds < 5000)
-                    {
-                        bool pending = false;
-                        try
-                        {
-                            pending = (bool)mStartAndWaitForPostPaintJob.Invoke(editorInstance, Array.Empty<object>());
-                        }
-                        catch
-                        {
-                            break;
-                        }
-
-                        if (!pending)
-                        {
-                            break;
-                        }
-
-                        System.Threading.Thread.Sleep(5);
-                    }
-                }
-
                 ApplyForcedGrassPlain(level, forcedGrassCoords);
             }
             catch (Exception ex)
@@ -1331,6 +1142,379 @@ namespace OGDirectImport
             AccessTools.Method(tEditor, "ComputeCurrentFlood")?.Invoke(mapEditorInstance, Array.Empty<object>());
 
             Log?.LogInfo($"OG terrain applied. items={arr.Count}, applied={applied}, skipped={skipped}");
+        }
+
+        private static void FlushTerrainPaintPhase(
+            object mapEditorInstance,
+            MapEditor editorInstance,
+            Type tEditor,
+            LevelMap level,
+            MethodInfo mBrushNeighbourUpdate,
+            MethodInfo mCliffInvalidPurge,
+            MethodInfo mStartAndWaitForPostPaintJob,
+            HashSet<Cell> refreshCells,
+            HashSet<int> refreshGrass,
+            HashSet<TerrainType> changedNativeTerrains,
+            HashSet<StaggeredCellCoord> changedCoords)
+        {
+            if (editorInstance == null || level == null || refreshCells == null || changedCoords == null)
+            {
+                return;
+            }
+
+            if (refreshCells.Count == 0 && changedCoords.Count == 0 && refreshGrass.Count == 0 && changedNativeTerrains.Count == 0)
+            {
+                return;
+            }
+
+            int neighbourRange = 1;
+            object editorSettings = AccessTools.Field(tEditor, "_editorSettings")?.GetValue(editorInstance);
+            if (editorSettings != null)
+            {
+                neighbourRange = Math.Max(1, (int)(AccessTools.Field(editorSettings.GetType(), "NeighbourCellUpdateRange")?.GetValue(editorSettings) ?? 1));
+            }
+
+            if (mBrushNeighbourUpdate != null && changedCoords.Count > 0)
+            {
+                HashSet<StaggeredCellCoord> neighbourCoords = new HashSet<StaggeredCellCoord>(changedCoords);
+                foreach (StaggeredCellCoord coord in changedCoords)
+                {
+                    for (int range = 1; range <= neighbourRange + 1; range++)
+                    {
+                        neighbourCoords.UnionWith(Isometric.GetRingCoordsFromRange(coord, range));
+                    }
+                }
+
+                mBrushNeighbourUpdate.Invoke(editorInstance, new object[] { neighbourCoords, refreshCells });
+            }
+
+            mCliffInvalidPurge?.Invoke(editorInstance, new object[] { refreshCells });
+
+            foreach (TerrainType terrainType in changedNativeTerrains)
+            {
+                if (LevelMap.NativeTerrainFilter.Contains(terrainType))
+                {
+                    GraphicTileInstancing.Instance.ReuploadComputeBufferGPU(level, terrainType);
+                }
+            }
+
+            if (refreshGrass.Count > 0)
+            {
+                GraphicTileInstancing.Instance.MapEditor_RecomputeGrassPatchBuffer(refreshGrass);
+            }
+
+            object mapRenderer = AccessTools.Field(tEditor, "_mapRenderer")?.GetValue(mapEditorInstance);
+            MethodInfo mRefreshCellTiles = mapRenderer != null ? AccessTools.Method(mapRenderer.GetType(), "RefreshCellTiles") : null;
+            FieldInfo fPostJobWaterCells = AccessTools.Field(tEditor, "_postJobWaterCellsToRefresh");
+            if (fPostJobWaterCells?.GetValue(editorInstance) is HashSet<Cell> postJobWaterCells)
+            {
+                foreach (Cell cell in refreshCells)
+                {
+                    if (cell.Terrain == TerrainType.FloodPlain)
+                    {
+                        bool surroundedByFloodplain = true;
+                        foreach (StaggeredCellCoord squareCoord in Isometric.GetSquareCoordsFromRange(cell.Coordinates, 1))
+                        {
+                            Cell squareCell = level.GetCell(squareCoord);
+                            if (squareCell == null || squareCell.Terrain != TerrainType.FloodPlain)
+                            {
+                                surroundedByFloodplain = false;
+                                break;
+                            }
+                        }
+
+                        if (surroundedByFloodplain)
+                        {
+                            cell.RemoveAdditionalData<GrassCellData>();
+                        }
+                    }
+
+                    if (cell.Terrain == TerrainType.Water || cell.Terrain == TerrainType.FloodPlain)
+                    {
+                        postJobWaterCells.Add(cell);
+                    }
+                }
+            }
+
+            mRefreshCellTiles?.Invoke(mapRenderer, new object[] { refreshCells });
+            AccessTools.Method(tEditor, "ForceRefreshGrass")?.Invoke(mapEditorInstance, Array.Empty<object>());
+
+            if (mStartAndWaitForPostPaintJob != null)
+            {
+                Stopwatch wait = Stopwatch.StartNew();
+                while (wait.ElapsedMilliseconds < 5000)
+                {
+                    bool pending = false;
+                    try
+                    {
+                        pending = (bool)mStartAndWaitForPostPaintJob.Invoke(editorInstance, Array.Empty<object>());
+                    }
+                    catch
+                    {
+                        break;
+                    }
+
+                    if (!pending)
+                    {
+                        break;
+                    }
+
+                    System.Threading.Thread.Sleep(5);
+                }
+            }
+
+            refreshCells.Clear();
+            refreshGrass.Clear();
+            changedNativeTerrains.Clear();
+            changedCoords.Clear();
+        }
+
+        private static bool ApplyTerrainBrush(
+            MapEditor editorInstance,
+            object paintContext,
+            FieldInfo fBrush,
+            MethodInfo mPaintCell,
+            MethodInfo mFloodConn,
+            Cell cell,
+            TerrainType brush,
+            HashSet<Cell> refreshCells,
+            HashSet<int> refreshGrass,
+            HashSet<TerrainType> changedNativeTerrains,
+            HashSet<StaggeredCellCoord> changedCoords)
+        {
+            if (cell == null || brush == TerrainType.None)
+            {
+                return false;
+            }
+
+            TerrainType previousTerrain = cell.Terrain;
+            fBrush.SetValue(paintContext, brush);
+            mPaintCell.Invoke(editorInstance, new object[] { cell, brush, refreshCells, refreshGrass });
+            mFloodConn?.Invoke(editorInstance, new object[] { cell, previousTerrain });
+
+            if (previousTerrain == TerrainType.FloodPlain)
+            {
+                cell.RemoveAdditionalData<FloodplainDistanceData>();
+            }
+
+            TerrainType currentTerrain = cell.Terrain;
+            if (previousTerrain != currentTerrain)
+            {
+                if (LevelMap.NativeTerrainFilter.Contains(previousTerrain))
+                {
+                    changedNativeTerrains.Add(previousTerrain);
+                }
+                if (LevelMap.NativeTerrainFilter.Contains(currentTerrain))
+                {
+                    changedNativeTerrains.Add(currentTerrain);
+                }
+            }
+
+            refreshCells.Add(cell);
+            changedCoords.Add(cell.Coordinates);
+            return true;
+        }
+
+        private static OgTerrainImportSpec DescribeOgTerrainCell(JToken jt)
+        {
+            if (jt == null)
+            {
+                return new OgTerrainImportSpec();
+            }
+
+            if (TryReadOgTerrainFlags(jt, out uint flags))
+            {
+                OgTerrainImportSpec fromFlags = DescribeOgTerrainFlags(flags, jt["terrain"]?.Value<string>());
+                if (fromFlags.Brushes.Count > 0 || fromFlags.ForceGrassPlain)
+                {
+                    return fromFlags;
+                }
+            }
+
+            return DescribeLegacyOgTerrain(jt["terrain"]?.Value<string>());
+        }
+
+        private static bool TryReadOgTerrainFlags(JToken jt, out uint flags)
+        {
+            flags = 0;
+            if (!(jt is JObject obj))
+            {
+                return false;
+            }
+
+            JToken numericToken = obj["terrain_flags"];
+            if (numericToken != null)
+            {
+                try
+                {
+                    switch (numericToken.Type)
+                    {
+                        case JTokenType.Integer:
+                            flags = unchecked((uint)numericToken.Value<long>());
+                            return true;
+                        case JTokenType.Float:
+                            flags = unchecked((uint)numericToken.Value<double>());
+                            return true;
+                        case JTokenType.String:
+                            string raw = numericToken.Value<string>()?.Trim();
+                            if (uint.TryParse(raw, NumberStyles.Integer, CultureInfo.InvariantCulture, out uint parsed))
+                            {
+                                flags = parsed;
+                                return true;
+                            }
+                            if (!string.IsNullOrWhiteSpace(raw) &&
+                                raw.StartsWith("0x", StringComparison.OrdinalIgnoreCase) &&
+                                uint.TryParse(raw.Substring(2), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out parsed))
+                            {
+                                flags = parsed;
+                                return true;
+                            }
+                            break;
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+            if (obj["terrain_flag_names"] is JArray flagNames && flagNames.Count > 0)
+            {
+                uint aggregate = 0;
+                foreach (string name in flagNames.Values<string>())
+                {
+                    if (string.IsNullOrWhiteSpace(name))
+                    {
+                        continue;
+                    }
+
+                    if (OgTerrainFlagByName.TryGetValue(name.Trim(), out uint bit))
+                    {
+                        aggregate |= bit;
+                    }
+                }
+
+                flags = aggregate;
+                return aggregate != 0;
+            }
+
+            return false;
+        }
+
+        private static OgTerrainImportSpec DescribeOgTerrainFlags(uint flags, string rawFallback)
+        {
+            OgTerrainImportSpec spec = new OgTerrainImportSpec();
+            if ((flags & OgTerrainFlagOutOfBounds) != 0)
+            {
+                return spec;
+            }
+
+            bool hasRoad = (flags & (OgTerrainFlagRoad | OgTerrainFlagSubmergedRoad)) != 0;
+            bool hasGroundwater = (flags & (OgTerrainFlagGroundwater | OgTerrainFlagGrass)) != 0;
+            bool hasFloodplain = (flags & OgTerrainFlagFloodplain) != 0;
+            bool hasWater = (flags & (OgTerrainFlagWater | OgTerrainFlagDeepWater)) != 0;
+            bool hasMarsh = (flags & OgTerrainFlagMarshland) != 0;
+            bool hasMeadow = (flags & OgTerrainFlagMeadow) != 0;
+            bool hasOre = (flags & OgTerrainFlagOre) != 0;
+            bool hasTree = (flags & OgTerrainFlagTree) != 0;
+            bool hasRock = (flags & OgTerrainFlagRock) != 0;
+            bool hasDune = (flags & OgTerrainFlagDune) != 0;
+            bool hasCliff = (flags & OgTerrainFlagElevation) != 0;
+            bool hasShrub = (flags & OgTerrainFlagShrub) != 0;
+            bool hasShore = (flags & OgTerrainFlagShore) != 0;
+            bool hasOnlyUnsupportedSurface =
+                (flags & (OgTerrainFlagCanal | OgTerrainFlagIrrigationRange | OgTerrainFlagWall | OgTerrainFlagShore)) != 0 &&
+                !hasRoad && !hasGroundwater && !hasFloodplain && !hasWater && !hasMarsh && !hasMeadow && !hasOre && !hasTree && !hasRock && !hasDune && !hasCliff && !hasShrub;
+
+            // Some OG cells appear as SHORE-only in the exported flags even though
+            // the editor should treat them as water cells for painting purposes.
+            if (!hasWater && hasShore && !hasRoad && !hasGroundwater && !hasFloodplain && !hasMarsh && !hasMeadow && !hasOre && !hasTree && !hasRock && !hasDune && !hasCliff && !hasShrub)
+            {
+                hasWater = true;
+                hasOnlyUnsupportedSurface = false;
+            }
+
+            if (hasWater && hasMarsh)
+            {
+                if (TerrainConflictWaterMarshLogCount < 20)
+                {
+                    TerrainConflictWaterMarshLogCount++;
+                    Log?.LogInfo($"OG terrain conflict WATER+MARSH detected; preferring Water. flags=0x{flags:X8}, raw='{rawFallback ?? "<null>"}'");
+                }
+
+                hasMarsh = false;
+            }
+
+            if (flags == 0)
+            {
+                spec.Brushes.Add(TerrainType.Sand);
+                return spec;
+            }
+
+            if (hasFloodplain)
+            {
+                spec.Brushes.Add(TerrainType.FloodPlain);
+            }
+            else if (hasWater)
+            {
+                spec.Brushes.Add(TerrainType.Water);
+            }
+            else if (hasMarsh)
+            {
+                spec.Brushes.Add(TerrainType.Marsh);
+            }
+            else if (!hasOnlyUnsupportedSurface && (hasRoad || hasGroundwater || hasMeadow || hasOre || hasTree || hasRock || hasDune || hasCliff || hasShrub))
+            {
+                spec.Brushes.Add(TerrainType.Sand);
+            }
+
+            if (hasCliff)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Cliff);
+            }
+            else if (hasOre)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Ore);
+            }
+            else if (hasMeadow)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Meadow);
+            }
+            else if (hasTree || hasShrub)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Tree);
+            }
+            else if (hasRock)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Rock);
+            }
+            else if (hasDune)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Dune);
+            }
+
+            spec.ForceGrassPlain = hasGroundwater && !hasRoad && !hasMeadow && !hasFloodplain && !hasWater && !hasMarsh;
+
+            if (hasRoad)
+            {
+                AddBrushOnce(spec.Brushes, TerrainType.Road);
+            }
+
+            if (spec.Brushes.Count == 0)
+            {
+                return DescribeLegacyOgTerrain(rawFallback);
+            }
+
+            return spec;
+        }
+
+        private static void AddBrushOnce(List<TerrainType> brushes, TerrainType brush)
+        {
+            if (brush == TerrainType.None || brushes == null || brushes.Contains(brush))
+            {
+                return;
+            }
+
+            brushes.Add(brush);
         }
 
         private static string NormalizeOgTerrainName(string raw)
@@ -1370,7 +1554,6 @@ namespace OGDirectImport
                 case "ore_rock_grass":
                     return "Ore";
                 case "tree":
-                    return "Tree";
                 case "tree_grass":
                     return "Tree";
                 case "sand":
@@ -1378,16 +1561,23 @@ namespace OGDirectImport
                 case "dune":
                     return "Dune";
                 case "cliff":
+                case "elevation":
                     return "Cliff";
                 default:
                     return s;
             }
         }
 
-        private static OgTerrainImportSpec DescribeOgTerrain(string raw)
+        private static OgTerrainImportSpec DescribeLegacyOgTerrain(string raw)
         {
+            OgTerrainImportSpec spec = new OgTerrainImportSpec();
             string normalized = NormalizeOgTerrainName(raw);
-            bool forceGrassPlain = false;
+            if (!Enum.TryParse(normalized, true, out TerrainType brush))
+            {
+                return spec;
+            }
+
+            spec.Brushes.Add(brush);
 
             if (!string.IsNullOrWhiteSpace(raw))
             {
@@ -1401,16 +1591,14 @@ namespace OGDirectImport
                 {
                     case "grass":
                     case "tree_grass":
-                        forceGrassPlain = true;
+                    case "rock_grass":
+                    case "ore_rock_grass":
+                        spec.ForceGrassPlain = true;
                         break;
                 }
             }
 
-            return new OgTerrainImportSpec
-            {
-                PaintTerrainName = normalized,
-                ForceGrassPlain = forceGrassPlain
-            };
+            return spec;
         }
 
         private static void ApplyForcedGrassPlain(LevelMap level, IEnumerable<StaggeredCellCoord> coords)
@@ -1456,8 +1644,15 @@ namespace OGDirectImport
 
         private sealed class OgTerrainImportSpec
         {
-            public string PaintTerrainName { get; set; }
+            public List<TerrainType> Brushes { get; } = new List<TerrainType>();
             public bool ForceGrassPlain { get; set; }
+        }
+
+        private sealed class OgTerrainCellImportState
+        {
+            public Cell Cell { get; set; }
+            public OgTerrainImportSpec TerrainSpec { get; set; }
+            public bool AppliedAnyBrush { get; set; }
         }
 
         private static void TryApplyScenarioInfo(object mapEditorInstance, JObject root)
@@ -1536,20 +1731,32 @@ namespace OGDirectImport
                 int enemyId = ReadInt(info, "enemy_id");
                 TrySetEnumMember(levelObj, levelType, "PharaohEnemy", enemyId);
 
-                int herdTypeAnimals = ReadInt(info, "herd_type_animals");
-                TrySetEnumMember(levelObj, levelType, "PreyType", herdTypeAnimals);
-
-                int altPredatorType = ReadInt(info, "alt_predator_type");
-                TrySetEnumMember(levelObj, levelType, "PredatorType", altPredatorType);
-
                 JObject env = info["env"] as JObject;
+                int ogClimate = 0;
                 if (env != null)
                 {
-                    int climate = ReadInt(env, "climate");
-                    TrySetEnumMember(levelObj, levelType, "Climate", climate);
+                    ogClimate = ReadInt(env, "climate");
+                    if (TryMapOgClimateToNewEra(ogClimate, out int mappedClimate))
+                    {
+                        TrySetEnumMember(levelObj, levelType, "Climate", mappedClimate);
+                    }
                 }
 
-                ApplyDeities(levelObj, levelType, info["known_gods"] as JArray);
+                if (TryResolveOgPreyType(info, ogClimate, out int mappedPreyType))
+                {
+                    TrySetEnumMember(levelObj, levelType, "PreyType", mappedPreyType);
+                }
+
+                if (TryResolveOgPredatorType(info, ogClimate, out int mappedPredatorType))
+                {
+                    TrySetEnumMember(levelObj, levelType, "PredatorType", mappedPredatorType);
+                }
+
+                if (TryResolveOgAnimalType(info, ogClimate, out int mappedAnimalType))
+                {
+                    TrySetEnumMember(levelObj, levelType, "AnimalType", mappedAnimalType);
+                }
+
                 ApplyWinConditions(levelObj, levelType, info);
                 ApplyBriefing(levelObj, levelType, briefDescription);
 
@@ -1914,6 +2121,15 @@ namespace OGDirectImport
 
             HashSet<Good> yielded = new HashSet<Good>();
 
+            foreach (JObject goodObj in (allowedGoods["newera_goods"] as JArray)?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                Good? normalized = MapOgGoodToken(goodObj["newera_good_name"]) ?? MapOgGoodToken(goodObj["newera_good_id"]);
+                if (normalized.HasValue && yielded.Add(normalized.Value))
+                {
+                    yield return normalized.Value;
+                }
+            }
+
             foreach (JToken token in allowedGoods["resource_ids"] as JArray ?? new JArray())
             {
                 Good? good = MapOgGoodToken(token);
@@ -1935,7 +2151,17 @@ namespace OGDirectImport
 
         private static IEnumerable<Good> EnumerateCityGoods(JObject city)
         {
+            foreach (Good good in EnumerateNormalizedGoods(city?["newera_sells_goods"] as JArray))
+            {
+                yield return good;
+            }
+
             foreach (Good good in EnumerateGoods(city?["sells_resource_names"] as JArray, city?["sells_resource_ids"] as JArray))
+            {
+                yield return good;
+            }
+
+            foreach (Good good in EnumerateNormalizedGoods(city?["newera_buys_goods"] as JArray))
             {
                 yield return good;
             }
@@ -1943,6 +2169,19 @@ namespace OGDirectImport
             foreach (Good good in EnumerateGoods(city?["buys_resource_names"] as JArray, city?["buys_resource_ids"] as JArray))
             {
                 yield return good;
+            }
+        }
+
+        private static IEnumerable<Good> EnumerateNormalizedGoods(JArray goods)
+        {
+            HashSet<Good> yielded = new HashSet<Good>();
+            foreach (JObject goodObj in goods?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                Good? good = MapOgGoodToken(goodObj["newera_good_name"]) ?? MapOgGoodToken(goodObj["newera_good_id"]);
+                if (good.HasValue && yielded.Add(good.Value))
+                {
+                    yield return good.Value;
+                }
             }
         }
 
@@ -2086,8 +2325,21 @@ namespace OGDirectImport
                 yield break;
             }
 
-            int playerRank = Math.Max(0, ReadInt(scenarioInfo, "player_rank"));
             HashSet<BuildingType> yielded = new HashSet<BuildingType>();
+            foreach (JToken token in (allowedBuildings["enabled_newera_building_type_names"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
+            {
+                if (token?.Type == JTokenType.String && Enum.TryParse(token.Value<string>(), true, out BuildingType normalized) && yielded.Add(normalized))
+                {
+                    yield return normalized;
+                }
+            }
+
+            if (yielded.Count > 0)
+            {
+                yield break;
+            }
+
+            int playerRank = Math.Max(0, ReadInt(scenarioInfo, "player_rank"));
             foreach (JToken token in (allowedBuildings["enabled_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
             {
                 int ogIndex = token?.Value<int>() ?? -1;
@@ -2131,36 +2383,12 @@ namespace OGDirectImport
 
         private static BuildingType ResolveOgPalaceTier(int playerRank)
         {
-            // Akhenaten uses scenario_property_player_rank() to enable palace tiers:
-            // rank < 6 => village, rank < 8 => town, otherwise city.
-            if (playerRank < 6)
-            {
-                return BuildingType.PalaceVillage;
-            }
-
-            if (playerRank < 8)
-            {
-                return BuildingType.PalaceTown;
-            }
-
-            return BuildingType.PalaceCity;
+            return OgNewEraMappings.ResolvePalaceTier(playerRank);
         }
 
         private static BuildingType ResolveOgMansionTier(int playerRank)
         {
-            // Akhenaten mirrors the same thresholds for mansion tiers:
-            // rank < 6 => personal, rank < 8 => family, otherwise dynasty.
-            if (playerRank < 6)
-            {
-                return BuildingType.MansionPersonal;
-            }
-
-            if (playerRank < 8)
-            {
-                return BuildingType.MansionFamily;
-            }
-
-            return BuildingType.MansionDynasty;
+            return OgNewEraMappings.ResolveMansionTier(playerRank);
         }
 
         private static IEnumerable<BuildingType> EnumerateAllowedMonumentsFromScenario(JObject scenarioInfo)
@@ -2171,8 +2399,21 @@ namespace OGDirectImport
                 yield break;
             }
 
-            HashSet<int> emittedMonumentIds = new HashSet<int>();
             HashSet<BuildingType> yielded = new HashSet<BuildingType>();
+            foreach (JToken token in (monuments["enabled_newera_building_type_names"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
+            {
+                if (token?.Type == JTokenType.String && Enum.TryParse(token.Value<string>(), true, out BuildingType normalized) && yielded.Add(normalized))
+                {
+                    yield return normalized;
+                }
+            }
+
+            if (yielded.Count > 0)
+            {
+                yield break;
+            }
+
+            HashSet<int> emittedMonumentIds = new HashSet<int>();
             foreach (JToken token in (monuments["enabled_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
             {
                 int ogMonumentId = token?.Value<int>() ?? 0;
@@ -2432,39 +2673,14 @@ namespace OGDirectImport
 
         private static string GetOgMonumentName(int ogMonumentId)
         {
-            return OgMonumentIdNames.TryGetValue(ogMonumentId, out string name) ? name : $"Monument {ogMonumentId}";
+            return OgNewEraMappings.GetMonumentName(ogMonumentId);
         }
 
         private static IEnumerable<BuildingType> MapGodToBuildings(string rawGod)
         {
-            string god = rawGod?.Trim().ToLowerInvariant();
-            switch (god)
+            foreach (BuildingType buildingType in OgNewEraMappings.MapGodToBuildings(rawGod))
             {
-                case "bast":
-                    yield return BuildingType.ShrineBast;
-                    yield return BuildingType.TempleBast;
-                    yield return BuildingType.TempleComplexBast;
-                    yield break;
-                case "osiris":
-                    yield return BuildingType.ShrineOsiris;
-                    yield return BuildingType.TempleOsiris;
-                    yield return BuildingType.TempleComplexOsiris;
-                    yield break;
-                case "ptah":
-                    yield return BuildingType.ShrinePtah;
-                    yield return BuildingType.TemplePtah;
-                    yield return BuildingType.TempleComplexPtah;
-                    yield break;
-                case "ra":
-                    yield return BuildingType.ShrineRa;
-                    yield return BuildingType.TempleRa;
-                    yield return BuildingType.TempleComplexRa;
-                    yield break;
-                case "seth":
-                    yield return BuildingType.ShrineSeth;
-                    yield return BuildingType.TempleSeth;
-                    yield return BuildingType.TempleComplexSeth;
-                    yield break;
+                yield return buildingType;
             }
         }
 
@@ -2663,8 +2879,30 @@ namespace OGDirectImport
                 return;
             }
 
+            AddImportedTradeGoods(importedCity["newera_sells_goods"] as JArray, TradeMode.CityExport, state);
             AddImportedTradeGoods(importedCity["sells_resource_names"] as JArray, importedCity["sells_resource_ids"] as JArray, TradeMode.CityExport, state);
+            AddImportedTradeGoods(importedCity["newera_buys_goods"] as JArray, TradeMode.CityImport, state);
             AddImportedTradeGoods(importedCity["buys_resource_names"] as JArray, importedCity["buys_resource_ids"] as JArray, TradeMode.CityImport, state);
+        }
+
+        private static void AddImportedTradeGoods(JArray normalizedGoods, TradeMode tradeMode, WorldMapCityState state)
+        {
+            HashSet<Good> seenGoods = new HashSet<Good>(state?.TradeMerchandises?.Select(m => m.Good) ?? Enumerable.Empty<Good>());
+            foreach (JObject goodObj in normalizedGoods?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                Good? good = MapOgGoodToken(goodObj["newera_good_name"]) ?? MapOgGoodToken(goodObj["newera_good_id"]);
+                if (!good.HasValue || !seenGoods.Add(good.Value))
+                {
+                    continue;
+                }
+
+                state.TradeMerchandises.Add(new TradeMerchandise
+                {
+                    Good = good.Value,
+                    TradeMode = tradeMode,
+                    TradeVolume = TradeVolume.Medium
+                });
+            }
         }
 
         private static void AddImportedTradeGoods(JArray names, JArray ids, TradeMode tradeMode, WorldMapCityState state)
@@ -2712,7 +2950,9 @@ namespace OGDirectImport
 
         private static bool HasImportedTradeGoods(JObject importedCity)
         {
-            return (importedCity?["sells_resource_ids"] as JArray)?.Count > 0
+            return (importedCity?["newera_sells_goods"] as JArray)?.Count > 0
+                || (importedCity?["newera_buys_goods"] as JArray)?.Count > 0
+                || (importedCity?["sells_resource_ids"] as JArray)?.Count > 0
                 || (importedCity?["buys_resource_ids"] as JArray)?.Count > 0
                 || (importedCity?["sells_resource_names"] as JArray)?.Count > 0
                 || (importedCity?["buys_resource_names"] as JArray)?.Count > 0;
@@ -2868,27 +3108,108 @@ namespace OGDirectImport
             }
         }
 
-        private static void ApplyDeities(object levelObj, Type levelType, JArray knownGods)
+        private static void TryApplyDeitiesViaMapEditor(object mapEditorInstance, JObject root)
         {
+            if (mapEditorInstance == null || root == null)
+            {
+                return;
+            }
+
+            JObject info = root["scenario_info"] as JObject;
+            JArray knownGods = info?["known_gods"] as JArray;
             if (knownGods == null)
             {
                 return;
             }
 
-            object localDeitiesObj = GetMember(levelObj, levelType, "LocalDeities");
-            if (!(localDeitiesObj is System.Collections.IList localDeities))
+            if (!(mapEditorInstance is MapEditor editor))
             {
                 return;
             }
 
-            localDeities.Clear();
-            Type deityType = localDeities.GetType().GetGenericArguments().FirstOrDefault();
-            if (deityType == null)
+            LevelMap level = GlobalAccessor.Level ?? AccessTools.Field(editor.GetType(), "_level")?.GetValue(editor) as LevelMap;
+            if (level == null)
             {
                 return;
             }
 
-            object firstKnown = null;
+            HashSet<DeityName> knownDeities = ExtractKnownOgDeities(knownGods);
+            if (knownDeities.Count == 0)
+            {
+                return;
+            }
+
+            DeityName patron = knownDeities.First();
+            HashSet<DeityName> localDeities = new HashSet<DeityName>(knownDeities.Where(d => d != patron));
+
+            IList deityInfos = AccessTools.Field(editor.GetType(), "_deityInfos")?.GetValue(editor) as IList;
+            object paramsByGodObj = AccessTools.Field(editor.GetType(), "_paramsByGod")?.GetValue(editor);
+            IDictionary paramsByGod = paramsByGodObj as IDictionary;
+            IDictionary availableTempleShrines = AccessTools.Field(editor.GetType(), "_availableTempleShrines")?.GetValue(editor) as IDictionary;
+            if (deityInfos == null || paramsByGod == null || availableTempleShrines == null)
+            {
+                return;
+            }
+
+            Type editorType = editor.GetType();
+            MethodInfo onDropdownGodRankChanged = AccessTools.Method(editorType, "OnDropdownGodRankValueChanged");
+            Type deityInfoType = null;
+            foreach (object deityInfo in deityInfos)
+            {
+                if (deityInfo == null)
+                {
+                    continue;
+                }
+
+                deityInfoType = deityInfo.GetType();
+                PropertyInfo deityProp = deityInfoType.GetProperty("Deity");
+                PropertyInfo rankProp = deityInfoType.GetProperty("Rank");
+                PropertyInfo paramsProp = deityInfoType.GetProperty("Params");
+                if (deityProp == null || rankProp == null || paramsProp == null)
+                {
+                    continue;
+                }
+
+                DeityName deity = (DeityName)deityProp.GetValue(deityInfo, null);
+                TMP_Dropdown rankDropdown = rankProp.GetValue(deityInfo, null) as TMP_Dropdown;
+                GodParams godParams = paramsProp.GetValue(deityInfo, null) as GodParams;
+                if (rankDropdown == null || godParams == null)
+                {
+                    continue;
+                }
+
+                int rankValue = deity == patron ? 0 : (localDeities.Contains(deity) ? 1 : 2);
+                rankDropdown.SetValueWithoutNotify(rankValue);
+                if (rankValue == 2)
+                {
+                    godParams.UpdateComplexState(GodParams.TempleComplexeState.Unavailable);
+                }
+                else
+                {
+                    BuildingType templeComplexType = (BuildingType)Enum.Parse(typeof(BuildingType), $"TempleComplex{deity}");
+                    bool complexAvailable = level.AvailableBuildings.Contains(templeComplexType);
+                    godParams.UpdateComplexState(complexAvailable ? GodParams.TempleComplexeState.Available : GodParams.TempleComplexeState.Unavailable);
+                }
+
+                godParams.UpdateRankState((DeityRank)rankValue);
+                onDropdownGodRankChanged?.Invoke(editor, new[] { deityInfo, (object)rankValue });
+            }
+
+            level.PatronDeity = patron;
+            level.LocalDeities.Clear();
+            level.LocalDeities.AddRange(localDeities);
+            SyncDeitiesFromMapEditorUi(level, deityInfos, paramsByGod, availableTempleShrines);
+            SanitizeLevelDeities(level);
+        }
+
+        private static HashSet<DeityName> ExtractKnownOgDeities(JArray knownGods)
+        {
+            HashSet<DeityName> result = new HashSet<DeityName>();
+            if (knownGods == null)
+            {
+                return result;
+            }
+
             foreach (JObject god in knownGods.OfType<JObject>())
             {
                 if (!(god["is_known"]?.Value<bool>() ?? false))
@@ -2896,30 +3217,96 @@ namespace OGDirectImport
                     continue;
                 }
 
-                string raw = god["god"]?.Value<string>();
+                string raw = god["newera_deity_name"]?.Value<string>() ?? god["god"]?.Value<string>();
                 if (string.IsNullOrWhiteSpace(raw))
                 {
                     continue;
                 }
 
                 string mapped = MapOgGodName(raw);
-                try
+                if (Enum.TryParse(mapped, true, out DeityName deity) && deity != DeityName.None)
                 {
-                    object deity = Enum.Parse(deityType, mapped, true);
-                    localDeities.Add(deity);
-                    if (firstKnown == null)
-                    {
-                        firstKnown = deity;
-                    }
-                }
-                catch
-                {
+                    result.Add(deity);
                 }
             }
 
-            if (firstKnown != null)
+            return result;
+        }
+
+        private static void SyncDeitiesFromMapEditorUi(LevelMap level, IList deityInfos, IDictionary paramsByGod, IDictionary availableTempleShrines)
+        {
+            if (level == null || deityInfos == null || availableTempleShrines == null)
             {
-                SetMember(levelObj, levelType, "PatronDeity", firstKnown);
+                return;
+            }
+
+            level.LocalDeities.Clear();
+            level.PatronDeity = null;
+
+            foreach (object deityInfo in deityInfos)
+            {
+                if (deityInfo == null)
+                {
+                    continue;
+                }
+
+                Type deityInfoType = deityInfo.GetType();
+                DeityName deity = (DeityName)deityInfoType.GetProperty("Deity")?.GetValue(deityInfo, null);
+                TMP_Dropdown rankDropdown = deityInfoType.GetProperty("Rank")?.GetValue(deityInfo, null) as TMP_Dropdown;
+                GodParams godParams = deityInfoType.GetProperty("Params")?.GetValue(deityInfo, null) as GodParams;
+                if (rankDropdown == null || godParams == null)
+                {
+                    continue;
+                }
+
+                DeityRank rank = (DeityRank)rankDropdown.value;
+                if (rank == DeityRank.Patron)
+                {
+                    level.PatronDeity = deity;
+                }
+                else if (rank == DeityRank.Local)
+                {
+                    level.LocalDeities.Add(deity);
+                }
+
+                BuildingType complex = (BuildingType)Enum.Parse(typeof(BuildingType), $"TempleComplex{deity}");
+                BuildingType temple = (BuildingType)Enum.Parse(typeof(BuildingType), $"Temple{deity}");
+                BuildingType shrine = (BuildingType)Enum.Parse(typeof(BuildingType), $"Shrine{deity}");
+                MapBuildingState deityBuildingState = rank == DeityRank.None ? MapBuildingState.Unavailable : MapBuildingState.Available;
+
+                availableTempleShrines[temple] = deityBuildingState;
+                availableTempleShrines[shrine] = deityBuildingState;
+                availableTempleShrines[complex] = godParams.ComplexAvailable == GodParams.TempleComplexeState.Unavailable
+                    ? MapBuildingState.Unavailable
+                    : MapBuildingState.Available;
+
+                if (paramsByGod[deity] is GodParams boundParams)
+                {
+                    boundParams.UpdateRankState(rank);
+                }
+            }
+        }
+
+        private static void SanitizeLevelDeities(LevelMap level)
+        {
+            if (level == null || level.LocalDeities == null)
+            {
+                return;
+            }
+
+            HashSet<DeityName> seen = new HashSet<DeityName>();
+            if (level.PatronDeity.HasValue)
+            {
+                seen.Add(level.PatronDeity.Value);
+            }
+
+            for (int i = level.LocalDeities.Count - 1; i >= 0; i--)
+            {
+                DeityName deity = level.LocalDeities[i];
+                if (deity == DeityName.None || !seen.Add(deity))
+                {
+                    level.LocalDeities.RemoveAt(i);
+                }
             }
         }
 
@@ -2984,8 +3371,21 @@ namespace OGDirectImport
                 yield break;
             }
 
-            HashSet<int> seenOgIds = new HashSet<int>();
             HashSet<BuildingType> yielded = new HashSet<BuildingType>();
+            foreach (JToken token in (monuments["enabled_newera_building_type_names"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
+            {
+                if (token?.Type == JTokenType.String && Enum.TryParse(token.Value<string>(), true, out BuildingType normalized) && yielded.Add(normalized))
+                {
+                    yield return normalized;
+                }
+            }
+
+            if (yielded.Count > 0)
+            {
+                yield break;
+            }
+
+            HashSet<int> seenOgIds = new HashSet<int>();
             foreach (JToken token in (monuments["enabled_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
             {
                 int ogMonumentId = token?.Value<int>() ?? 0;
@@ -3071,7 +3471,10 @@ namespace OGDirectImport
             int importedCount = 0;
             foreach (JObject provision in burial?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
             {
-                Good? mappedGood = MapOgGoodToken(provision["resource_name"]) ?? MapOgGoodToken(provision["resource_id"]);
+                Good? mappedGood = MapOgGoodToken(provision["newera_good_name"])
+                    ?? MapOgGoodToken(provision["newera_good_id"])
+                    ?? MapOgGoodToken(provision["resource_name"])
+                    ?? MapOgGoodToken(provision["resource_id"]);
                 if (!mappedGood.HasValue || mappedGood.Value == Good.Gold)
                 {
                     continue;
@@ -3115,23 +3518,21 @@ namespace OGDirectImport
 
         private static string MapOgGodName(string raw)
         {
-            switch (raw.Trim().ToLowerInvariant())
+            if (string.IsNullOrWhiteSpace(raw))
             {
-                case "seth":
-                case "set":
-                    return "Seth";
-                case "osiris":
-                    return "Osiris";
-                case "ra":
-                    return "Ra";
-                case "ptah":
-                    return "Ptah";
-                case "bast":
-                case "bastet":
-                    return "Bast";
-                default:
-                    return raw;
+                return raw;
             }
+
+            if (raw.Trim().Equals("set", StringComparison.OrdinalIgnoreCase))
+            {
+                raw = "seth";
+            }
+            else if (raw.Trim().Equals("bastet", StringComparison.OrdinalIgnoreCase))
+            {
+                raw = "bast";
+            }
+
+            return OgNewEraMappings.MapGodName(raw);
         }
 
         private static void TrySetEnumMember(object target, Type targetType, string memberName, int rawValue)
@@ -3967,10 +4368,10 @@ namespace OGDirectImport
 
             if (token.Type == JTokenType.Integer)
             {
-                return MapOgGoodFromResourceId(token.Value<int>());
+                return OgNewEraMappings.MapGoodFromResourceId(token.Value<int>());
             }
 
-            if (token.Type == JTokenType.String && TryMapOgGood(token.Value<string>(), out Good parsed))
+            if (token.Type == JTokenType.String && OgNewEraMappings.TryMapGood(token.Value<string>(), out Good parsed))
             {
                 return parsed;
             }
@@ -3980,98 +4381,12 @@ namespace OGDirectImport
 
         private static Good? MapOgGoodFromResourceId(int resourceId)
         {
-            switch (resourceId)
-            {
-                case 1: return Good.Grain;
-                case 2: return Good.Meat;
-                case 3: return Good.Lettuce;
-                case 4: return Good.Chickpeas;
-                case 5: return Good.Pomegranate;
-                case 6: return Good.Figs;
-                case 7: return Good.Fish;
-                case 8: return Good.GameMeat;
-                case 9: return Good.Straw;
-                case 10: return Good.Weapons;
-                case 11: return Good.Clay;
-                case 12: return Good.Bricks;
-                case 13: return Good.Pottery;
-                case 14: return Good.Barley;
-                case 15: return Good.Beer;
-                case 16: return Good.Flax;
-                case 17: return Good.Linen;
-                case 18: return Good.Gems;
-                case 19: return Good.Jewelry;
-                case 20: return Good.Wood;
-                case 21: return Good.Gold;
-                case 22: return Good.Reeds;
-                case 23: return Good.Papyrus;
-                case 24: return Good.Plainstone;
-                case 25: return Good.Limestone;
-                case 26: return Good.Granite;
-                case 28: return Good.Chariots;
-                case 29: return Good.Copper;
-                case 30: return Good.Sandstone;
-                case 31: return Good.Oil;
-                case 32: return Good.Henna;
-                case 33: return Good.Paint;
-                case 34: return Good.Lamp;
-                case 35: return Good.WhiteMarble;
-                default:
-                    return null;
-            }
+            return OgNewEraMappings.MapGoodFromResourceId(resourceId);
         }
 
         private static bool TryMapOgGood(string raw, out Good good)
         {
-            good = default;
-            if (string.IsNullOrWhiteSpace(raw) || raw.Equals("none", StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-
-            switch (raw.Trim().ToLowerInvariant())
-            {
-                case "grain": good = Good.Grain; return true;
-                case "meat": good = Good.Meat; return true;
-                case "lettuce": good = Good.Lettuce; return true;
-                case "chickpeas": good = Good.Chickpeas; return true;
-                case "pomegranates": good = Good.Pomegranate; return true;
-                case "figs": good = Good.Figs; return true;
-                case "fish": good = Good.Fish; return true;
-                case "gamemeat": good = Good.GameMeat; return true;
-                case "straw": good = Good.Straw; return true;
-                case "weapons": good = Good.Weapons; return true;
-                case "clay": good = Good.Clay; return true;
-                case "bricks": good = Good.Bricks; return true;
-                case "pottery": good = Good.Pottery; return true;
-                case "barley": good = Good.Barley; return true;
-                case "beer": good = Good.Beer; return true;
-                case "flax": good = Good.Flax; return true;
-                case "linen": good = Good.Linen; return true;
-                case "gems": good = Good.Gems; return true;
-                case "luxury_goods": good = Good.Jewelry; return true;
-                case "jewelry": good = Good.Jewelry; return true;
-                case "timber": good = Good.Wood; return true;
-                case "wood": good = Good.Wood; return true;
-                case "plainstone": good = Good.Plainstone; return true;
-                case "stone": good = Good.Plainstone; return true;
-                case "limestone": good = Good.Limestone; return true;
-                case "granite": good = Good.Granite; return true;
-                case "reeds": good = Good.Reeds; return true;
-                case "papyrus": good = Good.Papyrus; return true;
-                case "gold": good = Good.Gold; return true;
-                case "chariots": good = Good.Chariots; return true;
-                case "copper": good = Good.Copper; return true;
-                case "sandstone": good = Good.Sandstone; return true;
-                case "oil": good = Good.Oil; return true;
-                case "henna": good = Good.Henna; return true;
-                case "paint": good = Good.Paint; return true;
-                case "lamps": good = Good.Lamp; return true;
-                case "lamp": good = Good.Lamp; return true;
-                case "marble": good = Good.WhiteMarble; return true;
-                default:
-                    return Enum.TryParse(raw, true, out good);
-            }
+            return OgNewEraMappings.TryMapGood(raw, out good);
         }
 
         private static DeityName? MapOgFestivalDeity(string raw)
@@ -4152,6 +4467,197 @@ namespace OGDirectImport
                 }
             }
 
+            return false;
+        }
+
+        private static int[] ReadIntArray(JObject obj, params string[] names)
+        {
+            if (obj == null)
+            {
+                return Array.Empty<int>();
+            }
+
+            foreach (string name in names)
+            {
+                if (!(obj[name] is JArray array))
+                {
+                    continue;
+                }
+
+                return array
+                    .Select(token =>
+                    {
+                        if (token == null || token.Type == JTokenType.Null)
+                        {
+                            return 0;
+                        }
+
+                        if (token.Type == JTokenType.Integer)
+                        {
+                            return token.Value<int>();
+                        }
+
+                        if (token.Type == JTokenType.String && int.TryParse(token.Value<string>(), NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsed))
+                        {
+                            return parsed;
+                        }
+
+                        return 0;
+                    })
+                    .ToArray();
+            }
+
+            return Array.Empty<int>();
+        }
+
+        private static bool TryMapOgClimateToNewEra(int ogClimate, out int mappedClimate)
+        {
+            switch (ogClimate)
+            {
+                case 0:
+                    mappedClimate = 1; // OG central -> New Era normal
+                    return true;
+                case 1:
+                    mappedClimate = 2; // OG northern -> New Era humid
+                    return true;
+                case 2:
+                    mappedClimate = 0; // OG desert -> New Era arid
+                    return true;
+                default:
+                    mappedClimate = 0;
+                    return false;
+            }
+        }
+
+        private static bool TryResolveOgPreyType(JObject scenarioInfo, int ogClimate, out int preyType)
+        {
+            int figureType = ReadIntArray(scenarioInfo, "herd_type_animals")
+                .FirstOrDefault(value => value != 0);
+
+            switch (figureType)
+            {
+                case 69:
+                    preyType = 0; // Ostrich
+                    return true;
+                case 70:
+                    preyType = 1; // Antelop
+                    return true;
+                case 68:
+                    preyType = 2; // Birds
+                    return true;
+            }
+
+            switch (ogClimate)
+            {
+                case 2:
+                    preyType = 0; // desert -> ostrich
+                    return true;
+                case 0:
+                    preyType = 1; // central -> antelope
+                    return true;
+                case 1:
+                    preyType = 2; // northern -> birds in New Era humid setup
+                    return true;
+                default:
+                    preyType = 0;
+                    return false;
+            }
+        }
+
+        private static bool TryResolveOgPredatorType(JObject scenarioInfo, int ogClimate, out int predatorType)
+        {
+            foreach (int figureType in ReadIntArray(scenarioInfo, "herd_type_animals"))
+            {
+                switch (figureType)
+                {
+                    case 102:
+                        predatorType = 0; // Asp
+                        return true;
+                    case 104:
+                        predatorType = 1; // Scorpion
+                        return true;
+                    case 103:
+                        predatorType = 2; // Lion
+                        return true;
+                    case 83:
+                        predatorType = 3; // Hyena
+                        return true;
+                    case 84:
+                        predatorType = 4; // Hippopotamus
+                        return true;
+                    case 82:
+                        predatorType = 5; // Crocodile
+                        return true;
+                }
+            }
+
+            bool altPredator = ReadBool(scenarioInfo, "alt_predator_type");
+            switch (ogClimate)
+            {
+                case 2:
+                    predatorType = altPredator ? 3 : 1; // desert -> hyena/scorpion
+                    return true;
+                case 0:
+                    predatorType = altPredator ? 5 : 2; // central -> crocodile/lion
+                    return true;
+                case 1:
+                    predatorType = altPredator ? 0 : 4; // northern -> asp/hippo
+                    return true;
+                default:
+                    predatorType = altPredator ? 3 : 2;
+                    return false;
+            }
+        }
+
+        private static bool TryResolveOgAnimalType(JObject scenarioInfo, int ogClimate, out int animalType)
+        {
+            foreach (int figureType in ReadIntArray(scenarioInfo, "herd_type_animals"))
+            {
+                switch (figureType)
+                {
+                    case 69:
+                        animalType = 1; // Ostrich
+                        return true;
+                    case 70:
+                        animalType = 2; // Antelop
+                        return true;
+                    case 68:
+                        animalType = 3; // Birds
+                        return true;
+                    case 102:
+                        animalType = 4; // Asp
+                        return true;
+                    case 104:
+                        animalType = 5; // Scorpion
+                        return true;
+                    case 103:
+                        animalType = 6; // Lion
+                        return true;
+                    case 83:
+                        animalType = 7; // Hyena
+                        return true;
+                    case 84:
+                        animalType = 8; // Hippopotamus
+                        return true;
+                    case 82:
+                        animalType = 9; // Crocodile
+                        return true;
+                }
+            }
+
+            if (TryResolveOgPreyType(scenarioInfo, ogClimate, out int preyType))
+            {
+                animalType = preyType + 1;
+                return true;
+            }
+
+            if (TryResolveOgPredatorType(scenarioInfo, ogClimate, out int predatorType))
+            {
+                animalType = predatorType + 4;
+                return true;
+            }
+
+            animalType = 0;
             return false;
         }
 
@@ -4573,6 +5079,28 @@ namespace OGDirectImport
                 catch (Exception ex)
                 {
                     Log?.LogWarning($"GetTriggerEvents fallback failed: {ex}");
+                }
+            }
+        }
+
+        [HarmonyPatch]
+        private static class Patch_ReligionManager_OnMapDataLoadedCallback
+        {
+            private static MethodBase TargetMethod()
+            {
+                Type religionManagerType = AccessTools.TypeByName("ReligionManager");
+                return religionManagerType == null ? null : AccessTools.Method(religionManagerType, "OnMapDataLoadedCallback", new[] { typeof(LevelMap) });
+            }
+
+            private static void Prefix(LevelMap currentMap)
+            {
+                try
+                {
+                    SanitizeLevelDeities(currentMap);
+                }
+                catch (Exception ex)
+                {
+                    Log?.LogWarning($"Failed to sanitize deities before ReligionManager load callback: {ex.Message}");
                 }
             }
         }

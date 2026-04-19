@@ -438,7 +438,9 @@ namespace OGDirectImport
             JArray gods = new JArray();
             for (int i = 0; i < MaxGods; i++)
             {
-                gods.Add(new JObject { ["god"] = GodNames[i], ["is_known"] = r.ReadByte() != 0 });
+                JObject god = new JObject { ["god"] = GodNames[i], ["is_known"] = r.ReadByte() != 0 };
+                AddNewEraDeityField(god, GodNames[i]);
+                gods.Add(god);
                 r.Skip(1);
             }
             result["known_gods"] = gods;
@@ -547,19 +549,36 @@ namespace OGDirectImport
             {
                 bool enabled = reservedValues[i] != 0;
                 string name = AllowedBuildingNames.ContainsKey(i) ? AllowedBuildingNames[i] : "building_" + i.ToString(CultureInfo.InvariantCulture);
-                allowedSlots.Add(new JObject { ["id"] = i, ["name"] = name, ["enabled"] = enabled, ["raw_value"] = reservedValues[i] });
+                JObject slot = new JObject { ["id"] = i, ["name"] = name, ["enabled"] = enabled, ["raw_value"] = reservedValues[i] };
+                IEnumerable<BuildingType> mappedBuildings = OgNewEraMappings.MapAllowedBuildings(new[] { i });
+                AddNewEraBuildingFields(slot, mappedBuildings);
+                allowedSlots.Add(slot);
                 if (enabled)
                 {
                     enabledIds.Add(i);
                     enabledNames.Add(name);
                 }
             }
+            IEnumerable<int> enabledAllowedBuildingIds = enabledIds.OfType<JToken>().Select(token => token.Value<int>()).ToList();
+            List<BuildingType> enabledAllowedBuildingTypes = new List<BuildingType>(OgNewEraMappings.MapAllowedBuildings(enabledAllowedBuildingIds.Where(id => id != 25 && id != 26)));
+            if (enabledAllowedBuildingIds.Contains(25))
+            {
+                enabledAllowedBuildingTypes.Add(OgNewEraMappings.ResolvePalaceTier(result["player_rank"]?.Value<int>() ?? 0));
+            }
+            if (enabledAllowedBuildingIds.Contains(26))
+            {
+                enabledAllowedBuildingTypes.Add(OgNewEraMappings.ResolveMansionTier(result["player_rank"]?.Value<int>() ?? 0));
+            }
+            JArray enabledAllowedBuildings = BuildNewEraBuildingArray(enabledAllowedBuildingTypes);
             result["allowed_buildings"] = new JObject
             {
                 ["relative_offset_in_scenario_info"] = reservedOffset,
                 ["count"] = allowedSlots.Count,
                 ["enabled_ids"] = enabledIds,
                 ["enabled_names"] = enabledNames,
+                ["enabled_newera_buildings"] = enabledAllowedBuildings,
+                ["enabled_newera_building_type_ids"] = new JArray(enabledAllowedBuildings.OfType<JObject>().Select(b => b["building_type_id"])),
+                ["enabled_newera_building_type_names"] = new JArray(enabledAllowedBuildings.OfType<JObject>().Select(b => b["building_type_name"])),
                 ["slots"] = allowedSlots,
                 ["note"] = "Candidate interpretation of scenario_info reserved_data_114 as OG allowed-buildings flags (114 x int16)."
             };
@@ -579,19 +598,22 @@ namespace OGDirectImport
                 int monumentId = monumentValues[i];
                 string monumentName = GetMonumentName(monumentId);
                 bool enabled = monumentId != 0;
-                monumentSlots.Add(new JObject
+                JObject slot = new JObject
                 {
                     ["slot"] = monumentSlotNames[i],
                     ["id"] = monumentId,
                     ["name"] = monumentName,
                     ["enabled"] = enabled
-                });
+                };
+                AddNewEraBuildingFields(slot, OgNewEraMappings.MapAllowedMonuments(new[] { monumentId }));
+                monumentSlots.Add(slot);
                 if (enabled)
                 {
                     monumentEnabledIds.Add(monumentId);
                     monumentEnabledNames.Add(monumentName);
                 }
             }
+            JArray enabledMonumentBuildings = BuildNewEraBuildingArray(OgNewEraMappings.MapAllowedMonuments(monumentEnabledIds.OfType<JToken>().Select(token => token.Value<int>())));
 
             result["monuments"] = new JObject
             {
@@ -600,6 +622,9 @@ namespace OGDirectImport
                 ["third"] = monumentThird,
                 ["enabled_ids"] = monumentEnabledIds,
                 ["enabled_names"] = monumentEnabledNames,
+                ["enabled_newera_buildings"] = enabledMonumentBuildings,
+                ["enabled_newera_building_type_ids"] = new JArray(enabledMonumentBuildings.OfType<JObject>().Select(b => b["building_type_id"])),
+                ["enabled_newera_building_type_names"] = new JArray(enabledMonumentBuildings.OfType<JObject>().Select(b => b["building_type_name"])),
                 ["slots"] = monumentSlots
             };
             r.Skip(2);
@@ -610,13 +635,15 @@ namespace OGDirectImport
             for (int i = 0; i < ResourcesMax; i++)
             {
                 if (required[i] == 0 && dispatched[i] == 0) continue;
-                burialProvisions.Add(new JObject
+                JObject provision = new JObject
                 {
                     ["resource_id"] = i,
                     ["resource_name"] = GetResourceName(i),
                     ["required"] = required[i],
                     ["dispatched"] = dispatched[i]
-                });
+                };
+                AddNewEraGoodFields(provision, i, GetResourceName(i));
+                burialProvisions.Add(provision);
             }
             result["burial_provisions"] = burialProvisions;
             result["current_pharaoh"] = r.ReadUInt32();
@@ -715,14 +742,16 @@ namespace OGDirectImport
             {
                 int rawResource = u8(resourceOffsets[i]);
                 int? resourceId = DecodeResource(rawResource);
-                resourceSlots.Add(new JObject
+                JObject resourceSlot = new JObject
                 {
                     ["slot_index"] = i,
                     ["slot_label"] = "resource_" + (i + 1).ToString(CultureInfo.InvariantCulture),
                     ["raw_value"] = rawResource,
                     ["resource_id"] = resourceId ?? -1,
                     ["resource_name"] = resourceId.HasValue ? GetResourceName(resourceId.Value) : null
-                });
+                };
+                AddNewEraGoodFields(resourceSlot, resourceId, resourceId.HasValue ? GetResourceName(resourceId.Value) : null);
+                resourceSlots.Add(resourceSlot);
                 if (resourceId.HasValue)
                 {
                     resourceIds.Add(resourceId.Value);
@@ -756,7 +785,7 @@ namespace OGDirectImport
             int primaryResourceId = resourceIds.Count > 0 ? resourceIds[0].Value<int>() : -1;
             string primaryResourceName = primaryResourceId > 0 ? GetResourceName(primaryResourceId) : null;
 
-            return new JObject
+            JObject result = new JObject
             {
                 ["slot_index"] = slotIndex,
                 ["event_id"] = eventId >= 0 ? eventId : slotIndex,
@@ -804,6 +833,11 @@ namespace OGDirectImport
                 ["image"] = new JObject { ["pack"] = 0, ["id"] = 0, ["offset"] = 0 },
                 ["reasons"] = new JArray()
             };
+            AddNewEraGoodFields(result, primaryResourceId > 0 ? (int?)primaryResourceId : null, primaryResourceName);
+            AddNewEraDeityField(result, result["festival_deity_name"]?.Value<string>());
+            result["newera_resource_goods"] = BuildNewEraGoodArray(resourceIds.OfType<JToken>().Select(token => token.Value<int>()));
+            AddNewEraGoodFields(result["item"] as JObject, primaryResourceId > 0 ? (int?)primaryResourceId : null, primaryResourceName);
+            return result;
         }
 
         private static JObject InferPlayableFromEdge(byte[] edgeBytes)
@@ -886,7 +920,8 @@ namespace OGDirectImport
                     {
                         Row = (mx + my) - minRow.Value,
                         Col = ((mx - my) - minRawCol.Value) / 2,
-                        Terrain = TerrainKindFromFlags(flags)
+                        Terrain = TerrainKindFromFlags(flags),
+                        Flags = flags
                     });
                 }
             }
@@ -909,14 +944,28 @@ namespace OGDirectImport
             int minY = canvasTiles.Min(tile => tile.Row);
             foreach (CanvasTile tile in canvasTiles.OrderBy(t => t.Row).ThenBy(t => t.Col))
             {
+                JArray flagNames = new JArray(GetTerrainFlagNames(tile.Flags));
                 result.Add(new JObject
                 {
                     ["x"] = tile.Col - minX,
                     ["y"] = tile.Row - minY,
-                    ["terrain"] = tile.Terrain ?? "none"
+                    ["terrain"] = tile.Terrain ?? "none",
+                    ["terrain_flags"] = (long)tile.Flags,
+                    ["terrain_flag_names"] = flagNames
                 });
             }
             return result;
+        }
+
+        private static IEnumerable<string> GetTerrainFlagNames(uint flags)
+        {
+            foreach (KeyValuePair<string, uint> kvp in TerrainFlags)
+            {
+                if ((flags & kvp.Value) != 0)
+                {
+                    yield return kvp.Key;
+                }
+            }
         }
 
         private static void AttachStaggeredToPoints(JObject scenarioInfo, TransformMeta transformMeta)
@@ -966,13 +1015,15 @@ namespace OGDirectImport
             JArray prices = new JArray();
             for (int resourceId = 0; resourceId < ResourcesMax; resourceId++)
             {
-                prices.Add(new JObject
+                JObject price = new JObject
                 {
                     ["resource_id"] = resourceId,
                     ["resource_name"] = GetResourceName(resourceId),
                     ["buy_price"] = r.ReadInt32(),
                     ["sell_price"] = r.ReadInt32()
-                });
+                };
+                AddNewEraGoodFields(price, resourceId, GetResourceName(resourceId));
+                prices.Add(price);
             }
             return new JObject { ["count"] = prices.Count, ["prices"] = prices };
         }
@@ -1065,7 +1116,7 @@ namespace OGDirectImport
             {
                 int resourceId = i + 1;
                 string resourceName = GetResourceName(resourceId);
-                resources.Add(new JObject
+                JObject resource = new JObject
                 {
                     ["resource_id"] = resourceId,
                     ["resource_name"] = resourceName,
@@ -1077,7 +1128,9 @@ namespace OGDirectImport
                     ["mothballed"] = mothballed[i],
                     ["stockpiled"] = stockpiled[i],
                     ["unknown_00"] = resourceUnknown00[i]
-                });
+                };
+                AddNewEraGoodFields(resource, resourceId, resourceName);
+                resources.Add(resource);
 
                 if (tradeStatus[i] != 0 || tradingAmount[i] != 0 || mothballed[i] || stockpiled[i] || storedInStorages[i] != 0)
                 {
@@ -1094,6 +1147,7 @@ namespace OGDirectImport
                 ["resources"] = resources,
                 ["active_resource_ids"] = activeIds,
                 ["active_resource_names"] = activeNames,
+                ["active_newera_goods"] = BuildNewEraGoodArray(activeIds.OfType<JToken>().Select(token => token.Value<int>())),
                 ["food_types_available"] = DecodeFoodSlots(foodTypesAvailable),
                 ["food_types_eaten"] = DecodeFoodSlots(foodTypesEaten),
                 ["granary_food_stored"] = new JArray(granaryFoodStored.Select(v => (int)v))
@@ -1185,6 +1239,8 @@ namespace OGDirectImport
                     ["invasion_path_id"] = invasionPathId.HasValue ? (JToken)invasionPathId.Value : JValue.CreateNull(),
                     ["invasion_years"] = invasionYears.HasValue ? (JToken)invasionYears.Value : JValue.CreateNull()
                 };
+                obj["newera_sells_goods"] = BuildNewEraGoodArray(((JArray)obj["sells_resource_ids"]).OfType<JToken>().Select(token => token.Value<int>()));
+                obj["newera_buys_goods"] = BuildNewEraGoodArray(((JArray)obj["buys_resource_ids"]).OfType<JToken>().Select(token => token.Value<int>()));
                 objects.Add(obj);
 
                 if (objType == 1 && inUse != 0)
@@ -1300,6 +1356,9 @@ namespace OGDirectImport
                     ["months_under_siege"] = monthsUnderSiege,
                     ["trader_figure_ids"] = traderFigureIds
                 });
+                JObject city = (JObject)cities[cities.Count - 1];
+                city["newera_buys_goods"] = BuildNewEraGoodArray(buyIds.OfType<JToken>().Select(token => token.Value<int>()));
+                city["newera_sells_goods"] = BuildNewEraGoodArray(sellIds.OfType<JToken>().Select(token => token.Value<int>()));
             }
             return new JObject { ["record_size"] = recordSize, ["count"] = count, ["cities"] = cities };
         }
@@ -1488,6 +1547,7 @@ namespace OGDirectImport
             {
                 ["count"] = allIds.Count,
                 ["resource_ids"] = new JArray(allIds),
+                ["newera_goods"] = BuildNewEraGoodArray(allIds),
                 ["from_city_data_active_ids"] = new JArray(cityDataActiveIds),
                 ["from_food_types_available_ids"] = new JArray(foodTypesAvailableIds),
                 ["from_food_types_eaten_ids"] = new JArray(foodTypesEatenIds),
@@ -1626,7 +1686,14 @@ namespace OGDirectImport
             JArray decoded = new JArray();
             for (int i = 0; i < values.Length; i++)
             {
-                decoded.Add(new JObject { ["slot_index"] = i, ["resource_id"] = values[i], ["resource_name"] = values[i] > 0 ? GetResourceName(values[i]) : "none" });
+                JObject entry = new JObject
+                {
+                    ["slot_index"] = i,
+                    ["resource_id"] = values[i],
+                    ["resource_name"] = values[i] > 0 ? GetResourceName(values[i]) : "none"
+                };
+                AddNewEraGoodFields(entry, values[i], values[i] > 0 ? GetResourceName(values[i]) : null);
+                decoded.Add(entry);
             }
             return decoded;
         }
@@ -1657,6 +1724,96 @@ namespace OGDirectImport
         {
             string name;
             return ResourceNames.TryGetValue(resourceId, out name) ? name : "resource_" + resourceId.ToString(CultureInfo.InvariantCulture);
+        }
+
+        private static void AddNewEraGoodFields(JObject obj, int? resourceId, string resourceName = null)
+        {
+            if (obj == null)
+            {
+                return;
+            }
+
+            Good? good = null;
+            if (resourceId.HasValue)
+            {
+                good = OgNewEraMappings.MapGoodFromResourceId(resourceId.Value);
+            }
+
+            if (!good.HasValue && !string.IsNullOrWhiteSpace(resourceName) && OgNewEraMappings.TryMapGood(resourceName, out Good parsed))
+            {
+                good = parsed;
+            }
+
+            obj["newera_good_id"] = good.HasValue ? (int)good.Value : -1;
+            obj["newera_good_name"] = good.HasValue ? good.Value.ToString() : null;
+        }
+
+        private static JArray BuildNewEraGoodArray(IEnumerable<int> resourceIds)
+        {
+            JArray result = new JArray();
+            HashSet<Good> seen = new HashSet<Good>();
+            foreach (int resourceId in resourceIds ?? Enumerable.Empty<int>())
+            {
+                Good? good = OgNewEraMappings.MapGoodFromResourceId(resourceId);
+                if (!good.HasValue || !seen.Add(good.Value))
+                {
+                    continue;
+                }
+
+                result.Add(new JObject
+                {
+                    ["resource_id"] = resourceId,
+                    ["newera_good_id"] = (int)good.Value,
+                    ["newera_good_name"] = good.Value.ToString()
+                });
+            }
+
+            return result;
+        }
+
+        private static JArray BuildNewEraBuildingArray(IEnumerable<BuildingType> buildingTypes)
+        {
+            JArray result = new JArray();
+            HashSet<BuildingType> seen = new HashSet<BuildingType>();
+            foreach (BuildingType buildingType in buildingTypes ?? Enumerable.Empty<BuildingType>())
+            {
+                if (!seen.Add(buildingType))
+                {
+                    continue;
+                }
+
+                result.Add(new JObject
+                {
+                    ["building_type_id"] = (int)buildingType,
+                    ["building_type_name"] = buildingType.ToString()
+                });
+            }
+
+            return result;
+        }
+
+        private static void AddNewEraBuildingFields(JObject obj, IEnumerable<BuildingType> buildingTypes)
+        {
+            if (obj == null)
+            {
+                return;
+            }
+
+            JArray buildings = BuildNewEraBuildingArray(buildingTypes);
+            obj["newera_buildings"] = buildings;
+            obj["newera_building_type_ids"] = new JArray(buildings.OfType<JObject>().Select(b => b["building_type_id"]));
+            obj["newera_building_type_names"] = new JArray(buildings.OfType<JObject>().Select(b => b["building_type_name"]));
+        }
+
+        private static void AddNewEraDeityField(JObject obj, string rawGodName)
+        {
+            if (obj == null)
+            {
+                return;
+            }
+
+            string mapped = OgNewEraMappings.MapGodName(rawGodName);
+            obj["newera_deity_name"] = string.IsNullOrWhiteSpace(mapped) ? null : mapped;
         }
 
         private static string GetMonumentName(int monumentId)
@@ -1817,6 +1974,7 @@ namespace OGDirectImport
             public int Row;
             public int Col;
             public string Terrain;
+            public uint Flags;
         }
 
         private sealed class TransformMeta
