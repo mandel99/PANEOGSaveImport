@@ -177,9 +177,9 @@ namespace OGDirectImport
             { 8, new[] { BuildingType.Bazaar } },
             { 9, new[] { BuildingType.StorageYard } },
             { 10, new[] { BuildingType.Dock } },
-            { 11, new[] { BuildingType.JugglerSchool } },
-            { 12, new[] { BuildingType.Conservatory } },
-            { 13, new[] { BuildingType.DanceSchool } },
+            { 11, new[] { BuildingType.Booth, BuildingType.JugglerSchool } },
+            { 12, new[] { BuildingType.Bandstand, BuildingType.Conservatory } },
+            { 13, new[] { BuildingType.Pavilion, BuildingType.DanceSchool } },
             { 14, new[] { BuildingType.SenetHouse } },
             { 15, new[] { BuildingType.FestivalSquare } },
             { 16, new[] { BuildingType.ScribalSchool } },
@@ -1588,6 +1588,7 @@ namespace OGDirectImport
 
                 HashSet<BuildingType> buildings = new HashSet<BuildingType>(level.AvailableBuildings);
                 CollectAvailableBuildings(root, goods, buildings);
+                AddSupportingGuildsForAllowedMonuments(level.WinCondition?.RequiredMonuments, buildings);
                 CollectGoodsFromEnabledBuildings(buildings, goods);
 
                 ApplyAvailableGoods(level, goods, root["trade_prices"] as JObject);
@@ -2026,10 +2027,13 @@ namespace OGDirectImport
                 buildings.Add(buildingType);
             }
 
-            foreach (BuildingType buildingType in EnumerateAllowedMonumentsFromScenario(root["scenario_info"] as JObject))
+            List<BuildingType> allowedMonuments = EnumerateAllowedMonumentsFromScenario(root["scenario_info"] as JObject).Distinct().ToList();
+            foreach (BuildingType buildingType in allowedMonuments)
             {
                 buildings.Add(buildingType);
             }
+
+            AddSupportingGuildsForAllowedMonuments(allowedMonuments, buildings);
 
             foreach (Good good in goods ?? Enumerable.Empty<Good>())
             {
@@ -2190,6 +2194,147 @@ namespace OGDirectImport
                         yield return buildingType;
                     }
                 }
+            }
+        }
+
+        private static void AddSupportingGuildsForAllowedMonuments(IEnumerable<BuildingType> allowedMonuments, ISet<BuildingType> buildings)
+        {
+            if (allowedMonuments == null || buildings == null)
+            {
+                return;
+            }
+
+            bool needsBricklayers = false;
+            bool needsCarpenters = false;
+            bool needsStonemasons = false;
+            foreach (BuildingType monumentType in allowedMonuments)
+            {
+                if (MonumentNeedsBricklayers(monumentType))
+                {
+                    needsBricklayers = true;
+                }
+
+                if (MonumentNeedsCarpenters(monumentType))
+                {
+                    needsCarpenters = true;
+                }
+
+                if (MonumentNeedsStonemasons(monumentType))
+                {
+                    needsStonemasons = true;
+                }
+            }
+
+            if (needsBricklayers)
+            {
+                buildings.Add(BuildingType.GuildBricklayers);
+            }
+
+            if (needsCarpenters)
+            {
+                buildings.Add(BuildingType.GuildCarpenters);
+            }
+
+            if (needsStonemasons)
+            {
+                buildings.Add(BuildingType.GuildStonemasons);
+            }
+        }
+
+        private static bool MonumentNeedsBricklayers(BuildingType monumentType)
+        {
+            switch (monumentType)
+            {
+            case BuildingType.MastabaSmall:
+            case BuildingType.MastabaMedium:
+            case BuildingType.MastabaLarge:
+            case BuildingType.PyramidBrickCoreSmall:
+            case BuildingType.PyramidBrickCoreMedium:
+            case BuildingType.PyramidBrickCoreLarge:
+            case BuildingType.PyramidBrickCoreComplex:
+            case BuildingType.PyramidBrickCoreGrandComplex:
+                return true;
+            default:
+                return false;
+            }
+        }
+
+        private static bool MonumentNeedsCarpenters(BuildingType monumentType)
+        {
+            switch (monumentType)
+            {
+            case BuildingType.MastabaSmall:
+            case BuildingType.MastabaMedium:
+            case BuildingType.MastabaLarge:
+            case BuildingType.PyramidBentSmall:
+            case BuildingType.PyramidBentMedium:
+            case BuildingType.PyramidBrickCoreSmall:
+            case BuildingType.PyramidBrickCoreMedium:
+            case BuildingType.PyramidBrickCoreLarge:
+            case BuildingType.PyramidBrickCoreComplex:
+            case BuildingType.PyramidBrickCoreGrandComplex:
+            case BuildingType.PyramidSteppedSmall:
+            case BuildingType.PyramidSteppedMedium:
+            case BuildingType.PyramidSteppedLarge:
+            case BuildingType.PyramidSteppedComplex:
+            case BuildingType.PyramidSteppedGrandComplex:
+            case BuildingType.PyramidTrueSmall:
+            case BuildingType.PyramidTrueMedium:
+            case BuildingType.PyramidTrueLarge:
+            case BuildingType.PyramidTrueComplex:
+            case BuildingType.PyramidTrueGrandComplex:
+            case BuildingType.MausoleumA:
+            case BuildingType.MausoleumB:
+            case BuildingType.MausoleumC:
+            case BuildingType.RoyalTombSmall:
+            case BuildingType.RoyalTombMedium:
+            case BuildingType.RoyalTombLarge:
+            case BuildingType.RoyalTombGrand:
+            case BuildingType.SunTemple:
+            case BuildingType.AbuSimbel:
+            case BuildingType.PharaohsLighthouse:
+            case BuildingType.AlexandriasLibrary:
+            case BuildingType.Caesareum:
+                return true;
+            default:
+                return false;
+            }
+        }
+
+        private static bool MonumentNeedsStonemasons(BuildingType monumentType)
+        {
+            switch (monumentType)
+            {
+            case BuildingType.PyramidBentSmall:
+            case BuildingType.PyramidBentMedium:
+            case BuildingType.PyramidSteppedSmall:
+            case BuildingType.PyramidSteppedMedium:
+            case BuildingType.PyramidSteppedLarge:
+            case BuildingType.PyramidSteppedComplex:
+            case BuildingType.PyramidSteppedGrandComplex:
+            case BuildingType.PyramidTrueSmall:
+            case BuildingType.PyramidTrueMedium:
+            case BuildingType.PyramidTrueLarge:
+            case BuildingType.PyramidTrueComplex:
+            case BuildingType.PyramidTrueGrandComplex:
+            case BuildingType.ObeliskSmall:
+            case BuildingType.ObeliskLarge:
+            case BuildingType.Sphinx:
+            case BuildingType.SunTemple:
+            case BuildingType.MausoleumA:
+            case BuildingType.MausoleumB:
+            case BuildingType.MausoleumC:
+            case BuildingType.RoyalTombSmall:
+            case BuildingType.RoyalTombMedium:
+            case BuildingType.RoyalTombLarge:
+            case BuildingType.RoyalTombGrand:
+            case BuildingType.PharaohsLighthouse:
+            case BuildingType.AlexandriasLibrary:
+            case BuildingType.Caesareum:
+            case BuildingType.AbuSimbel:
+                return true;
+            default:
+                return false;
             }
         }
 
