@@ -26,7 +26,7 @@ namespace OGDirectImport
     {
         private const string ModGuid = "PANE.ogdirectimport";
         private const string ModName = "OG Direct Import";
-        private const string VersionString = "0.1.2";
+        private const string VersionString = "0.1.3";
         private const string ImportButtonObjectName = "OGDirectImportButton";
         private const string ImportButtonLabel = "Import OG MAP/SAV";
         private const string CreateButtonScenePath = "Canvas/Panel_LevelEditor/Generic_Container/PanelContent/Image/CreateButton";
@@ -5262,15 +5262,35 @@ namespace OGDirectImport
                             string cityNameTerm = city?.GetType().GetProperty("CityNameTerm")?.GetValue(city, null) as string;
                             if (!string.IsNullOrWhiteSpace(cityNameTerm))
                             {
-                                cityLabel = cityNameTerm;
+                                cityLabel = ResolveLocalizedTerm(cityNameTerm);
                             }
                         }
 
                         options.Add($"[{kvp.Key}] {cityLabel}");
                     }
 
-                    AccessTools.Method(dropdown.GetType(), "ClearOptions")?.Invoke(dropdown, Array.Empty<object>());
-                    AccessTools.Method(dropdown.GetType(), "AddOptions", new[] { typeof(List<string>) })?.Invoke(dropdown, new object[] { options });
+                    object localizeDropdown = AccessTools.Method(dropdown.GetType(), "GetComponent", Type.EmptyTypes)?
+                        .MakeGenericMethod(AccessTools.TypeByName("LocalizeDropdown"))
+                        .Invoke(dropdown, null);
+                    if (localizeDropdown != null)
+                    {
+                        FieldInfo termsField = AccessTools.Field(localizeDropdown.GetType(), "_Terms");
+                        if (termsField?.GetValue(localizeDropdown) is IList terms)
+                        {
+                            terms.Clear();
+                            foreach (string option in options)
+                            {
+                                terms.Add(option);
+                            }
+                        }
+
+                        AccessTools.Method(localizeDropdown.GetType(), "UpdateLocalizationTMPro")?.Invoke(localizeDropdown, Array.Empty<object>());
+                    }
+                    else
+                    {
+                        AccessTools.Method(dropdown.GetType(), "ClearOptions")?.Invoke(dropdown, Array.Empty<object>());
+                        AccessTools.Method(dropdown.GetType(), "AddOptions", new[] { typeof(List<string>) })?.Invoke(dropdown, new object[] { options });
+                    }
 
                     int selectedIndex = 0;
                     if (id != ScriptedEvent.s_InvalidId)
@@ -5294,6 +5314,23 @@ namespace OGDirectImport
                 }
 
                 return false;
+            }
+
+            private static string ResolveLocalizedTerm(string term)
+            {
+                if (string.IsNullOrWhiteSpace(term))
+                {
+                    return string.Empty;
+                }
+
+                try
+                {
+                    return LocalizationManager.GetTranslation(term, true, 0, true, false, null, null, true);
+                }
+                catch
+                {
+                    return term;
+                }
             }
         }
 
