@@ -529,11 +529,16 @@ namespace OGDirectImport
             result["milestone75_year"] = r.ReadInt32();
             r.Skip(10);
 
+            bool hasAnimals = r.ReadByte() != 0;
+            bool flotsamEnabled = r.ReadByte() != 0;
+            int climate = r.ReadByte();
             result["env"] = new JObject
             {
-                ["has_animals"] = r.ReadByte() != 0,
-                ["flotsam_enabled"] = r.ReadByte() != 0,
-                ["climate"] = r.ReadByte()
+                ["has_animals"] = hasAnimals,
+                ["flotsam_enabled"] = flotsamEnabled,
+                ["climate"] = climate,
+                ["climate_name"] = GetOgClimateName(climate),
+                ["newera_climate"] = MapOgClimateToNewEraName(climate)
             };
             r.Skip(1);
             r.Skip(1);
@@ -1039,6 +1044,28 @@ namespace OGDirectImport
                 prices.Add(price);
             }
             return new JObject { ["count"] = prices.Count, ["prices"] = prices };
+        }
+
+        private static string GetOgClimateName(int climate)
+        {
+            switch (climate)
+            {
+                case 0: return "central";
+                case 1: return "northern";
+                case 2: return "desert";
+                default: return "unknown";
+            }
+        }
+
+        private static string MapOgClimateToNewEraName(int climate)
+        {
+            switch (climate)
+            {
+                case 0: return "humid";
+                case 1: return "normal";
+                case 2: return "arid";
+                default: return "unknown";
+            }
         }
 
         private static JObject ParseCityData(byte[] data)

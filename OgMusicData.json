@@ -1,0 +1,8262 @@
+﻿[
+    {
+        "track":  "agbj.mp3",
+        "mode":  "M",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  0,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  1,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  2,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "M-srf.mp3",
+        "mode":  "A",
+        "mission":  2,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  2,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  2,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  2,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Advent.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  3,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  3,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  3,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  3,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  3,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  4,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  4,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  4,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  4,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  4,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Advent.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  5,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  5,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Amber.mp3",
+        "mode":  "A",
+        "mission":  5,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  5,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  5,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  6,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  6,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  6,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  6,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  6,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  7,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-srf.mp3",
+        "mode":  "A",
+        "mission":  7,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Amber.mp3",
+        "mode":  "A",
+        "mission":  7,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  7,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  7,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  8,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  8,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  8,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  8,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  8,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  9,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  9,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  9,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  9,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  9,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  10,
+        "min":  2500,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  10,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "agbj.mp3",
+        "mode":  "A",
+        "mission":  10,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  10,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  10,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  11,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  11,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  11,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  11,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  11,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  12,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-srf.mp3",
+        "mode":  "A",
+        "mission":  12,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  12,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "agbj.mp3",
+        "mode":  "A",
+        "mission":  12,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  12,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  13,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  13,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  13,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  13,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Longing.mp3",
+        "mode":  "A",
+        "mission":  13,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  14,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  14,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  14,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  14,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Longing.mp3",
+        "mode":  "A",
+        "mission":  14,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  15,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  15,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  15,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  15,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Longing.mp3",
+        "mode":  "A",
+        "mission":  15,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  16,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  16,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  16,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  16,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Longing.mp3",
+        "mode":  "A",
+        "mission":  16,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  17,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  17,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  17,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  17,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  17,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  18,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "agbj.mp3",
+        "mode":  "A",
+        "mission":  18,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  18,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  18,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  18,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  19,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Longing.mp3",
+        "mode":  "A",
+        "mission":  19,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  19,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  19,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  19,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  1000,
+        "max":  2999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  20,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  20,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  20,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  20,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  20,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  21,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  21,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  21,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "agbj.mp3",
+        "mode":  "A",
+        "mission":  21,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Amber.mp3",
+        "mode":  "A",
+        "mission":  21,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Nefer.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  22,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  22,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  22,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  22,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  22,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  3500,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  3500,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  3500,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  3500,
+        "max":  100000
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  23,
+        "min":  3500,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  23,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  23,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  23,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  23,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  23,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  23,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  24,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  24,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  24,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  24,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  24,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  24,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  24,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  25,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  25,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  25,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  25,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rain.mp3",
+        "mode":  "A",
+        "mission":  25,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  25,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  25,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  0,
+        "max":  1499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  0,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  0,
+        "max":  1499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  0,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  26,
+        "min":  5000,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  26,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  27,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  27,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  27,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  27,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  27,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  27,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  27,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  28,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-A.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rain.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  28,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  3000,
+        "max":  5999
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  29,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  29,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  1500,
+        "max":  3999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  30,
+        "min":  4000,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-A.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  30,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  31,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  32,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  32,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  32,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  32,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  32,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  32,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  32,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  1000,
+        "max":  2499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  2500,
+        "max":  3499
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  2500,
+        "max":  3499
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  2500,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  2500,
+        "max":  3499
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  33,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rain.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  33,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  34,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  34,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  34,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  34,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  34,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rain.mp3",
+        "mode":  "A",
+        "mission":  34,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  34,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  35,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  35,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  3000,
+        "max":  4499
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  36,
+        "min":  4500,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  36,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1000,
+        "max":  1099
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  2000,
+        "max":  2999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  3000,
+        "max":  4999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "rwD.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  5000,
+        "max":  7999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  37,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rain.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  37,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Advent.mp3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  38,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp38",
+        "mode":  "M",
+        "mission":  3,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  38,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  38,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  38,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  38,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  39,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  39,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  39,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  39,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  39,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  40,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  40,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  40,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  40,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  40,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  41,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  41,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  41,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  41,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  41,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Advent.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  42,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  42,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Amber.mp3",
+        "mode":  "A",
+        "mission":  42,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  42,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  42,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  43,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  43,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ankh.mp3",
+        "mode":  "A",
+        "mission":  43,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  43,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  43,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  44,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-srf.mp3",
+        "mode":  "A",
+        "mission":  44,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Amber.mp3",
+        "mode":  "A",
+        "mission":  44,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  44,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  44,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  0,
+        "max":  799
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  800,
+        "max":  1499
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  45,
+        "min":  1500,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  45,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  45,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  45,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sstj.mp3",
+        "mode":  "A",
+        "mission":  45,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  0,
+        "max":  299
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  46,
+        "min":  300,
+        "max":  100000
+    },
+    {
+        "track":  "M-srf.mp3",
+        "mode":  "A",
+        "mission":  46,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  46,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  46,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  46,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  500,
+        "max":  999
+    },
+    {
+        "track":  "Khet.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  47,
+        "min":  2000,
+        "max":  100000
+    },
+    {
+        "track":  "M-srf.mp3",
+        "mode":  "A",
+        "mission":  47,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  47,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "agbj.mp3",
+        "mode":  "A",
+        "mission":  47,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  47,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  500,
+        "max":  1499
+    },
+    {
+        "track":  "Khu.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "Rekhit.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  1500,
+        "max":  2999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Amakh.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  48,
+        "min":  3000,
+        "max":  100000
+    },
+    {
+        "track":  "Agbj.mp3",
+        "mode":  "A",
+        "mission":  48,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  48,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Offering.mp3",
+        "mode":  "A",
+        "mission":  48,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  48,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  0,
+        "max":  999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  1000,
+        "max":  1999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  2000,
+        "max":  3499
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  3500,
+        "max":  5999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "mAa-jb.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  49,
+        "min":  6000,
+        "max":  100000
+    },
+    {
+        "track":  "longing.mp3",
+        "mode":  "A",
+        "mission":  49,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  49,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  49,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rain.mp3",
+        "mode":  "A",
+        "mission":  49,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  49,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  49,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "sthA.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Daq.mp3",
+        "mode":  "M",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "rwDt.mp3",
+        "mode":  "A",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dd-m-ann.mp3",
+        "mode":  "A",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  50,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "sps.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  0,
+        "max":  1999
+    },
+    {
+        "track":  "khet.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "khu.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "Ra.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "rekhit.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  2000,
+        "max":  3999
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  4000,
+        "max":  5999
+    },
+    {
+        "track":  "Khepera.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "m-twr.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "jA.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  6000,
+        "max":  7999
+    },
+    {
+        "track":  "amakh.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Anquet.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Sekhmet.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "bennu.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "nefer.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Isis.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "Geb.mp3",
+        "mode":  "M",
+        "mission":  51,
+        "min":  8000,
+        "max":  100000
+    },
+    {
+        "track":  "waj.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "dust.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "ankh.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "jAkb.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "watj.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "m-srf.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "amber.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "offering.mp3",
+        "mode":  "A",
+        "mission":  51,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Smr.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "Sps.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "SthA.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "MAa-jb.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  0,
+        "max":  499
+    },
+    {
+        "track":  "RwD.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "M-twr.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "JA.MP3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "Jrj-Hb-sd.mp3",
+        "mode":  "M",
+        "mission":  52,
+        "min":  500,
+        "max":  100000
+    },
+    {
+        "track":  "Rain.mp3",
+        "mode":  "A",
+        "mission":  52,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "advent.mp3",
+        "mode":  "A",
+        "mission":  52,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Dust.mp3",
+        "mode":  "A",
+        "mission":  52,
+        "min":  0,
+        "max":  100000
+    },
+    {
+        "track":  "Hapj-aA.mp3",
+        "mode":  "A",
+        "mission":  52,
+        "min":  0,
+        "max":  100000
+    }
+]

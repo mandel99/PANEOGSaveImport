@@ -14,7 +14,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,7 +26,7 @@ namespace OGDirectImport
     {
         private const string ModGuid = "PANE.ogdirectimport";
         private const string ModName = "OG Direct Import";
-        private const string VersionString = "0.1.4";
+        private const string VersionString = "0.1.5";
         private const string ImportButtonObjectName = "OGDirectImportButton";
         private const string ImportButtonLabel = "Import OG MAP/SAV";
         private const string CreateButtonScenePath = "Canvas/Panel_LevelEditor/Generic_Container/PanelContent/Image/CreateButton";
@@ -86,7 +85,6 @@ namespace OGDirectImport
         internal static bool ApplyPending;
         internal static bool ImportArmed;
 
-        private static ConfigEntry<string> ConfPythonExe = null;
         private static ConfigEntry<bool> ConfImportEvents;
         private static ConfigEntry<bool> ConfDumpExtractedJson;
 
@@ -261,7 +259,6 @@ namespace OGDirectImport
             { "Worldmap/#Gaza", 11 },
             { "Worldmap/#Jericho", 11 }
         };
-        private static readonly Regex OgMusicLineRegex = new Regex(@"^\s*(?<track>[^;\s][^\s]*)\s+(?<mode>[MA])\s+(?<mission>\d+)\s+(?<delay>\d+)\s+(?<min>-?\d+)\s+(?<max>-?\d+)\s*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Dictionary<string, string> OgMusicAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             { "advent", "ADVENT" }, { "agbj", "Agbj" }, { "amakh", "AMAKH" }, { "amber", "AMBER" },
@@ -273,6 +270,8 @@ namespace OGDirectImport
             { "smr", "Smr" }, { "sps", "SPS" }, { "sstj", "SSTJ 1" }, { "stha", "sthA" },
             { "waj", "WAJ 1" }, { "watj", "WATJ" },
         };
+        private static readonly Lazy<Dictionary<int, List<OgMissionMusicEntry>>> EmbeddedOgMusicByMission =
+            new Lazy<Dictionary<int, List<OgMissionMusicEntry>>>(LoadEmbeddedOgMusicByMission);
 
         private void Awake()
         {
@@ -699,186 +698,6 @@ namespace OGDirectImport
             catch (Exception ex)
             {
                 Log?.LogError($"TryPickOgFileAndArmImport failed: {ex}");
-            }
-        }
-
-        private static bool RunExtractor(string sourcePath, out string jsonPath, out string error)
-        {
-            jsonPath = null;
-            error = null;
-
-            try
-            {
-                string pythonExe = ConfPythonExe.Value?.Trim();
-                string extractorScript = EnsureEmbeddedExtractorScript(out string resourceName);
-                if (string.IsNullOrWhiteSpace(pythonExe))
-                {
-                    error = "PythonExe config is empty.";
-                    return false;
-                }
-                if (string.IsNullOrWhiteSpace(extractorScript) || !File.Exists(extractorScript))
-                {
-                    error = $"Extractor script not found: '{extractorScript}'";
-                    return false;
-                }
-
-                Log?.LogInfo($"Running embedded extractor with Python='{pythonExe}' Script='{extractorScript}' Resource='{resourceName}'.");
-
-                string tempDir = Path.Combine(Path.GetTempPath(), "OGDirectImport");
-                Directory.CreateDirectory(tempDir);
-                string outName = Path.GetFileNameWithoutExtension(sourcePath) + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".json";
-                jsonPath = Path.Combine(tempDir, outName);
-
-                string arguments = $"\"{extractorScript}\" \"{sourcePath}\" --json-out \"{jsonPath}\"";
-                var psi = new ProcessStartInfo
-                {
-                    FileName = pythonExe,
-                    Arguments = arguments,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    CreateNoWindow = true
-                };
-
-                using (var process = Process.Start(psi))
-                {
-                    if (process == null)
-                    {
-                        error = "Process.Start returned null.";
-                        return false;
-                    }
-
-                    string stdout = process.StandardOutput.ReadToEnd();
-                    string stderr = process.StandardError.ReadToEnd();
-                    process.WaitForExit();
-
-                    if (process.ExitCode != 0)
-                    {
-                        error = $"Extractor exit code {process.ExitCode}\nSTDOUT:\n{stdout}\nSTDERR:\n{stderr}";
-                        return false;
-                    }
-                }
-
-                if (!File.Exists(jsonPath))
-                {
-                    error = $"Extractor did not produce JSON: '{jsonPath}'";
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                error = ex.ToString();
-                return false;
-            }
-        }
-
-        private static string EnsureEmbeddedExtractorScript(out string resourceName)
-        {
-            resourceName = null;
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            string[] resourceNames = assembly.GetManifestResourceNames();
-            resourceName = resourceNames.FirstOrDefault(name =>
-                string.Equals(name, "OGSaveImport.pharaoh_extract.py", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(name, "OGDirectImport.pharaoh_extract.py", StringComparison.OrdinalIgnoreCase)
-                || name.EndsWith(".pharaoh_extract.py", StringComparison.OrdinalIgnoreCase));
-
-            if (string.IsNullOrWhiteSpace(resourceName))
-            {
-                throw new FileNotFoundException("Embedded extractor resource pharaoh_extract.py was not found in assembly.");
-            }
-
-            string tempDir = Path.Combine(Path.GetTempPath(), "OGDirectImport", "embedded");
-            Directory.CreateDirectory(tempDir);
-
-            string assemblyPath = assembly.Location;
-            string assemblyStamp = "embedded";
-            if (!string.IsNullOrWhiteSpace(assemblyPath) && File.Exists(assemblyPath))
-            {
-                DateTime lastWriteUtc = File.GetLastWriteTimeUtc(assemblyPath);
-                assemblyStamp = lastWriteUtc.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture);
-            }
-
-            string targetPath = Path.Combine(tempDir, $"pharaoh_extract_{assemblyStamp}.py");
-
-            using (Stream resourceStream = assembly.GetManifestResourceStream(resourceName))
-            {
-                if (resourceStream == null)
-                {
-                    throw new FileNotFoundException($"Embedded extractor resource '{resourceName}' could not be opened.");
-                }
-
-                using (var fileStream = new FileStream(targetPath, FileMode.Create, FileAccess.Write, FileShare.Read))
-                {
-                    resourceStream.CopyTo(fileStream);
-                }
-            }
-
-            return targetPath;
-        }
-
-        private static string ResolveExtractorScriptPath()
-        {
-            try
-            {
-                return EnsureEmbeddedExtractorScript(out _);
-            }
-            catch (Exception ex)
-            {
-                Log?.LogWarning($"Falling back to legacy extractor path resolution because embedded extraction failed: {ex.Message}");
-            }
-
-            try
-            {
-                string assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                if (!string.IsNullOrWhiteSpace(assemblyDir))
-                {
-                    return Path.Combine(assemblyDir, "pharaoh_extract.py");
-                }
-            }
-            catch
-            {
-            }
-
-            return "pharaoh_extract.py";
-        }
-
-        private static bool TryReadJsonHeader(string path, out int side, out string gridKey, out string error)
-        {
-            side = 0;
-            gridKey = "grid";
-            error = null;
-
-            try
-            {
-                JObject root = JObject.Parse(File.ReadAllText(path));
-
-                if (root["grid"] is JArray) gridKey = "grid";
-                else if (root["tiles"] is JArray) gridKey = "tiles";
-                else
-                {
-                    error = "Neither 'grid' nor 'tiles' array found.";
-                    return false;
-                }
-
-                JObject map = root["map"] as JObject;
-                int width = (int?)map?["width"] ?? 0;
-                int height = (int?)map?["height"] ?? 0;
-                side = ComputeRequiredCreateSize(root, gridKey, width, height);
-
-                if (side <= 0)
-                {
-                    error = "Missing or invalid map.width/map.height.";
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                error = ex.Message;
-                return false;
             }
         }
 
@@ -1921,17 +1740,10 @@ namespace OGDirectImport
                     return;
                 }
 
-                string musicTxtPath = ResolveOgMusicTxtPath(root["source_file"]?.Value<string>());
-                if (string.IsNullOrWhiteSpace(musicTxtPath) || !File.Exists(musicTxtPath))
-                {
-                    Log?.LogInfo($"OG music import skipped: music.txt not found ('{musicTxtPath}').");
-                    return;
-                }
-
-                List<OgMissionMusicEntry> missionEntries = ParseOgMissionMusicFile(musicTxtPath, missionId);
+                List<OgMissionMusicEntry> missionEntries = GetEmbeddedOgMissionMusicEntries(missionId);
                 if (missionEntries.Count == 0)
                 {
-                    Log?.LogInfo($"OG music import skipped: no entries for mission {missionId}.");
+                    Log?.LogInfo($"OG music import skipped: no embedded music entries for mission {missionId}.");
                     return;
                 }
 
@@ -2184,56 +1996,69 @@ namespace OGDirectImport
             return false;
         }
 
-        private static string ResolveOgMusicTxtPath(string sourceFile)
+        private static List<OgMissionMusicEntry> GetEmbeddedOgMissionMusicEntries(int missionId)
         {
-            if (!string.IsNullOrWhiteSpace(sourceFile))
+            if (EmbeddedOgMusicByMission.Value.TryGetValue(missionId, out List<OgMissionMusicEntry> entries) && entries != null)
             {
-                try
-                {
-                    string dir = Path.GetDirectoryName(sourceFile);
-                    string parent = !string.IsNullOrWhiteSpace(dir) ? Directory.GetParent(dir)?.FullName : null;
-                    string candidate = !string.IsNullOrWhiteSpace(parent) ? Path.Combine(parent, "music.txt") : null;
-                    if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
-                    {
-                        return candidate;
-                    }
-                }
-                catch { }
+                return entries;
             }
 
-            return @"C:\Program Files (x86)\GOG.com\Pharaoh\music.txt";
+            return new List<OgMissionMusicEntry>();
         }
 
-        private static List<OgMissionMusicEntry> ParseOgMissionMusicFile(string musicTxtPath, int missionId)
+        private static Dictionary<int, List<OgMissionMusicEntry>> LoadEmbeddedOgMusicByMission()
         {
-            List<OgMissionMusicEntry> result = new List<OgMissionMusicEntry>();
-            foreach (string rawLine in File.ReadLines(musicTxtPath))
+            Dictionary<int, List<OgMissionMusicEntry>> result = new Dictionary<int, List<OgMissionMusicEntry>>();
+
+            try
             {
-                if (string.IsNullOrWhiteSpace(rawLine) || rawLine.TrimStart().StartsWith(";", StringComparison.Ordinal))
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string resourceName = assembly.GetManifestResourceNames()
+                    .FirstOrDefault(name => name.EndsWith(".OgMusicData.json", StringComparison.OrdinalIgnoreCase));
+                if (string.IsNullOrWhiteSpace(resourceName))
                 {
-                    continue;
+                    Log?.LogWarning("Embedded OG music data resource was not found in assembly.");
+                    return result;
                 }
 
-                Match match = OgMusicLineRegex.Match(rawLine);
-                if (!match.Success)
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                using (StreamReader reader = stream != null ? new StreamReader(stream, Encoding.UTF8) : null)
                 {
-                    continue;
-                }
+                    if (reader == null)
+                    {
+                        Log?.LogWarning($"Embedded OG music data resource '{resourceName}' could not be opened.");
+                        return result;
+                    }
 
-                int parsedMissionId = int.Parse(match.Groups["mission"].Value, CultureInfo.InvariantCulture);
-                if (parsedMissionId != missionId)
-                {
-                    continue;
-                }
+                    JArray rows = JArray.Parse(reader.ReadToEnd());
+                    foreach (JObject row in rows.OfType<JObject>())
+                    {
+                        int missionId = row["mission"]?.Value<int>() ?? -1;
+                        if (missionId < 0)
+                        {
+                            continue;
+                        }
 
-                result.Add(new OgMissionMusicEntry
-                {
-                    Track = match.Groups["track"].Value,
-                    Mode = string.Equals(match.Groups["mode"].Value, "A", StringComparison.OrdinalIgnoreCase) ? MapMusicMode.A : MapMusicMode.M,
-                    MissionId = parsedMissionId,
-                    MinPopulation = int.Parse(match.Groups["min"].Value, CultureInfo.InvariantCulture),
-                    MaxPopulation = int.Parse(match.Groups["max"].Value, CultureInfo.InvariantCulture)
-                });
+                        if (!result.TryGetValue(missionId, out List<OgMissionMusicEntry> list))
+                        {
+                            list = new List<OgMissionMusicEntry>();
+                            result.Add(missionId, list);
+                        }
+
+                        list.Add(new OgMissionMusicEntry
+                        {
+                            Track = row["track"]?.Value<string>(),
+                            Mode = string.Equals(row["mode"]?.Value<string>(), "A", StringComparison.OrdinalIgnoreCase) ? MapMusicMode.A : MapMusicMode.M,
+                            MissionId = missionId,
+                            MinPopulation = row["min"]?.Value<int>() ?? 0,
+                            MaxPopulation = row["max"]?.Value<int>() ?? int.MaxValue
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogWarning($"Failed to load embedded OG music data: {ex}");
             }
 
             return result;
@@ -4738,7 +4563,6 @@ namespace OGDirectImport
 
             if (mappedType == ScriptedEventType.Request ||
                 mappedType == ScriptedEventType.Gift ||
-                mappedType == ScriptedEventType.TroopRequest ||
                 mappedType == ScriptedEventType.TradeIncrease ||
                 mappedType == ScriptedEventType.TradeDecrease ||
                 mappedType == ScriptedEventType.PriceIncrease ||
@@ -4750,6 +4574,12 @@ namespace OGDirectImport
                     scripted.Goods.AddRange(goods);
                     scripted.GoodRequested = goods[0];
                 }
+            }
+
+            if (mappedType == ScriptedEventType.TroopRequest)
+            {
+                scripted.Goods.Clear();
+                scripted.GoodRequested = default(Good);
             }
 
             if (mappedType == ScriptedEventType.Invasion || mappedType == ScriptedEventType.KingdomInvasion || mappedType == ScriptedEventType.TroopRequest)
@@ -5300,10 +5130,10 @@ namespace OGDirectImport
             switch (ogClimate)
             {
                 case 0:
-                    mappedClimate = 1; // OG central -> New Era normal
+                    mappedClimate = 2; // OG central -> New Era humid
                     return true;
                 case 1:
-                    mappedClimate = 2; // OG northern -> New Era humid
+                    mappedClimate = 1; // OG northern -> New Era normal
                     return true;
                 case 2:
                     mappedClimate = 0; // OG desert -> New Era arid

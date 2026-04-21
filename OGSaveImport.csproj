@@ -74,6 +74,7 @@
     <Compile Include="OgBinaryExtractor.cs" />
     <Compile Include="OgNewEraMappings.cs" />
     <Compile Include="OGDirectImportPlugin.cs" />
+    <EmbeddedResource Include="OgMusicData.json" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
