@@ -179,6 +179,7 @@ namespace OGDirectImport
                 case 33: return Good.Paint;
                 case 34: return Good.Lamp;
                 case 35: return Good.WhiteMarble;
+                case 36: return Good.Gold;
                 default:
                     return null;
             }
@@ -223,6 +224,7 @@ namespace OGDirectImport
                 case "reeds": good = Good.Reeds; return true;
                 case "papyrus": good = Good.Papyrus; return true;
                 case "gold": good = Good.Gold; return true;
+                case "deben": good = Good.Gold; return true;
                 case "chariots": good = Good.Chariots; return true;
                 case "copper": good = Good.Copper; return true;
                 case "sandstone": good = Good.Sandstone; return true;

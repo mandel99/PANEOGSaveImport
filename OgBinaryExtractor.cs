@@ -393,6 +393,7 @@ namespace OGDirectImport
 
             JObject worldMap = BuildWorldMapData(info.Version, chunkByName);
             JObject cityData = cityDataRaw != null ? ParseCityData(cityDataRaw) : null;
+            byte[] scenarioMissionIndexRaw = GetChunk(chunkByName, "scenario_mission_index");
 
             JObject result = new JObject();
             result["source_file"] = sourcePath;
@@ -401,6 +402,10 @@ namespace OGDirectImport
             if (info.HasMissionIndexRaw)
             {
                 result["mission_index_raw"] = info.MissionIndexRaw;
+            }
+            if (scenarioMissionIndexRaw != null && scenarioMissionIndexRaw.Length >= 4)
+            {
+                result["scenario_mission_index"] = ReadInt32LE(scenarioMissionIndexRaw, 0);
             }
 
             result["map"] = new JObject
@@ -438,7 +443,15 @@ namespace OGDirectImport
             JArray gods = new JArray();
             for (int i = 0; i < MaxGods; i++)
             {
-                JObject god = new JObject { ["god"] = GodNames[i], ["is_known"] = r.ReadByte() != 0 };
+                byte rawStatus = r.ReadByte();
+                JObject god = new JObject
+                {
+                    ["god"] = GodNames[i],
+                    ["raw_status"] = rawStatus,
+                    ["is_known"] = rawStatus != 0,
+                    ["is_patron"] = rawStatus == 2,
+                    ["rank"] = rawStatus == 2 ? "patron" : (rawStatus == 1 ? "local" : "unknown")
+                };
                 AddNewEraDeityField(god, GodNames[i]);
                 gods.Add(god);
                 r.Skip(1);
@@ -1196,6 +1209,9 @@ namespace OGDirectImport
                 uint? trade25 = null;
                 uint? trade15 = null;
 
+                invasionPathId = r.ReadByte();
+                invasionYears = r.ReadByte();
+
                 if (version < 160)
                 {
                     r.Skip(2);
@@ -1205,8 +1221,6 @@ namespace OGDirectImport
                 }
                 else
                 {
-                    invasionPathId = r.ReadByte();
-                    invasionYears = r.ReadByte();
                     tradeDemand = new JArray(r.ReadBytes(ResourcesMax).Select(v => (int)v));
                 }
 
@@ -1236,6 +1250,10 @@ namespace OGDirectImport
                     ["trade40"] = trade40.HasValue ? (JToken)trade40.Value : JValue.CreateNull(),
                     ["trade25"] = trade25.HasValue ? (JToken)trade25.Value : JValue.CreateNull(),
                     ["trade15"] = trade15.HasValue ? (JToken)trade15.Value : JValue.CreateNull(),
+                    ["trade40_resource_ids"] = trade40.HasValue ? (JToken)new JArray(ExpandTradeMaskResourceIds(trade40.Value)) : JValue.CreateNull(),
+                    ["trade25_resource_ids"] = trade25.HasValue ? (JToken)new JArray(ExpandTradeMaskResourceIds(trade25.Value)) : JValue.CreateNull(),
+                    ["trade15_resource_ids"] = trade15.HasValue ? (JToken)new JArray(ExpandTradeMaskResourceIds(trade15.Value)) : JValue.CreateNull(),
+                    ["trade_levels"] = BuildTradeLevels(tradeDemand, trade40, trade25, trade15),
                     ["invasion_path_id"] = invasionPathId.HasValue ? (JToken)invasionPathId.Value : JValue.CreateNull(),
                     ["invasion_years"] = invasionYears.HasValue ? (JToken)invasionYears.Value : JValue.CreateNull()
                 };
@@ -1253,6 +1271,82 @@ namespace OGDirectImport
             }
 
             return new JObject { ["record_size"] = recordSize, ["count"] = count, ["cities"] = cities, ["objects"] = objects };
+        }
+
+        private static IEnumerable<int> ExpandTradeMaskResourceIds(uint mask)
+        {
+            for (int resourceId = 0; resourceId < 32; resourceId++)
+            {
+                if ((mask & (1u << resourceId)) != 0u)
+                {
+                    yield return resourceId;
+                }
+            }
+        }
+
+        private static JArray BuildTradeLevels(JArray tradeDemand, uint? trade40, uint? trade25, uint? trade15)
+        {
+            List<Tuple<int, int>> levels = new List<Tuple<int, int>>();
+
+            if (tradeDemand != null && tradeDemand.Count > 0)
+            {
+                for (int resourceId = 0; resourceId < tradeDemand.Count; resourceId++)
+                {
+                    int demandCode = tradeDemand[resourceId]?.Value<int>() ?? 0;
+                    if (demandCode > 0)
+                    {
+                        levels.Add(Tuple.Create(resourceId, demandCode));
+                    }
+                }
+            }
+            else
+            {
+                if (trade15.HasValue)
+                {
+                    levels.AddRange(ExpandTradeMaskResourceIds(trade15.Value).Select(resourceId => Tuple.Create(resourceId, 1)));
+                }
+
+                if (trade25.HasValue)
+                {
+                    levels.AddRange(ExpandTradeMaskResourceIds(trade25.Value).Select(resourceId => Tuple.Create(resourceId, 2)));
+                }
+
+                if (trade40.HasValue)
+                {
+                    levels.AddRange(ExpandTradeMaskResourceIds(trade40.Value).Select(resourceId => Tuple.Create(resourceId, 3)));
+                }
+            }
+
+            return new JArray(levels
+                .OrderBy(entry => entry.Item1)
+                .Select(entry => new JObject
+                {
+                    ["resource_id"] = entry.Item1,
+                    ["resource_name"] = GetResourceName(entry.Item1),
+                    ["demand_code"] = entry.Item2,
+                    ["demand_name"] = GetTradeDemandName(entry.Item2)
+                }));
+        }
+
+        private static string GetTradeDemandName(int demandCode)
+        {
+            switch (demandCode)
+            {
+                case 1:
+                case 15:
+                case 1500:
+                    return "low";
+                case 2:
+                case 25:
+                case 2500:
+                    return "medium";
+                case 3:
+                case 40:
+                case 4000:
+                    return "high";
+                default:
+                    return "unknown";
+            }
         }
 
         private static JObject ParseEmpireMapRoutes(byte[] data)

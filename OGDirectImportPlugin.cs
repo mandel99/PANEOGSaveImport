@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +27,7 @@ namespace OGDirectImport
     {
         private const string ModGuid = "PANE.ogdirectimport";
         private const string ModName = "OG Direct Import";
-        private const string VersionString = "0.1.3";
+        private const string VersionString = "0.1.4";
         private const string ImportButtonObjectName = "OGDirectImportButton";
         private const string ImportButtonLabel = "Import OG MAP/SAV";
         private const string CreateButtonScenePath = "Canvas/Panel_LevelEditor/Generic_Container/PanelContent/Image/CreateButton";
@@ -227,6 +228,51 @@ namespace OGDirectImport
         private static readonly Dictionary<int, BuildingType[]> OgAllowedBuildingIndexToNewEraBuildings = OgNewEraMappings.AllowedBuildingIndexToNewEraBuildings;
         private static readonly Dictionary<int, string> OgMonumentIdNames = OgNewEraMappings.MonumentIdNames;
         private static readonly Dictionary<int, BuildingType[]> OgAllowedMonumentIdToNewEraBuildings = OgNewEraMappings.AllowedMonumentIdToNewEraBuildings;
+        private static readonly Dictionary<string, int> WorldMapForeignCityVariationByTerm = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "Worldmap/#Enkomi", 0 },
+            { "Worldmap/#Pwenet", 1 },
+            { "Worldmap/#Sawu", 2 },
+            { "Worldmap/#Actium", 3 },
+            { "Worldmap/#Athens", 3 },
+            { "Worldmap/#Knossos", 3 },
+            { "Worldmap/#Mycenae", 3 },
+            { "Worldmap/#Rome", 3 },
+            { "Worldmap/#Kyrene", 4 },
+            { "Worldmap/#AbuSimbel", 5 },
+            { "Worldmap/#Baki", 5 },
+            { "Worldmap/#Buhen", 5 },
+            { "Worldmap/#Heh", 5 },
+            { "Worldmap/#Iken", 5 },
+            { "Worldmap/#Kerma", 5 },
+            { "Worldmap/#Shaat", 5 },
+            { "Worldmap/#Toshka", 5 },
+            { "Worldmap/#Tyre", 6 },
+            { "Worldmap/#Qadesh", 8 },
+            { "Worldmap/#BahariyaOasis", 9 },
+            { "Worldmap/#DakhlaOasis", 9 },
+            { "Worldmap/#Dunqul Oasis", 9 },
+            { "Worldmap/#Farafra Oasis", 9 },
+            { "Worldmap/#Kharga Oasis", 9 },
+            { "Worldmap/#SelimaOasis", 9 },
+            { "Worldmap/#Siwi Oasis", 9 },
+            { "Worldmap/#Byblos", 10 },
+            { "Worldmap/#Sumur", 10 },
+            { "Worldmap/#Gaza", 11 },
+            { "Worldmap/#Jericho", 11 }
+        };
+        private static readonly Regex OgMusicLineRegex = new Regex(@"^\s*(?<track>[^;\s][^\s]*)\s+(?<mode>[MA])\s+(?<mission>\d+)\s+(?<delay>\d+)\s+(?<min>-?\d+)\s+(?<max>-?\d+)\s*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Dictionary<string, string> OgMusicAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "advent", "ADVENT" }, { "agbj", "Agbj" }, { "amakh", "AMAKH" }, { "amber", "AMBER" },
+            { "ankh", "ANKH" }, { "bennu", "BENNU" }, { "daq", "Daq" }, { "ddmann", "Dd-m-ann" },
+            { "dust", "DUST" }, { "hapjaa", "Hapj-aA" }, { "ja", "jA" }, { "jakb", "jAkb" },
+            { "jrjhbsd", "jrj-Hb-sd" }, { "khet", "KHET" }, { "khu", "KHU" }, { "longing", "LONGING" },
+            { "maajb", "mAa-jb" }, { "msrf", "M-SRF 1" }, { "mtwr", "M-TWR" }, { "offering", "OFFERING" },
+            { "rain", "RAIN" }, { "rekhit", "Rekhit" }, { "rwd", "rwD" }, { "rwdt", "rwDt" },
+            { "smr", "Smr" }, { "sps", "SPS" }, { "sstj", "SSTJ 1" }, { "stha", "sthA" },
+            { "waj", "WAJ 1" }, { "watj", "WATJ" },
+        };
 
         private void Awake()
         {
@@ -963,6 +1009,7 @@ namespace OGDirectImport
 
             TryApplyScenarioInfo(mapEditorInstance, root);
             ApplyTerrainTiles(mapEditorInstance, arr);
+            TryApplyPopulationBasedMusic(mapEditorInstance, root);
             TryApplyAvailability(mapEditorInstance, root);
             TryApplyDeitiesViaMapEditor(mapEditorInstance, root);
             TryApplyMapFlags(mapEditorInstance, root);
@@ -1030,7 +1077,6 @@ namespace OGDirectImport
             HashSet<int> refreshGrass = new HashSet<int>();
             HashSet<TerrainType> changedNativeTerrains = new HashSet<TerrainType>();
             HashSet<StaggeredCellCoord> changedCoords = new HashSet<StaggeredCellCoord>();
-            HashSet<StaggeredCellCoord> forcedGrassCoords = new HashSet<StaggeredCellCoord>();
             List<OgTerrainCellImportState> preparedTiles = new List<OgTerrainCellImportState>(arr.Count);
             int applied = 0;
             int skipped = 0;
@@ -1060,11 +1106,6 @@ namespace OGDirectImport
                     {
                         skipped++;
                         continue;
-                    }
-
-                    if (terrainSpec.ForceGrassPlain)
-                    {
-                        forcedGrassCoords.Add(cell.Coordinates);
                     }
 
                     OgTerrainCellImportState tileState = new OgTerrainCellImportState
@@ -1130,15 +1171,6 @@ namespace OGDirectImport
             finally
             {
                 try { fBrush.SetValue(paintContext, oldBrush); } catch { }
-            }
-
-            try
-            {
-                ApplyForcedGrassPlain(level, forcedGrassCoords);
-            }
-            catch (Exception ex)
-            {
-                Log?.LogWarning($"Visual refresh failed (non-fatal): {ex.Message}");
             }
 
             AccessTools.Method(tEditor, "ComputeCurrentFlood")?.Invoke(mapEditorInstance, Array.Empty<object>());
@@ -1271,6 +1303,103 @@ namespace OGDirectImport
             changedCoords.Clear();
         }
 
+        private sealed class ClimateRefreshState
+        {
+            public MapHumidity PreviousClimate { get; set; }
+            public HashSet<Cell> CellsToRefresh { get; } = new HashSet<Cell>();
+        }
+
+        private sealed class OgMissionMusicEntry
+        {
+            public string Track { get; set; }
+            public MapMusicMode Mode { get; set; }
+            public int MissionId { get; set; }
+            public int MinPopulation { get; set; }
+            public int MaxPopulation { get; set; }
+        }
+
+        private static void TriggerClimateVisualRefresh(MonoBehaviour editorBehaviour, IEnumerable<Cell> cellsToRefresh)
+        {
+            if (editorBehaviour == null)
+            {
+                return;
+            }
+
+            try
+            {
+                editorBehaviour.StartCoroutine(RefreshClimateVisualsNextFrame(editorBehaviour, cellsToRefresh));
+            }
+            catch (Exception ex)
+            {
+                Log?.LogWarning($"Failed to schedule climate visual refresh: {ex}");
+            }
+        }
+
+        private static IEnumerator RefreshClimateVisualsNextFrame(MonoBehaviour editorBehaviour, IEnumerable<Cell> cellsToRefresh)
+        {
+            yield return null;
+
+            if (!(editorBehaviour is MapEditor editorInstance))
+            {
+                yield break;
+            }
+
+            Type tEditor = editorInstance.GetType();
+            LevelMap level = AccessTools.Field(tEditor, "_level")?.GetValue(editorInstance) as LevelMap;
+            if (level == null)
+            {
+                yield break;
+            }
+
+            MethodInfo mStartAndWaitForPostPaintJob = AccessTools.Method(tEditor, "StartAndWaitForPostPaintJob");
+            if (mStartAndWaitForPostPaintJob != null)
+            {
+                Stopwatch wait = Stopwatch.StartNew();
+                while (wait.ElapsedMilliseconds < 5000)
+                {
+                    try
+                    {
+                        bool pending = (bool)mStartAndWaitForPostPaintJob.Invoke(editorInstance, Array.Empty<object>());
+                        if (!pending)
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log?.LogDebug($"Climate post-job wait skipped: {ex.Message}");
+                        break;
+                    }
+
+                    yield return null;
+                }
+            }
+
+            object mapRenderer = AccessTools.Field(tEditor, "_mapRenderer")?.GetValue(editorInstance);
+            MethodInfo mRefreshCellTiles = mapRenderer != null ? AccessTools.Method(mapRenderer.GetType(), "RefreshCellTiles") : null;
+            if (mRefreshCellTiles != null)
+            {
+                try
+                {
+                    IEnumerable<Cell> targetCells = cellsToRefresh?.Where(c => c != null).Distinct().ToList();
+                    mRefreshCellTiles.Invoke(mapRenderer, new object[] { targetCells != null && targetCells.Any() ? targetCells : level.Cells });
+                }
+                catch (Exception ex)
+                {
+                    Log?.LogDebug($"Climate map tile refresh skipped: {ex.Message}");
+                }
+            }
+
+            try
+            {
+                GraphicTileInstancing.Instance.MapEditor_RefreshWholeGrass(level);
+            }
+            catch (Exception ex)
+            {
+                Log?.LogDebug($"Climate grass refresh skipped: {ex.Message}");
+            }
+        }
+
         private static bool ApplyTerrainBrush(
             MapEditor editorInstance,
             object paintContext,
@@ -1327,7 +1456,7 @@ namespace OGDirectImport
             if (TryReadOgTerrainFlags(jt, out uint flags))
             {
                 OgTerrainImportSpec fromFlags = DescribeOgTerrainFlags(flags, jt["terrain"]?.Value<string>());
-                if (fromFlags.Brushes.Count > 0 || fromFlags.ForceGrassPlain)
+                if (fromFlags.Brushes.Count > 0)
                 {
                     return fromFlags;
                 }
@@ -1494,8 +1623,6 @@ namespace OGDirectImport
                 AddBrushOnce(spec.Brushes, TerrainType.Dune);
             }
 
-            spec.ForceGrassPlain = hasGroundwater && !hasRoad && !hasMeadow && !hasFloodplain && !hasWater && !hasMarsh;
-
             if (hasRoad)
             {
                 AddBrushOnce(spec.Brushes, TerrainType.Road);
@@ -1595,7 +1722,6 @@ namespace OGDirectImport
                     case "tree_grass":
                     case "rock_grass":
                     case "ore_rock_grass":
-                        spec.ForceGrassPlain = true;
                         break;
                 }
             }
@@ -1603,51 +1729,9 @@ namespace OGDirectImport
             return spec;
         }
 
-        private static void ApplyForcedGrassPlain(LevelMap level, IEnumerable<StaggeredCellCoord> coords)
-        {
-            if (level == null || coords == null)
-            {
-                return;
-            }
-
-            int applied = 0;
-            foreach (StaggeredCellCoord coord in coords)
-            {
-                Cell cell = level.GetCell(coord);
-                if (cell == null || cell.Terrain != TerrainType.Sand)
-                {
-                    continue;
-                }
-
-                EnvironementCellData environment = cell.GetAdditionalDataOrDefault<EnvironementCellData>();
-                if (environment != null && environment.ShouldHideGrass())
-                {
-                    continue;
-                }
-
-                if (cell.ContainsAdditionalData<RoadCellData>())
-                {
-                    continue;
-                }
-
-                GrassCellData grass = cell.GetAdditionalDataOrDefault<GrassCellData>() ?? new GrassCellData(cell);
-                grass.Mode = GrassCellData.GrassMode.Plain;
-                grass.ComputedPlainLevel = Math.Max(grass.ComputedPlainLevel, 2);
-                cell.UpsertAdditionalData(grass);
-                applied++;
-            }
-
-            if (applied > 0)
-            {
-                GraphicTileInstancing.Instance.MapEditor_RefreshWholeGrass(level);
-                Log?.LogInfo($"Applied forced OG grass plain on {applied} cells.");
-            }
-        }
-
         private sealed class OgTerrainImportSpec
         {
             public List<TerrainType> Brushes { get; } = new List<TerrainType>();
-            public bool ForceGrassPlain { get; set; }
         }
 
         private sealed class OgTerrainCellImportState
@@ -1738,11 +1822,6 @@ namespace OGDirectImport
                 if (env != null)
                 {
                     ogClimate = ReadInt(env, "climate");
-                    if (TryMapOgClimateToNewEra(ogClimate, out int mappedClimate))
-                    {
-                        TrySetEnumMember(levelObj, levelType, "Climate", mappedClimate);
-                        TrySyncEditorClimateUi(mapEditorInstance, mappedClimate);
-                    }
                 }
 
                 if (TryResolveOgPreyType(info, ogClimate, out int mappedPreyType))
@@ -1790,31 +1869,6 @@ namespace OGDirectImport
                 : MapHumidity.Normal;
         }
 
-        private static void TrySyncEditorClimateUi(object mapEditorInstance, int mappedClimate)
-        {
-            if (mapEditorInstance == null)
-            {
-                return;
-            }
-
-            try
-            {
-                FieldInfo climateDropdownField = AccessTools.Field(mapEditorInstance.GetType(), "_climateDropdown");
-                object dropdown = climateDropdownField?.GetValue(mapEditorInstance);
-                if (dropdown == null)
-                {
-                    return;
-                }
-
-                AccessTools.Method(dropdown.GetType(), "SetValueWithoutNotify", new[] { typeof(int) })?.Invoke(dropdown, new object[] { mappedClimate });
-                AccessTools.Method(mapEditorInstance.GetType(), "OnDropdownClimateValueChanged", new[] { typeof(int) })?.Invoke(mapEditorInstance, new object[] { mappedClimate });
-            }
-            catch (Exception ex)
-            {
-                Log?.LogDebug($"Climate UI sync skipped: {ex.Message}");
-            }
-        }
-
         private static void TryApplyAvailability(object mapEditorInstance, JObject root)
         {
             try
@@ -1836,6 +1890,7 @@ namespace OGDirectImport
 
                 ApplyAvailableGoods(level, goods, root["trade_prices"] as JObject);
                 ApplyAvailableBuildings(level, buildings);
+                TryRefreshBuildingAvailabilityUi(mapEditorInstance);
 
                 Log?.LogInfo($"Availability import applied. Goods={level.AvailableGoods.Count}, buildings={level.AvailableBuildings.Count()}");
             }
@@ -1843,6 +1898,409 @@ namespace OGDirectImport
             {
                 Log?.LogWarning($"Availability import failed (non-fatal): {ex}");
             }
+        }
+
+        private static void TryApplyPopulationBasedMusic(object mapEditorInstance, JObject root)
+        {
+            try
+            {
+                if (!(mapEditorInstance is MapEditor editor))
+                {
+                    return;
+                }
+
+                LevelMap level = GlobalAccessor.Level ?? AccessTools.Field(editor.GetType(), "_level")?.GetValue(editor) as LevelMap;
+                if (level == null)
+                {
+                    return;
+                }
+
+                if (!TryResolveOgMusicMissionId(root, out int missionId, out bool heuristic))
+                {
+                    Log?.LogInfo("OG music import skipped: no reliable mission id found.");
+                    return;
+                }
+
+                string musicTxtPath = ResolveOgMusicTxtPath(root["source_file"]?.Value<string>());
+                if (string.IsNullOrWhiteSpace(musicTxtPath) || !File.Exists(musicTxtPath))
+                {
+                    Log?.LogInfo($"OG music import skipped: music.txt not found ('{musicTxtPath}').");
+                    return;
+                }
+
+                List<OgMissionMusicEntry> missionEntries = ParseOgMissionMusicFile(musicTxtPath, missionId);
+                if (missionEntries.Count == 0)
+                {
+                    Log?.LogInfo($"OG music import skipped: no entries for mission {missionId}.");
+                    return;
+                }
+
+                Dictionary<string, string> availableMusic = BuildNewEraGameplayMusicLookup();
+                Type editorType = editor.GetType();
+                MethodInfo mAddMusicLine = AccessTools.Method(editorType, "AddMusicLine");
+                MethodInfo mModalSaveAudio = AccessTools.Method(editorType, "ModalSave_Audio");
+                MethodInfo mUpdateMusicButtons = AccessTools.Method(editorType, "UpdateMusicButtonInteractableState");
+                if (mAddMusicLine == null || mModalSaveAudio == null)
+                {
+                    Log?.LogInfo("OG music import skipped: MapEditor audio methods not found.");
+                    return;
+                }
+
+                IList editionMusicData = AccessTools.Field(editorType, "_editionMusicData")?.GetValue(editor) as IList;
+                MusicEntry musicPrefab = AccessTools.Field(editorType, "_musicEntryPrefab")?.GetValue(editor) as MusicEntry;
+                Transform contentA = AccessTools.Field(editorType, "_music_A_ViewportContent")?.GetValue(editor) as Transform;
+                Transform contentM = AccessTools.Field(editorType, "_music_M_ViewportContent")?.GetValue(editor) as Transform;
+                List<string> availableGameplayMusic = AccessTools.Field(editorType, "_availableGameplayMusic")?.GetValue(editor) as List<string>;
+                if (editionMusicData == null || musicPrefab == null || contentA == null || contentM == null || availableGameplayMusic == null)
+                {
+                    Log?.LogInfo("OG music import skipped: MapEditor audio UI fields not found.");
+                    return;
+                }
+
+                availableGameplayMusic.Clear();
+                availableGameplayMusic.AddRange(AudioManager.Instance.GetGameplayMusicNames());
+                editionMusicData.Clear();
+                foreach (Transform content in new[] { contentA, contentM })
+                {
+                    for (int i = content.childCount - 1; i >= 0; i--)
+                    {
+                        UnityEngine.Object.Destroy(content.GetChild(i).gameObject);
+                    }
+                }
+
+                int added = 0;
+                foreach (OgMissionMusicEntry entry in missionEntries)
+                {
+                    string resolvedTrack = ResolveNewEraMusicName(entry.Track, availableMusic);
+                    if (string.IsNullOrWhiteSpace(resolvedTrack))
+                    {
+                        Log?.LogDebug($"OG music track '{entry.Track}' has no New Era equivalent.");
+                        continue;
+                    }
+
+                    Transform targetContent = entry.Mode == MapMusicMode.A ? contentA : contentM;
+                    object created = mAddMusicLine.Invoke(editor, new object[] { musicPrefab, targetContent, entry.Mode, resolvedTrack });
+                    MusicEntry musicEntry = created as MusicEntry;
+                    if (musicEntry == null)
+                    {
+                        continue;
+                    }
+
+                    if (entry.Mode == MapMusicMode.M)
+                    {
+                        int minPop = Math.Max(0, entry.MinPopulation);
+                        int maxPop = entry.MaxPopulation <= 0 ? int.MaxValue : Math.Max(minPop, entry.MaxPopulation);
+                        musicEntry.PopMin.SetTextWithoutNotify(minPop.ToString(CultureInfo.InvariantCulture));
+                        musicEntry.PopMax.SetTextWithoutNotify(maxPop == int.MaxValue ? string.Empty : maxPop.ToString(CultureInfo.InvariantCulture));
+                    }
+                    added++;
+                }
+
+                if (added > 0)
+                {
+                    try
+                    {
+                        mUpdateMusicButtons?.Invoke(editor, Array.Empty<object>());
+                        mModalSaveAudio.Invoke(editor, Array.Empty<object>());
+                    }
+                    catch (Exception ex)
+                    {
+                        Log?.LogDebug($"Audio save after OG music import skipped: {ex.Message}");
+                    }
+
+                    Log?.LogInfo($"Imported OG population music for mission {missionId}. Added={added}, source={(heuristic ? "image_id" : "scenario_mission_index")}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogWarning($"Population-based OG music import failed (non-fatal): {ex}");
+            }
+        }
+
+        private static bool TryPopulateAudioPanelWithoutLoadingClips(MapEditor editor)
+        {
+            if (editor == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                LevelMap level = GlobalAccessor.Level ?? AccessTools.Field(editor.GetType(), "_level")?.GetValue(editor) as LevelMap;
+                if (level == null)
+                {
+                    return false;
+                }
+
+                Type editorType = editor.GetType();
+                List<string> availableGameplayMusic = AccessTools.Field(editorType, "_availableGameplayMusic")?.GetValue(editor) as List<string>;
+                IList editionMusicData = AccessTools.Field(editorType, "_editionMusicData")?.GetValue(editor) as IList;
+                MusicEntry musicPrefab = AccessTools.Field(editorType, "_musicEntryPrefab")?.GetValue(editor) as MusicEntry;
+                Transform contentA = AccessTools.Field(editorType, "_music_A_ViewportContent")?.GetValue(editor) as Transform;
+                Transform contentM = AccessTools.Field(editorType, "_music_M_ViewportContent")?.GetValue(editor) as Transform;
+                MethodInfo mAddMusicLine = AccessTools.Method(editorType, "AddMusicLine");
+                MethodInfo mUpdateDropdownAvailableMusic = AccessTools.Method(editorType, "UpdateDropdownAvailableMusic");
+                MethodInfo mUpdateMusicButtons = AccessTools.Method(editorType, "UpdateMusicButtonInteractableState");
+                if (availableGameplayMusic == null || editionMusicData == null || musicPrefab == null || contentA == null || contentM == null || mAddMusicLine == null)
+                {
+                    return false;
+                }
+
+                availableGameplayMusic.Clear();
+                availableGameplayMusic.AddRange(AudioManager.Instance.GetGameplayMusicNames());
+
+                editionMusicData.Clear();
+                foreach (Transform content in new[] { contentA, contentM })
+                {
+                    for (int i = content.childCount - 1; i >= 0; i--)
+                    {
+                        UnityEngine.Object.Destroy(content.GetChild(i).gameObject);
+                    }
+                }
+
+                foreach (KeyValuePair<MapMusicMode, List<LevelMap.MapMusicData>> pair in level.MapMusics)
+                {
+                    foreach (LevelMap.MapMusicData mapMusicData in pair.Value)
+                    {
+                        Transform targetContent = pair.Key == MapMusicMode.A ? contentA : contentM;
+                        MusicEntry musicEntry = mAddMusicLine.Invoke(editor, new object[] { musicPrefab, targetContent, pair.Key, mapMusicData.Music }) as MusicEntry;
+                        if (musicEntry == null)
+                        {
+                            continue;
+                        }
+
+                        if (pair.Key == MapMusicMode.M)
+                        {
+                            musicEntry.PopMin.text = mapMusicData.MinPopulationThreshold.ToString(CultureInfo.InvariantCulture);
+                            musicEntry.PopMax.text = mapMusicData.MaxPopulationThreshold == int.MaxValue
+                                ? string.Empty
+                                : mapMusicData.MaxPopulationThreshold.ToString(CultureInfo.InvariantCulture);
+                        }
+
+                        int selectedIndex = availableGameplayMusic.IndexOf(mapMusicData.Music);
+                        if (selectedIndex >= 0 && editionMusicData.Count > 0)
+                        {
+                            object data = editionMusicData[editionMusicData.Count - 1];
+                            mUpdateDropdownAvailableMusic?.Invoke(editor, new object[] { selectedIndex, data });
+                        }
+                    }
+                }
+
+                mUpdateMusicButtons?.Invoke(editor, Array.Empty<object>());
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log?.LogDebug($"Lazy audio panel initialization failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        private static bool TrySaveAudioWithoutLoadingClips(MapEditor editor)
+        {
+            if (editor == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                LevelMap level = GlobalAccessor.Level ?? AccessTools.Field(editor.GetType(), "_level")?.GetValue(editor) as LevelMap;
+                IList editionMusicData = AccessTools.Field(editor.GetType(), "_editionMusicData")?.GetValue(editor) as IList;
+                if (level == null || editionMusicData == null)
+                {
+                    return false;
+                }
+
+                level.MapMusics[MapMusicMode.A].Clear();
+                level.MapMusics[MapMusicMode.M].Clear();
+
+                foreach (object musicEditionData in editionMusicData)
+                {
+                    if (musicEditionData == null)
+                    {
+                        continue;
+                    }
+
+                    Type dataType = musicEditionData.GetType();
+                    string music = AccessTools.Property(dataType, "Music")?.GetValue(musicEditionData, null) as string;
+                    object modeObject = AccessTools.Property(dataType, "Mode")?.GetValue(musicEditionData, null);
+                    MusicEntry entry = AccessTools.Property(dataType, "Entry")?.GetValue(musicEditionData, null) as MusicEntry;
+                    if (string.IsNullOrWhiteSpace(music) || !(modeObject is MapMusicMode mode))
+                    {
+                        continue;
+                    }
+
+                    LevelMap.MapMusicData mapMusicData = new LevelMap.MapMusicData
+                    {
+                        Music = music
+                    };
+
+                    if (mode == MapMusicMode.M && entry != null)
+                    {
+                        string minText = entry.PopMin.text;
+                        string maxText = entry.PopMax.text;
+                        int minPopulation = string.IsNullOrWhiteSpace(minText) ? 0 : int.Parse(minText, CultureInfo.InvariantCulture);
+                        int maxPopulation = Mathf.Max(
+                            minPopulation,
+                            string.IsNullOrWhiteSpace(maxText) ? int.MaxValue : int.Parse(maxText, CultureInfo.InvariantCulture));
+
+                        mapMusicData.MinPopulationThreshold = minPopulation;
+                        mapMusicData.MaxPopulationThreshold = maxPopulation;
+                    }
+
+                    level.MapMusics[mode].Add(mapMusicData);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log?.LogDebug($"Lazy audio save failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        private static bool TryResolveOgMusicMissionId(JObject root, out int missionId, out bool heuristic)
+        {
+            missionId = 0;
+            heuristic = false;
+
+            JToken direct = root?["scenario_mission_index"];
+            if (direct != null && direct.Type != JTokenType.Null)
+            {
+                missionId = direct.Value<int>();
+                return missionId >= 0;
+            }
+
+            JToken imageId = (root?["scenario_info"] as JObject)?["image_id"];
+            if (imageId != null && imageId.Type != JTokenType.Null)
+            {
+                missionId = imageId.Value<int>();
+                heuristic = true;
+                return missionId >= 0;
+            }
+
+            return false;
+        }
+
+        private static string ResolveOgMusicTxtPath(string sourceFile)
+        {
+            if (!string.IsNullOrWhiteSpace(sourceFile))
+            {
+                try
+                {
+                    string dir = Path.GetDirectoryName(sourceFile);
+                    string parent = !string.IsNullOrWhiteSpace(dir) ? Directory.GetParent(dir)?.FullName : null;
+                    string candidate = !string.IsNullOrWhiteSpace(parent) ? Path.Combine(parent, "music.txt") : null;
+                    if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
+                    {
+                        return candidate;
+                    }
+                }
+                catch { }
+            }
+
+            return @"C:\Program Files (x86)\GOG.com\Pharaoh\music.txt";
+        }
+
+        private static List<OgMissionMusicEntry> ParseOgMissionMusicFile(string musicTxtPath, int missionId)
+        {
+            List<OgMissionMusicEntry> result = new List<OgMissionMusicEntry>();
+            foreach (string rawLine in File.ReadLines(musicTxtPath))
+            {
+                if (string.IsNullOrWhiteSpace(rawLine) || rawLine.TrimStart().StartsWith(";", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                Match match = OgMusicLineRegex.Match(rawLine);
+                if (!match.Success)
+                {
+                    continue;
+                }
+
+                int parsedMissionId = int.Parse(match.Groups["mission"].Value, CultureInfo.InvariantCulture);
+                if (parsedMissionId != missionId)
+                {
+                    continue;
+                }
+
+                result.Add(new OgMissionMusicEntry
+                {
+                    Track = match.Groups["track"].Value,
+                    Mode = string.Equals(match.Groups["mode"].Value, "A", StringComparison.OrdinalIgnoreCase) ? MapMusicMode.A : MapMusicMode.M,
+                    MissionId = parsedMissionId,
+                    MinPopulation = int.Parse(match.Groups["min"].Value, CultureInfo.InvariantCulture),
+                    MaxPopulation = int.Parse(match.Groups["max"].Value, CultureInfo.InvariantCulture)
+                });
+            }
+
+            return result;
+        }
+
+        private static Dictionary<string, string> BuildNewEraGameplayMusicLookup()
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            try
+            {
+                foreach (string name in AudioManager.Instance.GetGameplayMusicNames())
+                {
+                    string normalized = NormalizeMusicToken(name);
+                    if (!string.IsNullOrWhiteSpace(normalized) && !result.ContainsKey(normalized))
+                    {
+                        result[normalized] = name;
+                    }
+                }
+            }
+            catch { }
+
+            return result;
+        }
+
+        private static string ResolveNewEraMusicName(string ogTrack, Dictionary<string, string> availableMusic)
+        {
+            string normalized = NormalizeMusicToken(Path.GetFileNameWithoutExtension(ogTrack));
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                return null;
+            }
+
+            if (availableMusic != null && availableMusic.TryGetValue(normalized, out string exact))
+            {
+                return exact;
+            }
+
+            if (OgMusicAliases.TryGetValue(normalized, out string alias))
+            {
+                string aliasNormalized = NormalizeMusicToken(alias);
+                if (availableMusic != null && availableMusic.TryGetValue(aliasNormalized, out string resolvedAlias))
+                {
+                    return resolvedAlias;
+                }
+                return alias;
+            }
+
+            return null;
+        }
+
+        private static string NormalizeMusicToken(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder(value.Length);
+            foreach (char c in value)
+            {
+                if (char.IsLetterOrDigit(c))
+                {
+                    sb.Append(char.ToLowerInvariant(c));
+                }
+            }
+
+            return sb.ToString();
         }
 
         private static void TryApplyMapFlags(object mapEditorInstance, JObject root)
@@ -2650,7 +3108,7 @@ namespace OGDirectImport
                 return;
             }
 
-            foreach (BuildingType buildingType in desiredBuildings)
+            foreach (BuildingType buildingType in desiredBuildings.OrderBy(b => (int)b))
             {
                 if (!level.BuildingStates.ContainsKey(buildingType))
                 {
@@ -2667,6 +3125,23 @@ namespace OGDirectImport
             if (desiredBuildings.Contains(BuildingType.FoodWorkCamp) && level.BuildingStates.TryGetValue(BuildingType.MonumentsWorkCamp, out MapBuildingState monumentState) && monumentState == MapBuildingState.Unavailable)
             {
                 level.BuildingStates[BuildingType.MonumentsWorkCamp] = MapBuildingState.Available;
+            }
+        }
+
+        private static void TryRefreshBuildingAvailabilityUi(object mapEditorInstance)
+        {
+            if (mapEditorInstance == null)
+            {
+                return;
+            }
+
+            try
+            {
+                AccessTools.Method(mapEditorInstance.GetType(), "ModalLoad_Buildings")?.Invoke(mapEditorInstance, null);
+            }
+            catch (Exception ex)
+            {
+                Log?.LogDebug($"Building availability UI refresh skipped: {ex.Message}");
             }
         }
 
@@ -2726,9 +3201,10 @@ namespace OGDirectImport
             {
                 JObject worldMap = root["world_map"] as JObject;
                 JObject allowedCities = root["allowed_cities"] as JObject;
-                JArray importedCities = allowedCities?["cities"] as JArray;
-                bool usingAllowedCities = importedCities != null && importedCities.Count > 0;
-                if ((importedCities == null || importedCities.Count == 0) && worldMap != null)
+                JArray importedCities = null;
+                bool usingAllowedCities = false;
+
+                if (worldMap != null)
                 {
                     importedCities = worldMap["cities"] as JArray;
                 }
@@ -2736,6 +3212,12 @@ namespace OGDirectImport
                 if ((importedCities == null || importedCities.Count == 0) && worldMap?["empire_map_objects"] is JObject empireMapObjects)
                 {
                     importedCities = empireMapObjects["cities"] as JArray;
+                }
+
+                if ((importedCities == null || importedCities.Count == 0) && allowedCities != null)
+                {
+                    importedCities = allowedCities["cities"] as JArray;
+                    usingAllowedCities = importedCities != null && importedCities.Count > 0;
                 }
 
                 if (importedCities == null || importedCities.Count == 0)
@@ -2902,6 +3384,8 @@ namespace OGDirectImport
                 state.CityTermName = candidate.Term;
             }
 
+            state.Variation = MapOgEmpireCityVariation(level, state.Status, candidate?.Term, cityType, candidate?.VariationCount ?? 0);
+
             state.TradeMerchandises.Clear();
             state.YearlyTradedVolume?.Clear();
             ApplyImportedTradeGoods(importedCity, state);
@@ -2915,13 +3399,11 @@ namespace OGDirectImport
                 return;
             }
 
-            AddImportedTradeGoods(importedCity["newera_sells_goods"] as JArray, TradeMode.CityExport, state);
-            AddImportedTradeGoods(importedCity["sells_resource_names"] as JArray, importedCity["sells_resource_ids"] as JArray, TradeMode.CityExport, state);
-            AddImportedTradeGoods(importedCity["newera_buys_goods"] as JArray, TradeMode.CityImport, state);
-            AddImportedTradeGoods(importedCity["buys_resource_names"] as JArray, importedCity["buys_resource_ids"] as JArray, TradeMode.CityImport, state);
+            AddImportedTradeGoods(importedCity["sells_resource_names"] as JArray, importedCity["sells_resource_ids"] as JArray, TradeMode.CityExport, state, importedCity);
+            AddImportedTradeGoods(importedCity["buys_resource_names"] as JArray, importedCity["buys_resource_ids"] as JArray, TradeMode.CityImport, state, importedCity);
         }
 
-        private static void AddImportedTradeGoods(JArray normalizedGoods, TradeMode tradeMode, WorldMapCityState state)
+        private static void AddImportedTradeGoods(JArray normalizedGoods, TradeMode tradeMode, WorldMapCityState state, JObject importedCity)
         {
             HashSet<Good> seenGoods = new HashSet<Good>(state?.TradeMerchandises?.Select(m => m.Good) ?? Enumerable.Empty<Good>());
             foreach (JObject goodObj in normalizedGoods?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
@@ -2936,33 +3418,14 @@ namespace OGDirectImport
                 {
                     Good = good.Value,
                     TradeMode = tradeMode,
-                    TradeVolume = TradeVolume.Medium
+                    TradeVolume = ResolveImportedTradeVolume(importedCity, goodObj["resource_id"]?.Value<int?>())
                 });
             }
         }
 
-        private static void AddImportedTradeGoods(JArray names, JArray ids, TradeMode tradeMode, WorldMapCityState state)
+        private static void AddImportedTradeGoods(JArray names, JArray ids, TradeMode tradeMode, WorldMapCityState state, JObject importedCity)
         {
-            HashSet<Good> seenGoods = new HashSet<Good>();
-
-            if (names != null)
-            {
-                foreach (JToken token in names)
-                {
-                    Good? good = MapOgGoodToken(token);
-                    if (!good.HasValue || !seenGoods.Add(good.Value))
-                    {
-                        continue;
-                    }
-
-                    state.TradeMerchandises.Add(new TradeMerchandise
-                    {
-                        Good = good.Value,
-                        TradeMode = tradeMode,
-                        TradeVolume = TradeVolume.Medium
-                    });
-                }
-            }
+            HashSet<Good> seenGoods = new HashSet<Good>(state?.TradeMerchandises?.Select(m => m.Good) ?? Enumerable.Empty<Good>());
 
             if (ids != null)
             {
@@ -2978,10 +3441,102 @@ namespace OGDirectImport
                     {
                         Good = good.Value,
                         TradeMode = tradeMode,
-                        TradeVolume = TradeVolume.Medium
+                        TradeVolume = ResolveImportedTradeVolume(importedCity, token?.Value<int?>())
+                    });
+                }
+
+                return;
+            }
+
+            if (names != null)
+            {
+                foreach (JToken token in names)
+                {
+                    Good? good = MapOgGoodToken(token);
+                    if (!good.HasValue || !seenGoods.Add(good.Value))
+                    {
+                        continue;
+                    }
+
+                    state.TradeMerchandises.Add(new TradeMerchandise
+                    {
+                        Good = good.Value,
+                        TradeMode = tradeMode,
+                        TradeVolume = ResolveImportedTradeVolume(importedCity, null)
                     });
                 }
             }
+        }
+
+        private static TradeVolume ResolveImportedTradeVolume(JObject importedCity, int? resourceId)
+        {
+            if (resourceId.HasValue)
+            {
+                int demandCode = ResolveImportedTradeDemandCode(importedCity, resourceId.Value);
+                switch (demandCode)
+                {
+                    case 1:
+                    case 15:
+                    case 1500:
+                        return TradeVolume.Small;
+                    case 2:
+                    case 25:
+                    case 2500:
+                        return TradeVolume.Medium;
+                    case 3:
+                    case 40:
+                    case 4000:
+                        return TradeVolume.Large;
+                }
+            }
+
+            return TradeVolume.Medium;
+        }
+
+        private static int ResolveImportedTradeDemandCode(JObject importedCity, int resourceId)
+        {
+            if (importedCity == null || resourceId < 0)
+            {
+                return 0;
+            }
+
+            foreach (JObject tradeLevel in (importedCity["trade_levels"] as JArray)?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                if ((tradeLevel["resource_id"]?.Value<int?>() ?? -1) == resourceId)
+                {
+                    return tradeLevel["demand_code"]?.Value<int>() ?? 0;
+                }
+            }
+
+            JArray tradeDemand = importedCity["trade_demand"] as JArray;
+            if (tradeDemand != null && resourceId < tradeDemand.Count)
+            {
+                return tradeDemand[resourceId]?.Value<int>() ?? 0;
+            }
+
+            if (resourceId < 32)
+            {
+                uint resourceFlag = 1u << resourceId;
+                uint trade40 = importedCity["trade40"]?.Value<uint?>() ?? 0u;
+                uint trade25 = importedCity["trade25"]?.Value<uint?>() ?? 0u;
+                uint trade15 = importedCity["trade15"]?.Value<uint?>() ?? 0u;
+                if ((trade40 & resourceFlag) != 0u)
+                {
+                    return 3;
+                }
+
+                if ((trade25 & resourceFlag) != 0u)
+                {
+                    return 2;
+                }
+
+                if ((trade15 & resourceFlag) != 0u)
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
         }
 
         private static bool HasImportedTradeGoods(JObject importedCity)
@@ -3072,6 +3627,59 @@ namespace OGDirectImport
                 default:
                     return false;
             }
+        }
+
+        private static int MapOgEmpireCityVariation(LevelMap level, CityStatus cityStatus, string cityTerm, int cityType, int variationCount)
+        {
+            if (variationCount <= 1)
+            {
+                return 0;
+            }
+
+            int desiredVariation;
+            if (cityStatus == CityStatus.MyCity)
+            {
+                bool isGreatPharaoh = level != null && level.PharaohRank == PharaohRank.GreatPharaoh;
+                desiredVariation = isGreatPharaoh ? 13 : 12;
+            }
+            else if (cityStatus == CityStatus.PharaohCity)
+            {
+                desiredVariation = 13;
+            }
+            else if (cityStatus == CityStatus.EgyptianCity)
+            {
+                desiredVariation = 14;
+            }
+            else if (!string.IsNullOrWhiteSpace(cityTerm) && WorldMapForeignCityVariationByTerm.TryGetValue(cityTerm, out int mappedVariation))
+            {
+                desiredVariation = mappedVariation;
+            }
+            else
+            {
+                switch (cityType)
+                {
+                    case 5:
+                    case 6:
+                        desiredVariation = 7;
+                        break;
+                    case 3:
+                    case 4:
+                        desiredVariation = 14;
+                        break;
+                    case 1:
+                    case 2:
+                        desiredVariation = 13;
+                        break;
+                    case 0:
+                        desiredVariation = 12;
+                        break;
+                    default:
+                        desiredVariation = 7;
+                        break;
+                }
+            }
+
+            return Mathf.Clamp(desiredVariation, 0, variationCount - 1);
         }
 
         private static void EnsureUniqueWorldMapStatuses(Dictionary<int, WorldMapCityState> mapCityStates)
@@ -3169,14 +3777,19 @@ namespace OGDirectImport
                 return;
             }
 
-            HashSet<DeityName> knownDeities = ExtractKnownOgDeities(knownGods);
-            if (knownDeities.Count == 0)
+            Dictionary<DeityName, DeityRank> deityRanks = ExtractOgDeityRanks(knownGods);
+            if (deityRanks.Count == 0)
             {
                 return;
             }
 
-            DeityName patron = knownDeities.First();
-            HashSet<DeityName> localDeities = new HashSet<DeityName>(knownDeities.Where(d => d != patron));
+            DeityName? patronDeity = deityRanks
+                .Where(kvp => kvp.Value == DeityRank.Patron)
+                .Select(kvp => (DeityName?)kvp.Key)
+                .FirstOrDefault();
+            HashSet<DeityName> localDeities = new HashSet<DeityName>(deityRanks
+                .Where(kvp => kvp.Value == DeityRank.Local)
+                .Select(kvp => kvp.Key));
 
             IList deityInfos = AccessTools.Field(editor.GetType(), "_deityInfos")?.GetValue(editor) as IList;
             object paramsByGodObj = AccessTools.Field(editor.GetType(), "_paramsByGod")?.GetValue(editor);
@@ -3214,9 +3827,11 @@ namespace OGDirectImport
                     continue;
                 }
 
-                int rankValue = deity == patron ? 0 : (localDeities.Contains(deity) ? 1 : 2);
+                int rankValue = patronDeity.HasValue && deity == patronDeity.Value
+                    ? (int)DeityRank.Patron
+                    : (localDeities.Contains(deity) ? (int)DeityRank.Local : (int)DeityRank.None);
                 rankDropdown.SetValueWithoutNotify(rankValue);
-                if (rankValue == 2)
+                if (rankValue == (int)DeityRank.None)
                 {
                     godParams.UpdateComplexState(GodParams.TempleComplexeState.Unavailable);
                 }
@@ -3231,16 +3846,16 @@ namespace OGDirectImport
                 onDropdownGodRankChanged?.Invoke(editor, new[] { deityInfo, (object)rankValue });
             }
 
-            level.PatronDeity = patron;
+            level.PatronDeity = patronDeity;
             level.LocalDeities.Clear();
             level.LocalDeities.AddRange(localDeities);
             SyncDeitiesFromMapEditorUi(level, deityInfos, paramsByGod, availableTempleShrines);
             SanitizeLevelDeities(level);
         }
 
-        private static HashSet<DeityName> ExtractKnownOgDeities(JArray knownGods)
+        private static Dictionary<DeityName, DeityRank> ExtractOgDeityRanks(JArray knownGods)
         {
-            HashSet<DeityName> result = new HashSet<DeityName>();
+            Dictionary<DeityName, DeityRank> result = new Dictionary<DeityName, DeityRank>();
             if (knownGods == null)
             {
                 return result;
@@ -3248,7 +3863,9 @@ namespace OGDirectImport
 
             foreach (JObject god in knownGods.OfType<JObject>())
             {
-                if (!(god["is_known"]?.Value<bool>() ?? false))
+                int rawStatus = god["raw_status"]?.Value<int?>()
+                    ?? ((god["is_patron"]?.Value<bool>() ?? false) ? 2 : ((god["is_known"]?.Value<bool>() ?? false) ? 1 : 0));
+                if (rawStatus <= 0)
                 {
                     continue;
                 }
@@ -3262,7 +3879,8 @@ namespace OGDirectImport
                 string mapped = MapOgGodName(raw);
                 if (Enum.TryParse(mapped, true, out DeityName deity) && deity != DeityName.None)
                 {
-                    result.Add(deity);
+                    DeityRank rank = rawStatus == 2 ? DeityRank.Patron : DeityRank.Local;
+                    result[deity] = rank;
                 }
             }
 
@@ -3902,11 +4520,45 @@ namespace OGDirectImport
                     TermNormalized = NormalizeCityName(cityTerm),
                     DisplayName = string.IsNullOrWhiteSpace(displayName) ? cityTerm : displayName,
                     DisplayNameNormalized = NormalizeCityName(string.IsNullOrWhiteSpace(displayName) ? cityTerm : displayName),
-                    Aliases = aliases
+                    Aliases = aliases,
+                    VariationCount = GetWorldMapCityVariationCount(cityObj)
                 });
             }
 
             return results;
+        }
+
+        private static int GetWorldMapCityVariationCount(object cityObj)
+        {
+            if (cityObj == null)
+            {
+                return 0;
+            }
+
+            try
+            {
+                object settingsObj = cityObj.GetType().GetProperty("Settings")?.GetValue(cityObj, null);
+                if (settingsObj == null)
+                {
+                    return 0;
+                }
+
+                object variationsObj = settingsObj.GetType().GetProperty("Variations")?.GetValue(settingsObj, null);
+                if (variationsObj is System.Collections.ICollection collection)
+                {
+                    return collection.Count;
+                }
+
+                if (variationsObj is IEnumerable<UnityEngine.Sprite> spriteEnumerable)
+                {
+                    return spriteEnumerable.Count();
+                }
+            }
+            catch
+            {
+            }
+
+            return 0;
         }
 
         private static string SafeTranslateCityTerm(string cityTerm)
@@ -3993,6 +4645,7 @@ namespace OGDirectImport
             public string DisplayName;
             public string DisplayNameNormalized;
             public HashSet<string> Aliases;
+            public int VariationCount;
         }
 
         private static ScriptedEvent ConvertOgEvent(JObject ev, int fallbackIndex, HashSet<int> usedEventIds, out int rawEventId)
@@ -4123,6 +4776,10 @@ namespace OGDirectImport
                     if (mappedType == ScriptedEventType.Request)
                     {
                         scripted.Reason = EventReason.GodFestival;
+                        // Keep the original OG importer compatibility hack as well:
+                        // some editor flows historically mirrored the festival god id
+                        // into MilitaryArmyMax for GodFestival requests.
+                        scripted.MilitaryArmyMax = (int)deity.Value;
                     }
                 }
             }
@@ -4360,16 +5017,30 @@ namespace OGDirectImport
                 resourceName = ev["param1_resource_name"]?.Value<string>();
             }
 
-            if (TryMapOgGood(resourceName, out Good good))
+            Good? contextualGood = MapOgGoodTokenForEvent(ev, resourceName != null ? new JValue(resourceName) : null);
+            if (contextualGood.HasValue)
             {
-                return good;
+                return contextualGood.Value;
             }
 
             int rawGood = ReadInt(itemData, "value");
             string fallbackName = ev["param1_resource_name"]?.Value<string>();
-            if (rawGood <= 0 && TryMapOgGood(fallbackName, out good))
+            if (rawGood > 0)
             {
-                return good;
+                contextualGood = MapOgGoodTokenForEvent(ev, new JValue(rawGood));
+                if (contextualGood.HasValue)
+                {
+                    return contextualGood.Value;
+                }
+            }
+
+            if (rawGood <= 0)
+            {
+                contextualGood = MapOgGoodTokenForEvent(ev, fallbackName != null ? new JValue(fallbackName) : null);
+                if (contextualGood.HasValue)
+                {
+                    return contextualGood.Value;
+                }
             }
 
             return null;
@@ -4386,7 +5057,7 @@ namespace OGDirectImport
 
             foreach (JToken token in (ev?["resource_names"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
             {
-                Good? good = MapOgGoodToken(token);
+                Good? good = MapOgGoodTokenForEvent(ev, token);
                 if (good.HasValue && yielded.Add(good.Value))
                 {
                     yield return good.Value;
@@ -4395,7 +5066,7 @@ namespace OGDirectImport
 
             foreach (JToken token in (ev?["resource_ids"] as JArray)?.Children() ?? Enumerable.Empty<JToken>())
             {
-                Good? good = MapOgGoodToken(token);
+                Good? good = MapOgGoodTokenForEvent(ev, token);
                 if (good.HasValue && yielded.Add(good.Value))
                 {
                     yield return good.Value;
@@ -4404,7 +5075,7 @@ namespace OGDirectImport
 
             foreach (JObject slot in (ev?["resource_slots"] as JArray)?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
             {
-                Good? good = MapOgGoodToken(slot["resource_name"]) ?? MapOgGoodToken(slot["resource_id"]);
+                Good? good = MapOgGoodTokenForEvent(ev, slot["resource_name"]) ?? MapOgGoodTokenForEvent(ev, slot["resource_id"]);
                 if (good.HasValue && yielded.Add(good.Value))
                 {
                     yield return good.Value;
@@ -4455,6 +5126,42 @@ namespace OGDirectImport
             }
 
             return null;
+        }
+
+        private static Good? MapOgGoodTokenForEvent(JObject ev, JToken token)
+        {
+            if (token == null || token.Type == JTokenType.Null)
+            {
+                return null;
+            }
+
+            int ogType = ReadInt(ev, "event_type", "type", "type_id");
+            int subtype = ReadInt(ev, "subtype");
+            int reason = MapOgRequestSubtypeToReason(subtype);
+
+            if (ogType == 1 && reason == (int)EventReason.GodFestival)
+            {
+                // OG festival requests use a restricted commodity list. In that context
+                // resource id 31 is shown by the original editor as Deben/Gold, not Oil.
+                if (token.Type == JTokenType.Integer && token.Value<int>() == 31)
+                {
+                    return Good.Gold;
+                }
+
+                if (token.Type == JTokenType.String)
+                {
+                    string raw = token.Value<string>()?.Trim();
+                    if (!string.IsNullOrWhiteSpace(raw) &&
+                        (raw.Equals("oil", StringComparison.OrdinalIgnoreCase)
+                        || raw.Equals("deben", StringComparison.OrdinalIgnoreCase)
+                        || raw.Equals("gold", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        return Good.Gold;
+                    }
+                }
+            }
+
+            return MapOgGoodToken(token);
         }
 
         private static Good? MapOgGoodFromResourceId(int resourceId)
@@ -5127,6 +5834,94 @@ namespace OGDirectImport
                 catch
                 {
                 }
+            }
+        }
+
+        [HarmonyPatch]
+        private static class Patch_MapEditor_ProcessLevelLoadingUI_Audio
+        {
+            private static MethodBase TargetMethod()
+            {
+                Type mapEditorType = AccessTools.TypeByName("MapEditor");
+                return mapEditorType == null ? null : AccessTools.Method(mapEditorType, "ProcessLevelLoadingUI_Audio");
+            }
+
+            private static bool Prefix(object __instance)
+            {
+                return !(__instance is MapEditor editor) || !TryPopulateAudioPanelWithoutLoadingClips(editor);
+            }
+        }
+
+        [HarmonyPatch]
+        private static class Patch_MapEditor_ModalSave_Audio
+        {
+            private static MethodBase TargetMethod()
+            {
+                Type mapEditorType = AccessTools.TypeByName("MapEditor");
+                return mapEditorType == null ? null : AccessTools.Method(mapEditorType, "ModalSave_Audio");
+            }
+
+            private static bool Prefix(object __instance)
+            {
+                return !(__instance is MapEditor editor) || !TrySaveAudioWithoutLoadingClips(editor);
+            }
+        }
+
+        [HarmonyPatch]
+        private static class Patch_MapEditor_ModalSave_MapParameters
+        {
+            private static MethodBase TargetMethod()
+            {
+                return AccessTools.Method("MapEditor:ModalSave_MapParameters");
+            }
+
+            private static void Prefix(object __instance, ref ClimateRefreshState __state)
+            {
+                if (__instance is MapEditor editor)
+                {
+                    LevelMap level = AccessTools.Field(editor.GetType(), "_level")?.GetValue(editor) as LevelMap;
+                    if (level != null)
+                    {
+                        __state = new ClimateRefreshState
+                        {
+                            PreviousClimate = level.Climate
+                        };
+
+                        foreach (StaggeredCellCoord coord in level.AoD_GrassCellData.Keys)
+                        {
+                            Cell cell = level.GetCell(coord);
+                            if (cell == null)
+                            {
+                                continue;
+                            }
+
+                            __state.CellsToRefresh.Add(cell);
+                            foreach (Cell neighbour in level.GetSurroundingCells(cell, 1))
+                            {
+                                if (neighbour != null)
+                                {
+                                    __state.CellsToRefresh.Add(neighbour);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            private static void Postfix(MonoBehaviour __instance, ClimateRefreshState __state)
+            {
+                if (!(__instance is MapEditor editor))
+                {
+                    return;
+                }
+
+                LevelMap level = AccessTools.Field(editor.GetType(), "_level")?.GetValue(editor) as LevelMap;
+                if (level == null || __state == null || level.Climate == __state.PreviousClimate)
+                {
+                    return;
+                }
+
+                TriggerClimateVisualRefresh(__instance, __state.CellsToRefresh);
             }
         }
 
